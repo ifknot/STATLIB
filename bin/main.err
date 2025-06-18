@@ -1,0 +1,2 @@
+/Users/jeremythornton/dosbox/STATLIB/src/main.c(9): Warning! W303: Parameter 'argv' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/main.c(9): Warning! W303: Parameter 'argc' has been defined, but not referenced

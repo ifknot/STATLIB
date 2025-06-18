@@ -1,0 +1,3 @@
+/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles/stat.dir
+/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles/edit_cache.dir
+/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles/rebuild_cache.dir

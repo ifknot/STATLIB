@@ -1,0 +1,251 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/Applications/CMake.app/Contents/share/cmake-4.0/Modules/CMakeDetermineSystem.cmake:200 (message)"
+      - "CMakeLists.txt:6 (project)"
+    message: |
+      The target system is: DOS -  - I86
+      The host system is: Darwin - 23.6.0 - arm64
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/Applications/CMake.app/Contents/share/cmake-4.0/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/Applications/CMake.app/Contents/share/cmake-4.0/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/Applications/CMake.app/Contents/share/cmake-4.0/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:6 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+      Compiler: /opt/watcom/armo64/wcl 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      Open Watcom C/C++ x86 16-bit Compile and Link Utility
+      Version 2.0 beta May  3 2025 18:29:00
+      Copyright (c) 2002-2025 The Open Watcom Contributors. All Rights Reserved.
+      Portions Copyright (c) 1988-2002 Sybase, Inc. All Rights Reserved.
+      Source code is available under the Sybase Open Watcom Public License.
+      See https://github.com/open-watcom/open-watcom-v2#readme for details.
+      	wcc CMakeCCompilerId.c 
+      Open Watcom C x86 16-bit Optimizing Compiler
+      Version 2.0 beta May  3 2025 18:25:13
+      Copyright (c) 2002-2025 The Open Watcom Contributors. All Rights Reserved.
+      Portions Copyright (c) 1984-2002 Sybase, Inc. All Rights Reserved.
+      Source code is available under the Sybase Open Watcom Public License.
+      See https://github.com/open-watcom/open-watcom-v2#readme for details.
+      CMakeCCompilerId.c: 906 lines, included 53, 0 warnings, 0 errors
+      	wlink @__wcl_00.lnk
+      Open Watcom Linker Version 2.0 beta May  3 2025 18:23:37
+      Copyright (c) 2002-2025 The Open Watcom Contributors. All Rights Reserved.
+      Portions Copyright (c) 1985-2002 Sybase, Inc. All Rights Reserved.
+      Source code is available under the Sybase Open Watcom Public License.
+      See https://github.com/open-watcom/open-watcom-v2#readme for details.
+      loading object files
+      searching libraries
+      creating a DOS executable
+      
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.exe"
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.o"
+      
+      The C compiler identification is OpenWatcom, found in:
+        /Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles/4.0.1/CompilerIdC/CMakeCCompilerId.exe
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/Applications/CMake.app/Contents/share/cmake-4.0/Modules/CMakeDetermineCompilerId.cmake:1281 (message)"
+      - "/Applications/CMake.app/Contents/share/cmake-4.0/Modules/CMakeDetermineCompilerId.cmake:250 (CMAKE_DETERMINE_MSVC_SHOWINCLUDES_PREFIX)"
+      - "/Applications/CMake.app/Contents/share/cmake-4.0/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:6 (project)"
+    message: |
+      Detecting C compiler /showIncludes prefix:
+        Open Watcom C/C++ x86 16-bit Compile and Link Utility
+        Version 2.0 beta May  3 2025 18:29:00
+        Copyright (c) 2002-2025 The Open Watcom Contributors. All Rights Reserved.
+        Portions Copyright (c) 1988-2002 Sybase, Inc. All Rights Reserved.
+        Source code is available under the Sybase Open Watcom Public License.
+        See https://github.com/open-watcom/open-watcom-v2#readme for details.
+        	wcc /nologo.c 
+        Open Watcom C x86 16-bit Optimizing Compiler
+        Version 2.0 beta May  3 2025 18:25:13
+        Copyright (c) 2002-2025 The Open Watcom Contributors. All Rights Reserved.
+        Portions Copyright (c) 1984-2002 Sybase, Inc. All Rights Reserved.
+        Source code is available under the Sybase Open Watcom Public License.
+        See https://github.com/open-watcom/open-watcom-v2#readme for details.
+        Error: Compiler returned a bad status compiling '/nologo.c'
+        	wcc /showIncludes.c 
+        Open Watcom C x86 16-bit Optimizing Compiler
+        Version 2.0 beta May  3 2025 18:25:13
+        Copyright (c) 2002-2025 The Open Watcom Contributors. All Rights Reserved.
+        Portions Copyright (c) 1984-2002 Sybase, Inc. All Rights Reserved.
+        Source code is available under the Sybase Open Watcom Public License.
+        See https://github.com/open-watcom/open-watcom-v2#readme for details.
+        Error: Compiler returned a bad status compiling '/showIncludes.c'
+        	wcc /c.c 
+        Open Watcom C x86 16-bit Optimizing Compiler
+        Version 2.0 beta May  3 2025 18:25:13
+        Copyright (c) 2002-2025 The Open Watcom Contributors. All Rights Reserved.
+        Portions Copyright (c) 1984-2002 Sybase, Inc. All Rights Reserved.
+        Source code is available under the Sybase Open Watcom Public License.
+        See https://github.com/open-watcom/open-watcom-v2#readme for details.
+        Error: Compiler returned a bad status compiling '/c.c'
+        	wcc main.c 
+        Open Watcom C x86 16-bit Optimizing Compiler
+        Version 2.0 beta May  3 2025 18:25:13
+        Copyright (c) 2002-2025 The Open Watcom Contributors. All Rights Reserved.
+        Portions Copyright (c) 1984-2002 Sybase, Inc. All Rights Reserved.
+        Source code is available under the Sybase Open Watcom Public License.
+        See https://github.com/open-watcom/open-watcom-v2#readme for details.
+        main.c: 3 lines, included 55, 1 warnings, 0 errors
+        
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/Applications/CMake.app/Contents/share/cmake-4.0/Modules/CMakeDetermineCompilerId.cmake:1281 (message)"
+      - "/Applications/CMake.app/Contents/share/cmake-4.0/Modules/CMakeDetermineCompilerId.cmake:250 (CMAKE_DETERMINE_MSVC_SHOWINCLUDES_PREFIX)"
+      - "/Applications/CMake.app/Contents/share/cmake-4.0/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:6 (project)"
+    message: |
+      Detecting C compiler /showIncludes prefix:
+        Open Watcom C/C++ x86 16-bit Compile and Link Utility
+        Version 2.0 beta May  3 2025 18:29:00
+        Copyright (c) 2002-2025 The Open Watcom Contributors. All Rights Reserved.
+        Portions Copyright (c) 1988-2002 Sybase, Inc. All Rights Reserved.
+        Source code is available under the Sybase Open Watcom Public License.
+        See https://github.com/open-watcom/open-watcom-v2#readme for details.
+        	wcc /nologo.c 
+        Open Watcom C x86 16-bit Optimizing Compiler
+        Version 2.0 beta May  3 2025 18:25:13
+        Copyright (c) 2002-2025 The Open Watcom Contributors. All Rights Reserved.
+        Portions Copyright (c) 1984-2002 Sybase, Inc. All Rights Reserved.
+        Source code is available under the Sybase Open Watcom Public License.
+        See https://github.com/open-watcom/open-watcom-v2#readme for details.
+        Error: Compiler returned a bad status compiling '/nologo.c'
+        	wcc /showIncludes.c 
+        Open Watcom C x86 16-bit Optimizing Compiler
+        Version 2.0 beta May  3 2025 18:25:13
+        Copyright (c) 2002-2025 The Open Watcom Contributors. All Rights Reserved.
+        Portions Copyright (c) 1984-2002 Sybase, Inc. All Rights Reserved.
+        Source code is available under the Sybase Open Watcom Public License.
+        See https://github.com/open-watcom/open-watcom-v2#readme for details.
+        Error: Compiler returned a bad status compiling '/showIncludes.c'
+        	wcc /c.c 
+        Open Watcom C x86 16-bit Optimizing Compiler
+        Version 2.0 beta May  3 2025 18:25:13
+        Copyright (c) 2002-2025 The Open Watcom Contributors. All Rights Reserved.
+        Portions Copyright (c) 1984-2002 Sybase, Inc. All Rights Reserved.
+        Source code is available under the Sybase Open Watcom Public License.
+        See https://github.com/open-watcom/open-watcom-v2#readme for details.
+        Error: Compiler returned a bad status compiling '/c.c'
+        	wcc main.c 
+        Open Watcom C x86 16-bit Optimizing Compiler
+        Version 2.0 beta May  3 2025 18:25:13
+        Copyright (c) 2002-2025 The Open Watcom Contributors. All Rights Reserved.
+        Portions Copyright (c) 1984-2002 Sybase, Inc. All Rights Reserved.
+        Source code is available under the Sybase Open Watcom Public License.
+        See https://github.com/open-watcom/open-watcom-v2#readme for details.
+        main.c: 3 lines, included 55, 1 warnings, 0 errors
+        
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/Applications/CMake.app/Contents/share/cmake-4.0/Modules/CMakeDetermineCompilerABI.cmake:83 (try_compile)"
+      - "/Applications/CMake.app/Contents/share/cmake-4.0/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:6 (project)"
+    checks:
+      - "Detecting C compiler ABI info"
+    directories:
+      source: "/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles/CMakeScratch/TryCompile-rL28zE"
+      binary: "/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles/CMakeScratch/TryCompile-rL28zE"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-w3 -bt=dos"
+      CMAKE_EXE_LINKER_FLAGS: "opt map system dos"
+    buildResult:
+      variable: "CMAKE_C_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles/CMakeScratch/TryCompile-rL28zE'
+        
+        Run Build Command(s): /Applications/CMake.app/Contents/bin/cmake -E env VERBOSE=1 wmake -f Makefile cmTC_50678/fast
+        Open Watcom Make Version 2.0 beta May  3 2025 18:23:44
+        Copyright (c) 2002-2025 The Open Watcom Contributors. All Rights Reserved.
+        Portions Copyright (c) 1988-2002 Sybase, Inc. All Rights Reserved.
+        Source code is available under the Sybase Open Watcom Public License.
+        See https://github.com/open-watcom/open-watcom-v2#readme for details.
+        	/opt/watcom/armo64/wmake  -f CMakeFiles/cmTC_50678.dir/build.make -h CMakeFiles/cmTC_50678.dir/build
+        Building C object CMakeFiles/cmTC_50678.dir/CMakeCCompilerABI.c.obj
+        /opt/watcom/armo64/wcl -zq -d+  -I"/opt/watcom/h" -w3 -bt=dos -d2 -foCMakeFiles/cmTC_50678.dir/CMakeCCompilerABI.c.obj -c -cc /Applications/CMake.app/Contents/share/cmake-4.0/Modules/CMakeCCompilerABI.c
+        Linking C executable cmTC_50678.exe
+        /Applications/CMake.app/Contents/bin/cmake -E cmake_link_script CMakeFiles/cmTC_50678.dir/link.txt --verbose=1
+        /opt/watcom/armo64/wlink option quiet name cmTC_50678.exe opt map system dos  debug all file {CMakeFiles/cmTC_50678.dir/CMakeCCompilerABI.c.obj}
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/Applications/CMake.app/Contents/share/cmake-4.0/Modules/CMakeDetermineCompilerABI.cmake:227 (message)"
+      - "/Applications/CMake.app/Contents/share/cmake-4.0/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:6 (project)"
+    message: |
+      Parsed C implicit link information:
+        link line regex: [^( *|.*[/\\])(wlink|;ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(wlink|;ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)))("|,| |$)]
+        linker tool for 'C': /opt/watcom/armo64/wlink
+        implicit libs: []
+        implicit objs: []
+        implicit dirs: []
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/Applications/CMake.app/Contents/share/cmake-4.0/Modules/Internal/CMakeDetermineLinkerId.cmake:36 (message)"
+      - "/Applications/CMake.app/Contents/share/cmake-4.0/Modules/CMakeDetermineCompilerABI.cmake:264 (cmake_determine_linker_id)"
+      - "/Applications/CMake.app/Contents/share/cmake-4.0/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:6 (project)"
+    message: |
+      Running the C compiler's linker: "/opt/watcom/armo64/wlink" "-v"
+      Open Watcom Linker Version 2.0 beta May  3 2025 18:23:37
+      Copyright (c) 2002-2025 The Open Watcom Contributors. All Rights Reserved.
+      Portions Copyright (c) 1985-2002 Sybase, Inc. All Rights Reserved.
+      Source code is available under the Sybase Open Watcom Public License.
+      See https://github.com/open-watcom/open-watcom-v2#readme for details.
+      Error! E3033: directive error near '-v'
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/Applications/CMake.app/Contents/share/cmake-4.0/Modules/Internal/CMakeDetermineLinkerId.cmake:36 (message)"
+      - "/Applications/CMake.app/Contents/share/cmake-4.0/Modules/CMakeDetermineCompilerABI.cmake:264 (cmake_determine_linker_id)"
+      - "/Applications/CMake.app/Contents/share/cmake-4.0/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:6 (project)"
+    message: |
+      Running the C compiler's linker: "/opt/watcom/armo64/wlink" "-V"
+      Open Watcom Linker Version 2.0 beta May  3 2025 18:23:37
+      Copyright (c) 2002-2025 The Open Watcom Contributors. All Rights Reserved.
+      Portions Copyright (c) 1985-2002 Sybase, Inc. All Rights Reserved.
+      Source code is available under the Sybase Open Watcom Public License.
+      See https://github.com/open-watcom/open-watcom-v2#readme for details.
+      Error! E3033: directive error near '-V'
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/Applications/CMake.app/Contents/share/cmake-4.0/Modules/Internal/CMakeDetermineLinkerId.cmake:36 (message)"
+      - "/Applications/CMake.app/Contents/share/cmake-4.0/Modules/CMakeDetermineCompilerABI.cmake:264 (cmake_determine_linker_id)"
+      - "/Applications/CMake.app/Contents/share/cmake-4.0/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:6 (project)"
+    message: |
+      Running the C compiler's linker: "/opt/watcom/armo64/wlink" "--version"
+      Open Watcom Linker Version 2.0 beta May  3 2025 18:23:37
+      Copyright (c) 2002-2025 The Open Watcom Contributors. All Rights Reserved.
+      Portions Copyright (c) 1985-2002 Sybase, Inc. All Rights Reserved.
+      Source code is available under the Sybase Open Watcom Public License.
+      See https://github.com/open-watcom/open-watcom-v2#readme for details.
+      Error! E3033: directive error near '--version'
+...
