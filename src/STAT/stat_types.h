@@ -7,6 +7,7 @@
 
 #define STAT_SIZE_MAX UINT32_MAX
 typedef uint32_t stat_size_t;
+typedef int32_t stat_int_t;
 typedef double stat_float_t;
 
 // PRNG state
