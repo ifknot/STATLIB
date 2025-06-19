@@ -1,5 +1,9 @@
 #include "stat_graphs.h"
 
+#include <assert.h>
+
+#include "stat_basic.h"
+
 void stat_graph_smooth_histogram_i(
     const stat_int_t* values,
     stat_size_t count,
@@ -28,8 +32,8 @@ void stat_graph_smooth_histogram_i(
     }
 
     for (stat_size_t i = 0; i < count; ++i) {
-        printf("%3zu ", i); 
-        
+        printf("%3zu ", i);
+
         stat_float_t val = log_scale ? log10(values[i] + 1) : (stat_float_t)values[i];
         stat_float_t scaled = val * scale;
         stat_size_t full_units = (stat_size_t)(scaled / 2);
@@ -59,27 +63,27 @@ void stat_graph_smooth_histogram_f(
     for (stat_size_t i = 1; i < count; i++) {
         if (values[i] > max_val) max_val = values[i];
     }
-    
+
     stat_float_t percentiles[3];
     stat_percentiles_float(values, count, (stat_float_t[]){25, 50, 75}, percentiles, 3);
 
     // Header
     printf("\n");
     if (show_stats) {
-        printf("Max:%.2f  P25:%.2f  Med:%.2f  P75:%.2f\n\n", 
+        printf("Max:%.2f  P25:%.2f  Med:%.2f  P75:%.2f\n\n",
                max_val, percentiles[0], percentiles[1], percentiles[2]);
     }
 
     // Scaling (2x resolution)
-    stat_float_t scale = log_scale ? 
-        (2 * max_cols / log10(max_val + 1)) : 
+    stat_float_t scale = log_scale ?
+        (2 * max_cols / log10(max_val + 1)) :
         (2 * max_cols / max_val);
 
     for (stat_size_t i = 0; i < count; i++) {
         printf("%2zu ", i); // Bin index
 
-        stat_float_t val = log_scale ? 
-            log10(values[i] + 1) : 
+        stat_float_t val = log_scale ?
+            log10(values[i] + 1) :
             values[i];
 
         stat_float_t scaled = val * scale;
