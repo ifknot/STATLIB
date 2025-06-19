@@ -20,4 +20,11 @@ stat_float_t stat_round_decimal(stat_float_t value, int decimals);
 
 bool stat_safe_round_to_i32(stat_float_t value, int32_t* result);
 
+TODO: - make all arrays
+
+bool stat_cast_int_to_float_arr(stat_float_t* destination, stat_int_t* source);
+
+// Array versions 
+
+
 #endif // STAT_ROUND_H
