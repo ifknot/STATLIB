@@ -1,45 +1,43 @@
 #include "stat_abs.h"
-#ifndef STAT_ABS_H
-#define STAT_ABS_H
 
-#include "stat_types.h"
-#include <stdbool.h>
-#include <errno.h>
-#include <limits.h>
+#include <assert.h>
+#include <stddef.h>
 
-void stat_abs_f(stat_float_t* values, stat_size_t count) {
-    for (stat_size_t i = 0; i < count; i++) {
-        values[i] = values[i] < 0 ? -values[i] : values[i];
+stat_float_t* stat_abs_f(const stat_float_t* src, stat_float_t* dst, stat_size_t size) {
+    assert(src != NULL && "Source array cannot be NULL");
+    assert(dst != NULL && "Destination array cannot be NULL");
+
+    if (size == 0) {
+        errno = EINVAL;
+        return dst;
     }
-}
 
-stat_size_t stat_abs_i32(stat_int_t* values, stat_size_t count) {
-    stat_size_t successes = 0;
-    for (stat_size_t i = 0; i < count; i++) {
-        if (values[i] != INT32_MIN) {
-            values[i] = values[i] < 0 ? -values[i] : values[i];
-            successes++;
+    for (stat_size_t i = 0; i < size; i++) {
+        if (isnan(src[i])) {
+            errno = EDOM;
+            return dst;
         }
+        dst[i] = src[i] < 0 ? -src[i] : src[i];
     }
-    return successes;
+    return dst;
 }
 
-stat_size_t stat_safe_abs_i32(
-    const stat_int_t* input, 
-    stat_int_t* output, 
-    stat_size_t count
-) {
-    stat_size_t successes = 0;
-    for (stat_size_t i = 0; i < count; i++) {
-        if (input[i] == INT32_MIN) {
-            output[i] = input[i]; // Preserve original
+int32_t* stat_abs_i(const int32_t* src, int32_t* dst, stat_size_t size) {
+    assert(src != NULL && "Source array cannot be NULL");
+    assert(dst != NULL && "Destination array cannot be NULL");
+
+    if (!size) {
+        errno = EINVAL;
+        return dst;
+    }
+
+    for (stat_size_t i = 0; i <size; i++) {
+        if (src[i] == INT32_MIN) {
+            dst[i] = INT32_MIN; // Preserve value
             errno = ERANGE;
         } else {
-            output[i] = input[i] < 0 ? -input[i] : input[i];
-            successes++;
+            dst[i] = src[i] < 0 ? -src[i] : src[i];
         }
     }
-    return successes;
+    return dst;
 }
-
-#endif // STAT_ABS_H

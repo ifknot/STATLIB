@@ -10,11 +10,6 @@ typedef uint32_t stat_size_t;
 typedef int32_t stat_int_t;
 typedef double stat_float_t;
 
-// PRNG state
-typedef struct {
-    uint64_t x;
-} stat_prng_state_t;
-
 // Five-number summary
 typedef struct {
     stat_float_t min;

@@ -24,3 +24,9 @@ int stat_compare_floats_qsort(const void* a, const void* b) {
     stat_float_t fb = *(const stat_float_t*)b;
     return stat_compare_floats(fa, fb, STAT_EPSILON);
 }
+
+int stat_compare_ints_qsort(const void* a, const void* b) {
+    stat_int_t x = *(const stat_int_t*)a;
+    stat_int_t y = *(const stat_int_t*)b;
+    return (x > y) - (x < y);  // Branchless comparison
+}

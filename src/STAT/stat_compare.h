@@ -10,4 +10,6 @@ bool stat_is_near_zero(stat_float_t value, stat_float_t threshold);
 // Qsort-compatible wrapper
 int stat_compare_floats_qsort(const void* a, const void* b);
 
+int stat_compare_ints_qsort(const void* a, const void* b);
+
 #endif // STAT_COMPARE_H

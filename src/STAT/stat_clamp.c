@@ -1,21 +1,54 @@
 #include "stat_clamp.h"
 
-stat_float_t stat_clamp_f(stat_float_t value, stat_float_t min, stat_float_t max) {
-    if (value < min) return min;
-    if (value > max) return max;
-    return value;
-}
+#include <math.h>
+#include <stddef.h>
 
-int32_t stat_clamp_i32(int32_t value, int32_t min, int32_t max) {
-    if (value < min) return min;
-    if (value > max) return max;
-    return value;
-}
+stat_float_t* stat_clamp_f(
+    const stat_float_t* src,
+    stat_float_t* dst,
+    stat_size_t count,
+    stat_float_t min,
+    stat_float_t max
+) {
+    // Irrecoverable errors (assert)
+    assert(src != NULL && "Source array cannot be NULL");
+    assert(dst != NULL && "Destination array cannot be NULL");
 
-bool stat_clamp_array(stat_float_t* array, stat_size_t size, stat_float_t min, stat_float_t max) {
-    if (!array || size == 0) return false;
-    for (stat_size_t i = 0; i < size; i++) {
-        array[i] = stat_clamp_f(array[i], min, max);
+    // Recoverable errors (errno)
+    if (count == 0 || min > max) {
+        errno = EINVAL;
+        return dst;
     }
-    return true;
+
+    for (stat_size_t i = 0; i < count; i++) {
+        if (isnan(src[i])) {
+            errno = EDOM;
+            return dst;
+        }
+        dst[i] = (src[i] < min) ? min : ((src[i] > max) ? max : src[i]);
+    }
+    return dst;
+}
+
+stat_int_t* stat_clamp_i32(
+    const stat_int_t* src,
+    stat_int_t* dst,
+    stat_size_t count,
+    stat_int_t min,
+    stat_int_t max
+) {
+    // Irrecoverable errors (assert)
+    assert(src != NULL && "Source array cannot be NULL");
+    assert(dst != NULL && "Destination array cannot be NULL");
+
+    // Recoverable errors (errno)
+    if (count == 0 || min > max) {
+        errno = EINVAL;
+        return dst;
+    }
+
+    for (stat_size_t i = 0; i < count; i++) {
+        dst[i] = (src[i] < min) ? min : ((src[i] > max) ? max : src[i]);
+    }
+    return dst;
 }

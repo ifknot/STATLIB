@@ -1,35 +1,55 @@
 #include "stat_prng.h"
+#include <assert.h>
 #include <time.h>
-//#include <limits.h>
 
-#define STAT_MARSAGLIA_SEED 0x2545F4914F6CDD1DULL
-
-void stat_prng_init(stat_prng_state_t* state) {
-    state->x = STAT_MARSAGLIA_SEED;
+// 32-bit version of xoshiro128** (C99-compatible)
+static inline uint32_t rotl32(uint32_t x, int k) {
+    return (x << k) | (x >> (32 - k));
 }
 
-void stat_prng_init_time(stat_prng_state_t* state) {
-    uint64_t seed = (uint64_t)time(NULL);
-    // Mix in additional entropy sources when possible
-    //seed ^= (uint64_t)__rdtsc();  // Use CPU timestamp counter if available
-    //seed ^= (uint64_t)clock();    // Fallback to process clock
-    //state->x = seed ? seed : STAT_MARSAGLIA_SEED;
+static uint32_t xoshiro128_next(stat_prng_state_t* state) {
+    const uint32_t result = rotl32(state->state[1] * 5, 7) * 9;
+    const uint32_t t = state->state[1] << 9;
 
-    // Warm-up the generator
+    state->state[2] ^= state->state[0];
+    state->state[3] ^= state->state[1];
+    state->state[1] ^= state->state[2];
+    state->state[0] ^= state->state[3];
+
+    state->state[2] ^= t;
+    state->state[3] = rotl32(state->state[3], 11);
+
+    return result;
+}
+
+void stat_prng_init(stat_prng_state_t* state, uint32_t seed) {
+    assert(state != NULL && "PRNG state cannot be NULL");
+    assert(seed != 0 && "ZERO seed forbidden!");
+
+    // Simple seeding (Watcom-compatible)
+    state->state[0] = seed ^ 0xBADF00D;
+    state->state[1] = seed ^ 0xCAFEBABE;
+    state->state[2] = seed ^ 0xDEADBEEF;
+    state->state[3] = seed ^ 0xFEEDFACE;
+
+    // Warm-up (10 iterations)
     for (int i = 0; i < 10; i++) {
-        stat_prng_next(state);
+        xoshiro128_next(state);
     }
 }
 
-stat_float_t stat_prng_next(stat_prng_state_t* state) {
-    state->x ^= state->x >> 12;
-    state->x ^= state->x << 25;
-    state->x ^= state->x >> 27;
-    return (stat_float_t)((state->x * STAT_MARSAGLIA_SEED) >> 11) * (1.0 / (UINT64_C(1) << 53));
+void stat_prng_init_time(stat_prng_state_t* state) {
+    uint32_t seed = (uint32_t)time(NULL);
+    stat_prng_init(state, seed);
 }
 
-int32_t stat_prng_next_int(stat_prng_state_t* state, int32_t min, int32_t max) {
-    uint64_t range = (uint64_t)max - min + 1;
-    uint64_t scaled = (uint64_t)(stat_prng_next(state) * range);
-    return min + (int32_t)scaled;
+stat_float_t stat_prng_float(stat_prng_state_t* state) {
+    assert(state != NULL && "PRNG state cannot be NULL");
+    // 23-bit precision float in [0,1)
+    return (xoshiro128_next(state) >> 9) * (1.0f / (1U << 23));
+}
+
+uint32_t stat_prng_u32(stat_prng_state_t* state) {
+    assert(state != NULL && "PRNG state cannot be NULL");
+    return xoshiro128_next(state);
 }

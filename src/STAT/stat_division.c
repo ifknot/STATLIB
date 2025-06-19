@@ -1,23 +1,52 @@
 #include "stat_division.h"
-//#include <limits.h>
+#include <assert.h>
 #include <errno.h>
+#include <math.h>
+#include <stddef.h>
 
-bool stat_safe_div_i32(int32_t numerator, int32_t denominator, int32_t* result) {
-    if (denominator == 0 ||
-        (numerator == INT32_MIN && denominator == -1)) {
+stat_float_t stat_safe_div_f(stat_float_t numerator, stat_float_t denominator) {
+    if (denominator == 0.0f) {
+        errno = EDOM;
+        return NAN;
+    }
+    return numerator / denominator;
+}
+
+bool stat_safe_div_i(stat_int_t numerator, stat_int_t denominator,
+                      stat_int_t* result) {
+    assert(result != NULL && "Result pointer cannot be NULL");
+
+    if (denominator == 0) {
+        errno = EDOM;
+        return false;
+    }
+
+    // Handle INT_MIN / -1 special case
+    if (numerator == INT32_MIN && denominator == -1) {
         errno = ERANGE;
         return false;
     }
+
     *result = numerator / denominator;
     return true;
 }
 
-int32_t stat_div_round_up(int32_t dividend, int32_t divisor) {
-    if (divisor == 0) return 0;
-    return (dividend + divisor - 1) / divisor;
-}
+bool stat_divmod_i32(stat_int_t numerator, stat_int_t denominator, stat_int_t* quotient, stat_int_t* remainder) {
+    assert(quotient != NULL && "Quotient pointer cannot be NULL");
+    assert(remainder != NULL && "Remainder pointer cannot be NULL");
 
-int32_t stat_div_round_nearest(int32_t dividend, int32_t divisor) {
-    if (divisor == 0) return 0;
-    return (dividend + divisor/2) / divisor;
+    if (denominator == 0) {
+        errno = EDOM;
+        return false;
+    }
+
+    // Handle INT_MIN / -1 special case
+    if (numerator == INT32_MIN && denominator == -1) {
+        errno = ERANGE;
+        return false;
+    }
+
+    *quotient = numerator / denominator;
+    *remainder = numerator % denominator;
+    return true;
 }

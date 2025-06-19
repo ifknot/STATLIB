@@ -11,7 +11,7 @@ stat_float_t stat_percentile(stat_float_t* data, stat_size_t size, stat_float_t 
     if (!sorted) return NAN;
 
     memcpy(sorted, data, size * sizeof(stat_float_t));
-    stat_sort(sorted, size);
+    stat_sort_f(sorted, size);
 
     stat_float_t index = (percentile / 100.0) * (size - 1);
     stat_size_t lower = (stat_size_t)floor(index);

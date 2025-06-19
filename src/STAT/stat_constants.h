@@ -18,6 +18,10 @@
 #define M_PI ((stat_float_t)3.14159265358979323846)       ///< π
 #endif
 
+#ifndef TWO_PI
+#define TWO_PI 6.28318530717958647692
+#endif
+
 #ifndef M_E
 #define M_E  ((stat_float_t)2.7182818284590452354)        ///< Euler's number
 #endif

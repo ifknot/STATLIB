@@ -1,71 +1,53 @@
 #ifndef STAT_ABS_H
 #define STAT_ABS_H
 
+#include <errno.h>
+#include <math.h>
+
 #include "stat_types.h"
 
-
 /**
- * @brief Compute absolute values of float array (in-place)
- * @param values Array of values (can be length 1)
- * @param count Number of elements
+ * @brief Computes absolute values of a stat_float_t array
+ * @param[in]  src   Source array
+ * @param[out] dst   Destination array
+ * @param[in]  count Number of elements
+ * @return dst pointer for chaining
+ * @note dst may alias src (safe for in-place operation)
+ * @throws EINVAL if count=0, EDOM if NaN encountered
+ * @assert Fails if src or dst is NULL
  */
-void stat_abs_f(stat_float_t* values, stat_size_t count);
+stat_float_t* stat_abs_f(const stat_float_t* src, stat_float_t* dst, stat_size_t size);
 
 /**
- * @brief Compute absolute values of int32 array (in-place)
- * @param values Array to modify (can be length 1)
- * @param count Number of elements
- * @return Number of successful conversions (count-INT32_MIN occurrences)
+ * @brief Computes absolute values of an int32 array
+ * @param[in]  src   Source array
+ * @param[out] dst   Destination array
+ * @param[in]  count Number of elements
+ * @return dst pointer for chaining
+ * @throws EINVAL if size=0, ERANGE if INT32_MIN encountered
+ * @assert Fails if src or dst is NULL
  */
-stat_size_t stat_abs_i32(stat_int_t* values, stat_size_t count)
+int32_t* stat_abs_i(const int32_t* src, int32_t* dst, stat_size_t size);
 
 /**
- * @brief Safe absolute values (out-of-place)
- * @param input Source array
- * @param output Destination array (pre-allocated)
- * @param count Number of elements
- * @return Number of successful conversions
- */
-stat_size_t stat_safe_abs_i32(
-    const stat_int_t* input, 
-    stat_int_t* output, 
-    stat_size_t count
-)
-
-/**
- * @brief Scalar wrapper for stat_abs_f (float)
- * @param x Single value to process
+ * @brief Scalar absolute value (stat_float_t)
+ * @param[in] x Input value
  * @return Absolute value
+ * @note Sets errno=EDOM if x=NaN
  */
 static inline stat_float_t stat_abs_scalar_f(stat_float_t x) {
-    stat_abs_f(&x, 1);
-    return x;
+    if (isnan(x)) errno = EDOM;
+    return x < 0 ? -x : x;
 }
 
 /**
- * @brief Scalar wrapper for stat_abs_i32 (int32)
- * @param x Single value to process
+ * @brief Scalar absolute value (int32_t)
+ * @param[in] x Input value
  * @return Absolute value (undefined if x=INT32_MIN)
  */
-static inline stat_int_t stat_abs_scalar_i32(stat_int_t x) {
-    stat_abs_i32(&x, 1);
-    return x;
+static inline int32_t stat_abs_scalar_i32(int32_t x) {
+    if (x == INT32_MIN) errno = ERANGE;
+    return x < 0 ? -x : x;
 }
 
-/**
- * @brief Safe scalar wrapper for stat_safe_abs_i32
- * @param x Single value to process
- * @param result Output pointer (unchanged if x=INT32_MIN)
- * @return True if successful, False if x=INT32_MIN
- */
-static inline bool stat_safe_abs_scalar_i32(stat_int_t x, stat_int_t* result) {
-    stat_int_t tmp = x;
-    if (stat_abs_i32(&tmp, 1) == 0) {
-        return false;
-    }
-    *result = tmp;
-    return true;
-}
-
-
-#endif // STAT_ABS_H
+#endif
