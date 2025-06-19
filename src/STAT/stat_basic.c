@@ -1,6 +1,4 @@
 #include "stat_basic.h"
-#include <math.h>
-//#include <limits.h>
 
 stat_float_t stat_min_f(stat_float_t* data, stat_size_t size) {
     if (size == 0) return NAN;
