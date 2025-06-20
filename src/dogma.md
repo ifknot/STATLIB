@@ -1,5 +1,5 @@
 ## Final Dogma List
-0.	  No internal malloc	                    
+0.	  Never use function internal malloc to return a pointer result 
 1.	  No in-place modification	              
 2.	  Return scalars directly	                
 3.	  Return destination pointer for chaining	        
