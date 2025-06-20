@@ -116,6 +116,33 @@ uint64_t prng_default_seed(void);
 bool prng_is_valid_seed(uint64_t seed, prng_engine_t engine);
 
 /**
+ * Minimal 16-bit DOS Seed Generator
+ * ----------------------------------
+ * A deterministic but sufficiently erratic seed source for 
+ * 1980s-90s era procedural generation. Not suitable for crypto.
+ * 
+ * Cycle Breakdown:
+ * 1. BIOS Timer (INT 0x1A AH=0x00)
+ *    - 18.2 Hz counter since midnight
+ *    - Stored in CX:DX (high:low words)
+ * 
+ * 2. DOS Time (INT 0x21 AH=0x2C)
+ *    - CH = hour
+ *    - CL = minute
+ *    - DH = second
+ *    - DL = 1/100 sec (actually 1/18.2 sec)
+ * 
+ * 3. UNIX Time Fallback
+ *    - Seconds since 1970 (if BIOS/DOS fails)
+ * 
+ * Guarantees:
+ * - Always returns non-zero
+ * - <100 clock cycles on 8086
+ * - No malloc() or system calls
+ */
+uint32_t prng_time_seed(void)
+
+/**
  * Initializes a PRNG state with explicit parameters.
  * - Requires: state != NULL, seed != 0 (asserts otherwise).
  * - Warm-up rounds: clamped to [0, WARMUP_MAX].
