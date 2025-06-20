@@ -2,6 +2,8 @@
 
 #include <assert.h>
 #include <string.h>
+#include <dos.h>
+#include <time.h>
 
 /* ===================== *
  * Engine-Specific Constants
@@ -118,6 +120,32 @@ bool prng_is_valid_seed(uint64_t seed, prng_engine_t engine) {
         case PRNG_XORSHIFT:  return (seed & SEED_XSHIFT_MASK) != 0;
         default: return true;
     }
+}
+
+uint32_t prng_time_seed(void) {
+    uint32_t seed;
+    
+    /* 1. Time since midnight (1/18.2 second precision) */
+    seed = (uint32_t)time(NULL) << 16;
+    
+    /* 2. BIOS timer ticks (18.2 Hz) */
+    _asm {
+        mov ah, 0x00
+        int 0x1A      ; CX:DX = timer ticks
+        mov word ptr seed, dx
+        mov word ptr seed+2, cx
+    }
+    
+    /* 3. Mix with CPU registers (DH=seconds, DL=minutes) */
+    _asm {
+        mov ah, 0x2C
+        int 0x21      ; CH=hour, CL=minute, DH=second, DL=1/100 sec
+        xor byte ptr seed, dh
+        xor byte ptr seed+1, dl
+    }
+    
+    /* 4. Ensure non-zero (golden ratio) */
+    return seed ? seed : 0x9E3779B9UL;
 }
 
 /**
