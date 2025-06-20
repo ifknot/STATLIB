@@ -31,7 +31,7 @@ stat_size_t stat_count_outliers(const stat_float_t* data, stat_size_t size, cons
  * @param[out] results Output array for outlier flags (must be pre-allocated)
  * @return bool* Pointer to results array for chaining
  */
-bool* stat_outlier_to_array(const stat_float_t* values, stat_size_t count, const stat_five_num_summary_t* summary, bool* results);
+stat_size_t stat_outliers_as_array(const stat_float_t* values, stat_size_t count, const stat_five_num_summary_t* summary, bool* outliers);
 
 /**
  * @brief Enumerates outliers by storing pointers to them in a destination array
