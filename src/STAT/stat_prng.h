@@ -1,8 +1,7 @@
 #ifndef PRNG_H
 #define PRNG_H
 
-#include "stat_types.h"
-
+#include <stdint.h>
 /* ===================== *
  * Seed Generation Constants 
  * ===================== */
@@ -126,7 +125,7 @@ bool prng_is_valid_seed(uint64_t seed, prng_engine_t engine);
  *   prng_init(&rng, PRNG_XORSHIFT, 0xABCD, 16, stderr);
  *   // Logs: "[PRNG] Engine=xorshift Seed=0xABCD..."
  */
-void sprng_init(stat_prng_state_t* state, prng_engine_t engine, uint64_t seed, int warmup_rounds, FILE* seed_log);
+void prng_init(stat_prng_state_t* state, prng_engine_t engine, uint64_t seed, int warmup_rounds, FILE* seed_log);
 
 /**
  * @brief Generates uniform float in [0,1)
