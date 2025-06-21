@@ -6,6 +6,40 @@
 
 #IncludeRegexTransform: 
 
+/Users/jeremythornton/dosbox/STATLIB/src/PRNG/prng.h
+stdint.h
+-
+stdio.h
+-
+stdbool.h
+-
+prng_constants.h
+/Users/jeremythornton/dosbox/STATLIB/src/PRNG/prng_constants.h
+
+/Users/jeremythornton/dosbox/STATLIB/src/PRNG/prng_constants.h
+
+/Users/jeremythornton/dosbox/STATLIB/src/PRNG/prng_popcount.h
+stdint.h
+-
+
+/Users/jeremythornton/dosbox/STATLIB/src/PRNG/test_prng.h
+stdbool.h
+-
+math.h
+-
+stdint.h
+-
+../PRNG/prng.h
+/Users/jeremythornton/dosbox/STATLIB/src/PRNG/prng.h
+../PRNG/prng_popcount.h
+/Users/jeremythornton/dosbox/STATLIB/src/PRNG/prng_popcount.h
+../PRNG/prng_constants.h
+/Users/jeremythornton/dosbox/STATLIB/src/PRNG/prng_constants.h
+../TDD/tdd_macros.h
+/Users/jeremythornton/dosbox/STATLIB/src/TDD/tdd_macros.h
+../TDD/tdd_progress.h
+/Users/jeremythornton/dosbox/STATLIB/src/TDD/tdd_progress.h
+
 /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_abs.h
 errno.h
 -
@@ -127,6 +161,8 @@ stdint.h
 /Users/jeremythornton/dosbox/STATLIB/src/main.c
 stdlib.h
 -
+PRNG/test_prng.h
+/Users/jeremythornton/dosbox/STATLIB/src/PRNG/test_prng.h
 STAT/test_stats.h
 /Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h
 

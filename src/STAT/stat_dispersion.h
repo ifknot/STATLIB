@@ -2,7 +2,7 @@
 #define STAT_DISTRIBUTIONS_H
 
 #include "stat_types.h"
-#include "stat_prng.h"
+#include "../PRNG/prng.h"
 #include <stdbool.h>
 
 /**
@@ -17,7 +17,7 @@
  */
 void stat_generate_uniform_dist(stat_float_t* output, stat_size_t size,
                               stat_float_t min, stat_float_t max,
-                              stat_prng_state_t* state);
+                              prng_state_t* state);
 
 /**
  * @brief Generates normal distribution N(mean, std_dev^2)
@@ -32,7 +32,7 @@ void stat_generate_uniform_dist(stat_float_t* output, stat_size_t size,
  */
 void stat_generate_normal_dist(stat_float_t* output, stat_size_t size,
                              stat_float_t mean, stat_float_t std_dev,
-                             stat_prng_state_t* state);
+                             prng_state_t* state);
 
 /**
  * @brief Generates exponential distribution with rate lambda
@@ -45,7 +45,7 @@ void stat_generate_normal_dist(stat_float_t* output, stat_size_t size,
  * @note Uses inverse transform sampling
  */
 void stat_generate_exponential_dist(stat_float_t* output, stat_size_t size,
-                                  stat_float_t lambda, stat_prng_state_t* state);
+                                  stat_float_t lambda, prng_state_t* state);
 
 /**
  * @brief Generates Poisson distribution Pois(lambda)
@@ -58,7 +58,7 @@ void stat_generate_exponential_dist(stat_float_t* output, stat_size_t size,
  * @note Uses Knuth's algorithm
  */
 void stat_generate_poisson_dist(stat_size_t* output, stat_size_t size,
-                              stat_float_t lambda, stat_prng_state_t* state);
+                              stat_float_t lambda, prng_state_t* state);
 
 /**
  * @brief Generates binomial distribution B(n, p)
@@ -72,6 +72,6 @@ void stat_generate_poisson_dist(stat_size_t* output, stat_size_t size,
  */
 void stat_generate_binomial_dist(stat_size_t* output, stat_size_t size,
                                stat_size_t n, stat_float_t p,
-                               stat_prng_state_t* state);
+                               prng_state_t* state);
 
 #endif // STAT_DISTRIBUTIONS_H

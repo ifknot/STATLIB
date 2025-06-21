@@ -5,7 +5,7 @@
 #include <stddef.h>
 
 #include "stat_constants.h"
-#include "stat_prng.h"
+#include "../PRNG/prng.h"
 /*
 void stat_generate_uniform_dist(stat_float_t* output, stat_size_t size,
                               stat_float_t min, stat_float_t max,

@@ -8,6 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
+  "/Users/jeremythornton/dosbox/STATLIB/src/PRNG/prng.c" "/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles/stat.dir/PRNG/prng.c.obj"
+  "/Users/jeremythornton/dosbox/STATLIB/src/PRNG/prng_popcount.c" "/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles/stat.dir/PRNG/prng_popcount.c.obj"
   "/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_abs.c" "/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles/stat.dir/STAT/stat_abs.c.obj"
   "/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_basic.c" "/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles/stat.dir/STAT/stat_basic.c.obj"
   "/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_central.c" "/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles/stat.dir/STAT/stat_central.c.obj"
@@ -20,7 +22,6 @@ set(CMAKE_DEPENDS_CHECK_C
   "/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_graphs.c" "/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles/stat.dir/STAT/stat_graphs.c.obj"
   "/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_outliers.c" "/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles/stat.dir/STAT/stat_outliers.c.obj"
   "/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_percentiles.c" "/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles/stat.dir/STAT/stat_percentiles.c.obj"
-  "/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_prng.c" "/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles/stat.dir/STAT/stat_prng.c.obj"
   "/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_round.c" "/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles/stat.dir/STAT/stat_round.c.obj"
   "/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_sign.c" "/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles/stat.dir/STAT/stat_sign.c.obj"
   "/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_util.c" "/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles/stat.dir/STAT/stat_util.c.obj"

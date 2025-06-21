@@ -35,7 +35,7 @@ stat_summary_t stat_describe_f(const stat_float_t* data, stat_size_t count) {
     summary.mean = stat_mean_f(data, count);
 
     // Variance/stddev
-    summary.variance = 0;//stat_variance_f(data, count, true);
+    summary.variance = stat_variance_f(data, count, true);
     summary.stddev = sqrt(summary.variance);
 
     // Percentiles (requires sorted data)

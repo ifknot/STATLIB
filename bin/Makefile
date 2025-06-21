@@ -118,6 +118,54 @@ stat/fast: .SYMBOLIC
 stat/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/stat.dir/build.make -h CMakeFiles/stat.dir/build
 
+PRNG/prng.obj: .SYMBOLIC
+PRNG/prng.obj: PRNG/prng.c.obj
+
+# target to build an object file
+PRNG/prng.c.obj: .SYMBOLIC
+PRNG/prng.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stat.dir/build.make -h CMakeFiles/stat.dir/PRNG/prng.c.obj
+
+PRNG/prng.i: .SYMBOLIC
+PRNG/prng.i: PRNG/prng.c.i
+
+# target to preprocess a source file
+PRNG/prng.c.i: .SYMBOLIC
+PRNG/prng.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stat.dir/build.make -h CMakeFiles/stat.dir/PRNG/prng.c.i
+
+PRNG/prng.s: .SYMBOLIC
+PRNG/prng.s: PRNG/prng.c.s
+
+# target to generate assembly for a file
+PRNG/prng.c.s: .SYMBOLIC
+PRNG/prng.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stat.dir/build.make -h CMakeFiles/stat.dir/PRNG/prng.c.s
+
+PRNG/prng_popcount.obj: .SYMBOLIC
+PRNG/prng_popcount.obj: PRNG/prng_popcount.c.obj
+
+# target to build an object file
+PRNG/prng_popcount.c.obj: .SYMBOLIC
+PRNG/prng_popcount.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stat.dir/build.make -h CMakeFiles/stat.dir/PRNG/prng_popcount.c.obj
+
+PRNG/prng_popcount.i: .SYMBOLIC
+PRNG/prng_popcount.i: PRNG/prng_popcount.c.i
+
+# target to preprocess a source file
+PRNG/prng_popcount.c.i: .SYMBOLIC
+PRNG/prng_popcount.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stat.dir/build.make -h CMakeFiles/stat.dir/PRNG/prng_popcount.c.i
+
+PRNG/prng_popcount.s: .SYMBOLIC
+PRNG/prng_popcount.s: PRNG/prng_popcount.c.s
+
+# target to generate assembly for a file
+PRNG/prng_popcount.c.s: .SYMBOLIC
+PRNG/prng_popcount.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stat.dir/build.make -h CMakeFiles/stat.dir/PRNG/prng_popcount.c.s
+
 STAT/stat_abs.obj: .SYMBOLIC
 STAT/stat_abs.obj: STAT/stat_abs.c.obj
 
@@ -406,30 +454,6 @@ STAT/stat_percentiles.c.s: .SYMBOLIC
 STAT/stat_percentiles.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/stat.dir/build.make -h CMakeFiles/stat.dir/STAT/stat_percentiles.c.s
 
-STAT/stat_prng.obj: .SYMBOLIC
-STAT/stat_prng.obj: STAT/stat_prng.c.obj
-
-# target to build an object file
-STAT/stat_prng.c.obj: .SYMBOLIC
-STAT/stat_prng.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/stat.dir/build.make -h CMakeFiles/stat.dir/STAT/stat_prng.c.obj
-
-STAT/stat_prng.i: .SYMBOLIC
-STAT/stat_prng.i: STAT/stat_prng.c.i
-
-# target to preprocess a source file
-STAT/stat_prng.c.i: .SYMBOLIC
-STAT/stat_prng.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/stat.dir/build.make -h CMakeFiles/stat.dir/STAT/stat_prng.c.i
-
-STAT/stat_prng.s: .SYMBOLIC
-STAT/stat_prng.s: STAT/stat_prng.c.s
-
-# target to generate assembly for a file
-STAT/stat_prng.c.s: .SYMBOLIC
-STAT/stat_prng.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/stat.dir/build.make -h CMakeFiles/stat.dir/STAT/stat_prng.c.s
-
 STAT/stat_round.obj: .SYMBOLIC
 STAT/stat_round.obj: STAT/stat_round.c.obj
 
@@ -608,6 +632,12 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... stat"
+	@echo "... PRNG/prng.obj"
+	@echo "... PRNG/prng.i"
+	@echo "... PRNG/prng.s"
+	@echo "... PRNG/prng_popcount.obj"
+	@echo "... PRNG/prng_popcount.i"
+	@echo "... PRNG/prng_popcount.s"
 	@echo "... STAT/stat_abs.obj"
 	@echo "... STAT/stat_abs.i"
 	@echo "... STAT/stat_abs.s"
@@ -644,9 +674,6 @@ help:
 	@echo "... STAT/stat_percentiles.obj"
 	@echo "... STAT/stat_percentiles.i"
 	@echo "... STAT/stat_percentiles.s"
-	@echo "... STAT/stat_prng.obj"
-	@echo "... STAT/stat_prng.i"
-	@echo "... STAT/stat_prng.s"
 	@echo "... STAT/stat_round.obj"
 	@echo "... STAT/stat_round.i"
 	@echo "... STAT/stat_round.s"

@@ -2,44 +2,10 @@
 
 #include <assert.h>
 #include <string.h>
-#include <dos.h>
 #include <time.h>
+#include <stdlib.h>
 
-/* ===================== *
- * Engine-Specific Constants
- * ===================== */
-
-// Marsaglia MWC
-#define MWC_MULTIPLIER_A  36969U
-#define MWC_MULTIPLIER_B  18000U
-#define MWC_MULTIPLIER_C  29000U
-#define MWC_MULTIPLIER_D  30970U
-#define MWC_DEFAULT_SEED  1U     // Default seed if 0 provided
-
-// XORShift128
-#define XORSHIFT_INIT_SEED  0xBADF00D
-#define XORSHIFT_SEED_STEP  0x11111111
-#define XORSHIFT_SHIFT_1    11U
-#define XORSHIFT_SHIFT_2    8U
-#define XORSHIFT_SHIFT_3    19U
-
-// PCG32
-#define PCG_MULTIPLIER      6364136223846793005ULL
-#define PCG_INCREMENT       1442695040888963407ULL  // Default stream selector
-#define PCG_ROTATE_BITS     59U
-#define PCG_XSHIFT_BITS     27U
-#define PCG_OUTPUT_BITS     31U
-
-// SplitMix
-#define SPLITMIX_INCREMENT  0x9e3779b97f4a7c15ULL
-#define SPLITMIX_MULT_1     0xbf58476d1ce4e5b9ULL
-#define SPLITMIX_MULT_2     0x94d049bb133111ebULL
-#define SPLITMIX_SHIFT_1    30U
-#define SPLITMIX_SHIFT_2    27U
-
-// Float generation
-#define FLOAT_PRECISION_BITS 24U  // Bits for float mantissa
-#define FLOAT_SHIFT_BITS    8U    // (32 - FLOAT_PRECISION_BITS)
+#include "prng_constants.h"
 
 /* ===================== *
  * Engine Implementations
@@ -104,9 +70,9 @@ static const struct {
  * - Guaranteed non-zero (hash_seed() ensures this).
  */
 uint64_t prng_default_seed(void) {
-    uint64_t seed = ((uint64_t)time(NULL)) << SEED_TIME_SHIFT | getpid();
+    uint64_t seed = ((uint64_t)time(NULL)) << SEED_TIME_SHIFT;
     seed ^= (uint64_t)clock() << (SEED_TIME_SHIFT / 2);
-    return hash_seed(seed ? seed : SEED_GOLDEN_RATIO); // Fallback if clock=0
+    return seed ? seed : SEED_GOLDEN_RATIO; // Fallback if clock=0
 }
 
 /**
@@ -122,30 +88,21 @@ bool prng_is_valid_seed(uint64_t seed, prng_engine_t engine) {
     }
 }
 
-uint32_t prng_time_seed(void) {
-    uint32_t seed;
-    
-    /* 1. Time since midnight (1/18.2 second precision) */
-    seed = (uint32_t)time(NULL) << 16;
-    
-    /* 2. BIOS timer ticks (18.2 Hz) */
-    _asm {
-        mov ah, 0x00
-        int 0x1A      ; CX:DX = timer ticks
-        mov word ptr seed, dx
-        mov word ptr seed+2, cx
-    }
-    
-    /* 3. Mix with CPU registers (DH=seconds, DL=minutes) */
-    _asm {
-        mov ah, 0x2C
-        int 0x21      ; CH=hour, CL=minute, DH=second, DL=1/100 sec
-        xor byte ptr seed, dh
-        xor byte ptr seed+1, dl
-    }
-    
-    /* 4. Ensure non-zero (golden ratio) */
-    return seed ? seed : 0x9E3779B9UL;
+uint64_t prng_time_seed(void) {
+    uint64_t seed = 0;
+
+    // 1. Time since epoch (seconds)
+    seed ^= (uint64_t)time(NULL) << 32;
+
+    // 2. Processor ticks (best effort)
+    seed ^= (uint64_t)clock();
+
+    // 3. Stack address entropy (ASLR bits)
+    volatile uintptr_t stack_addr = (uintptr_t)&seed;
+    seed ^= (stack_addr << 16) | (stack_addr >> 16);
+
+    // 4. Guaranteed non-zero
+    return seed ? seed : GOLDEN_RATIO_64; // Golden ratio fallback
 }
 
 /**
@@ -157,11 +114,11 @@ uint32_t prng_time_seed(void) {
 void prng_init(prng_state_t* state, prng_engine_t engine, uint64_t seed, int warmup_rounds, FILE* seed_log) {
     assert(state != NULL);
     assert(seed != 0); // Enforce explicit seeding
-    
+
     state->engine = engine;
     state->engine_name = engine_metadata[engine].name;
     state->period_log2 = engine_metadata[engine].period_log2;
-    
+
     switch(engine) {
         case PRNG_MARSAGLIA:
             seed = seed ? seed : MWC_DEFAULT_SEED;
@@ -170,22 +127,22 @@ void prng_init(prng_state_t* state, prng_engine_t engine, uint64_t seed, int war
             state->state.mwc.c = seed + 2;
             state->state.mwc.d = seed + 3;
             break;
-            
+
         case PRNG_XORSHIFT:
             seed = seed ? seed : MWC_DEFAULT_SEED;
-            for (int i = 0; i < 4; i++) 
+            for (int i = 0; i < 4; i++)
                 state->state.xorshift.x[i] = seed ^ (XORSHIFT_INIT_SEED + i*XORSHIFT_SEED_STEP);
             break;
-            
+
         case PRNG_C99:
             if (seed) srand((unsigned)seed);
             break;
-            
+
         case PRNG_PCG32:
             state->state.pcg.state = seed ? seed : MWC_DEFAULT_SEED;
             state->state.pcg.inc = PCG_INCREMENT;
             break;
-            
+
         case PRNG_SPLITMIX:
             state->state.splitmix = seed ? seed : MWC_DEFAULT_SEED;
             break;
@@ -194,7 +151,7 @@ void prng_init(prng_state_t* state, prng_engine_t engine, uint64_t seed, int war
 
 uint32_t prng_next_u32(prng_state_t* state) {
     assert(state != NULL);
-    
+
     switch(state->engine) {
         case PRNG_MARSAGLIA: return marsaglia_next(state);
         case PRNG_XORSHIFT:  return xorshift_next(state);
@@ -206,14 +163,13 @@ uint32_t prng_next_u32(prng_state_t* state) {
 }
 
 double prng_next_float(prng_state_t* state) {
-    return (uint32_t(state) >> FLOAT_SHIFT_BITS) * 
-           (1.0f / (1U << FLOAT_PRECISION_BITS));
+    return ((uint64_t)state >> FLOAT_SHIFT_BITS) * (1.0f / (1U << FLOAT_PRECISION_BITS));
 }
 
 const char* prng_get_metadata(const prng_state_t* state) {
     static char buf[64];
     snprintf(buf, sizeof(buf), "%s (Period=2^%u, Speed=%.1fx)",
-             state->engine_name, state->period_log2, 
+             state->engine_name, state->period_log2,
              engine_metadata[state->engine].speed_factor);
     return buf;
 }

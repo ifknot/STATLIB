@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/stat.dir/PRNG/prng.c.obj"
+  "CMakeFiles/stat.dir/PRNG/prng_popcount.c.obj"
   "CMakeFiles/stat.dir/STAT/stat_abs.c.obj"
   "CMakeFiles/stat.dir/STAT/stat_basic.c.obj"
   "CMakeFiles/stat.dir/STAT/stat_central.c.obj"
@@ -11,7 +13,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/stat.dir/STAT/stat_graphs.c.obj"
   "CMakeFiles/stat.dir/STAT/stat_outliers.c.obj"
   "CMakeFiles/stat.dir/STAT/stat_percentiles.c.obj"
-  "CMakeFiles/stat.dir/STAT/stat_prng.c.obj"
   "CMakeFiles/stat.dir/STAT/stat_round.c.obj"
   "CMakeFiles/stat.dir/STAT/stat_sign.c.obj"
   "CMakeFiles/stat.dir/STAT/stat_util.c.obj"

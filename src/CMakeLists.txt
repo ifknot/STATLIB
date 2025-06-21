@@ -22,6 +22,7 @@ file(GLOB SOURCES
     *.c
     STAT/*c
     TDD/*.c
+    PRNG/*.c
 )
 
 message(Source list="${SOURCES}")

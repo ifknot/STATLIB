@@ -1,16 +1,16 @@
 #include "stat_percentiles.h"
-#include "stat_sort.h"
 #include "stat_util.h"
 #include <assert.h>
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>
 
+/*
 static stat_float_t private_compute_percentile(const stat_float_t* sorted, stat_size_t size, stat_float_t percentile) {
     const stat_float_t rank = (percentile / 100.0f) * (size - 1);
     const stat_size_t lower = (stat_size_t)rank;
     const stat_float_t frac = rank - lower;
-    
+
     return sorted[lower] + frac * (sorted[lower + 1] - sorted[lower]);
 }
 
@@ -29,7 +29,7 @@ stat_float_t stat_percentile(stat_float_t* data, stat_size_t size, stat_float_t 
 
     memcpy(sorted, data, size * sizeof(stat_float_t));
     stat_sort_f(sorted, size);
-    
+
     stat_float_t result = private_compute_percentile(sorted, size, percentile);
     free(sorted);
     return result;
@@ -41,7 +41,7 @@ stat_float_t* stat_percentiles_array(stat_float_t* data, stat_size_t data_size,
     assert(data != NULL && "Data pointer cannot be NULL");
     assert(percentiles != NULL && "Percentiles pointer cannot be NULL");
     assert(results != NULL && "Results pointer cannot be NULL");
-    
+
     if (data_size == 0) {
         errno = EDOM;
         return results;
@@ -80,7 +80,7 @@ stat_float_t stat_quartile(stat_float_t* data, stat_size_t size, stat_size_t qua
 
 stat_five_num_summary_t stat_five_num_summary(stat_float_t* data, stat_size_t size) {
     assert(data != NULL && "Data pointer cannot be NULL");
-    
+
     stat_five_num_summary_t summary = {0};
     if (size == 0) {
         errno = EDOM;
@@ -108,3 +108,4 @@ stat_five_num_summary_t stat_five_num_summary(stat_float_t* data, stat_size_t si
     free(sorted);
     return summary;
 }
+*/
