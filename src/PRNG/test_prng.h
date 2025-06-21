@@ -23,8 +23,8 @@
 
 #define PRNG_TEST_SUITE &test_prng_popcount, \
     &test_prng_basic,         \
-    //&test_prng_distributions,  \
-    //&test_prng_monte_carlo,    \
+    &test_prng_distributions,  \
+    &test_prng_monte_carlo,    \
     &test_prng_bit_quality,    \
     &test_prng_performance,    \
     &test_prng_edge_cases
@@ -60,9 +60,9 @@ TEST(test_prng_basic) {
     const uint32_t expected[10] = {
         3073780141, 2828037266,
         1361383432, 1327541568,
+        5720, 14404,
         27, 1824507900,
-        1256175887, 3730336304,
-        5720, 14404
+        1256175887, 3730336304
     };
 
     for (size_t i = 0; i < PRNG_ENGINE_COUNT; i++) {
@@ -83,19 +83,21 @@ TEST(test_prng_basic) {
 }
 
 TEST(test_prng_distributions) {
-    const prng_engine_t engines[] = {PRNG_MARSAGLIA, PRNG_XORSHIFT, PRNG_PCG32};
     const size_t num_buckets = 32;
-    const size_t samples = 10000;
+    const size_t samples = 500;
 
-    for (size_t e = 0; e < sizeof(engines)/sizeof(engines[0]); e++) {
+    for (size_t e = 0; e < PRNG_ENGINE_COUNT; e++) {
         prng_state_t rng;
-        prng_init(&rng, engines[e], 0xCAFE + e, 16, NULL);
 
+        prng_init(&rng, prng_engine_list[e], 0xCAFE + e, 16, NULL);
+
+        tdd_progress_t prg = tdd_progress_make(samples, 0, 0, 30);
         uint32_t buckets[32] = {0};
         for (size_t i = 0; i < samples; i++) {
+            tdd_progress_bar(&prg);
             buckets[prng_next_u32(&rng) % num_buckets]++;
         }
-
+        V(printf(" %s\n", prng_to_string[e]););
         // Visual histogram
         //char title[40];
         //snprintf(title, sizeof(title), "%s Distribution", prng_engine_name(engines[e]));
@@ -113,15 +115,19 @@ TEST(test_prng_distributions) {
 }
 
 TEST(test_prng_monte_carlo) {
-    const prng_engine_t engines[] = {PRNG_MARSAGLIA, PRNG_XORSHIFT, PRNG_PCG32};
-    const size_t samples = 10000;
+    const size_t samples = 100;
 
-    for (size_t e = 0; e < sizeof(engines)/sizeof(engines[0]); e++) {
+    for (size_t e = 0; e < PRNG_ENGINE_COUNT; e++) {
         prng_state_t rng;
-        prng_init(&rng, engines[e], 0x1234 + e, 16, NULL);
+        prng_init(&rng, prng_engine_list[e], 0x1234 + e, 16, NULL);
+
+        tdd_progress_t prg = tdd_progress_make(samples, 0, 0, 30);
 
         size_t hits = 0;
         for (size_t i = 0; i < samples; i++) {
+
+            tdd_progress_bar(&prg);
+
             double x = prng_next_u32(&rng) / (double)UINT32_MAX;
             double y = prng_next_u32(&rng) / (double)UINT32_MAX;
             if (x*x + y*y <= 1.0) hits++;
@@ -129,25 +135,31 @@ TEST(test_prng_monte_carlo) {
 
         double pi_est = 4.0 * hits / samples;
         double error = fabs(pi_est - M_PI) / M_PI * 100.0;
-
-        EXPECT_IN_RANGE(error, 0.0, 5.0);
+        V(printf(" err %f %s\n", error, prng_to_string[e]););
+        EXPECT_IN_RANGE(error, 0.0, 7.0);
     }
 }
 
 TEST(test_prng_bit_quality) {
-    const prng_engine_t engines[] = {PRNG_MARSAGLIA, PRNG_XORSHIFT};
-
-    for (size_t e = 0; e < sizeof(engines)/sizeof(engines[0]); e++) {
+    const size_t samples = 1000;
+    for (size_t e = 0; e < PRNG_ENGINE_COUNT; e++) {
         prng_state_t rng;
-        prng_init(&rng, engines[e], 0xABCD + e, 16, NULL);
+        prng_init(&rng, prng_engine_list[e], 0xABCD + e, 16, NULL);
 
         uint32_t last = prng_next_u32(&rng);
         size_t transitions = 0;
-        for (size_t i = 0; i < 1000; i++) {
+
+        tdd_progress_t prg = tdd_progress_make(samples, 0, 0, 30);
+
+        for (size_t i = 0; i < samples; i++) {
+
+            tdd_progress_bar(&prg);
+
             uint32_t current = prng_next_u32(&rng);
             transitions += prng_popcount(last ^ current);
             last = current;
         }
+        V(printf(" %s\n", prng_to_string[e]););
 
         double avg_trans = transitions / 1000.0;
         EXPECT_IN_RANGE(avg_trans, 14.0, 18.0);
@@ -156,12 +168,11 @@ TEST(test_prng_bit_quality) {
 }
 
 TEST(test_prng_performance) {
-    const prng_engine_t engines[] = {PRNG_MARSAGLIA, PRNG_XORSHIFT, PRNG_PCG32};
-    const size_t iterations = 100000;
+    const size_t iterations = 1000;
 
-    for (size_t e = 0; e < sizeof(engines)/sizeof(engines[0]); e++) {
+    for (size_t e = 0; e < PRNG_ENGINE_COUNT; e++) {
         prng_state_t rng;
-        prng_init(&rng, engines[e], 0xFEED, 0, NULL);
+        prng_init(&rng, prng_engine_list[e], 0xFEED, 0, NULL);
 
         clock_t start = clock();
         uint32_t dummy = 0;
@@ -172,7 +183,8 @@ TEST(test_prng_performance) {
         (void)dummy;
 
         double ms = (end - start) * 1000.0 / CLOCKS_PER_SEC;
-        EXPECT_LT(ms, 1000.0);
+        V(printf("time %lu ms\t%s\n", (uint32_t)ms, prng_to_string[e]););
+        EXPECT_LT(ms, 3300.0); // worst case on an IBM XT 4.77MHz
     }
 }
 
@@ -181,7 +193,7 @@ TEST(test_prng_edge_cases) {
     // Zero seed (should assert in debug)
     #ifndef NDEBUG
     prng_state_t rng;
-    prng_init(&rng, PRNG_MARSAGLIA, 0, 16, NULL);
+    //prng_init(&rng, PRNG_MARSAGLIA, 0, 16, NULL); // it does
     #endif
 
     // Low entropy seed

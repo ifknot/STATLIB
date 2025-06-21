@@ -58,9 +58,9 @@ typedef enum {
 const prng_engine_t prng_engine_list[PRNG_ENGINE_COUNT] = {
     PRNG_MARSAGLIA,
     PRNG_XORSHIFT,
+    PRNG_C99,
     PRNG_PCG32,
     PRNG_SPLITMIX,
-    PRNG_C99
 };
 
 typedef struct {
