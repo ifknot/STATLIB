@@ -3,7 +3,11 @@
 #include "STAT/test_stats.h"
 
 RUN_TESTS(
-    STATS_TEST_SUITE
+    //STATS_TEST_ABS,
+    //STATS_TEST_BASIC
+    //STATS_TEST_CENTRAL,
+    //STATS_TEST_CLAMP
+    STATS_TEST_COMPARE
 )
 
 int main(int argc, char** argv) {

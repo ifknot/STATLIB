@@ -6,7 +6,7 @@
 
 #include "stat_constants.h"
 #include "stat_prng.h"
-
+/*
 void stat_generate_uniform_dist(stat_float_t* output, stat_size_t size,
                               stat_float_t min, stat_float_t max,
                               stat_prng_state_t* state) {
@@ -109,3 +109,4 @@ void stat_generate_binomial_dist(stat_size_t* output, stat_size_t size,
         output[i] = successes;
     }
 }
+*/

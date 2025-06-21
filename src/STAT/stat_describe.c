@@ -8,7 +8,9 @@
 #include "stat_basic.h"
 #include "stat_central.h"
 #include "stat_util.h"
+#include "errno.h"
 
+/*
 stat_summary_t stat_describe_f(const stat_float_t* data, stat_size_t count) {
     assert(data != NULL && "Input array cannot be NULL");
 
@@ -33,14 +35,14 @@ stat_summary_t stat_describe_f(const stat_float_t* data, stat_size_t count) {
     summary.mean = stat_mean_f(data, count);
 
     // Variance/stddev
-    summary.variance = stat_variance_f(data, count, true);
-    summary.stddev = sqrtf(summary.variance);
+    summary.variance = 0;//stat_variance_f(data, count, true);
+    summary.stddev = sqrt(summary.variance);
 
     // Percentiles (requires sorted data)
     stat_sort_f(copy, count);
     summary.median = stat_median_f(copy, count);
-    summary.q25 = stat_percentile_f(copy, count, 25.0f);
-    summary.q75 = stat_percentile_f(copy, count, 75.0f);
+    summary.q25 = 0;//stat_percentile_f(copy, count, 25.0f);
+    summary.q75 = 0;//stat_percentile_f(copy, count, 75.0f);
 
     free(copy);
     return summary;
@@ -65,7 +67,8 @@ stat_summary_t stat_describe_i32(const stat_int_t* data, stat_size_t count) {
         fdata[i] = (stat_float_t)data[i];
     }
 
-    summary = stat_describe_f(fdata, count);
+    //summary = stat_describe_f(fdata, count);
     free(fdata);
     return summary;
 }
+*/

@@ -1,2 +1,49 @@
-/Users/jeremythornton/dosbox/STATLIB/src/main.c(9): Warning! W303: Parameter 'argv' has been defined, but not referenced
-/Users/jeremythornton/dosbox/STATLIB/src/main.c(9): Warning! W303: Parameter 'argc' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(16): Warning! W140: Definition of macro 'NAN' not identical to previous definition
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(16): Note! I2002: 'NAN' defined in: /opt/watcom/h/math.h(150)
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(17): Warning! W140: Definition of macro 'INFINITY' not identical to previous definition
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(17): Note! I2002: 'INFINITY' defined in: /opt/watcom/h/math.h(149)
+/Users/jeremythornton/dosbox/STATLIB/src/main.c(13): Warning! W303: Parameter 'argv' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/main.c(13): Warning! W303: Parameter 'argc' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/../TDD/tdd_macros.h(30): Warning! W202: Symbol 'tdd_death_jmp_buf' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(78): Warning! W202: Symbol 'test_stat_abs_f_basic' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(97): Warning! W202: Symbol 'test_stat_abs_f_nan' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(89): Warning! W202: Symbol 'test_stat_abs_f_inplace' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(107): Warning! W202: Symbol 'test_stat_abs_f_infinity' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(115): Warning! W202: Symbol 'test_stat_abs_f_empty' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(122): Warning! W202: Symbol 'test_stat_abs_f_large' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(136): Warning! W202: Symbol 'test_stat_abs_i_basic' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(147): Warning! W202: Symbol 'test_stat_abs_i_int32_min' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(156): Warning! W202: Symbol 'test_stat_abs_i_empty' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(163): Warning! W202: Symbol 'test_stat_abs_i_large' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(177): Warning! W202: Symbol 'test_stat_abs_scalar_f' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(183): Warning! W202: Symbol 'test_stat_abs_scalar_f_nan' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(190): Warning! W202: Symbol 'test_stat_abs_scalar_f_bulk' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(200): Warning! W202: Symbol 'test_stat_abs_scalar_i32' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(205): Warning! W202: Symbol 'test_stat_abs_scalar_i32_range' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(222): Warning! W202: Symbol 'test_stat_min_f_normal' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(211): Warning! W202: Symbol 'test_stat_abs_scalar_i32_bulk' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(232): Warning! W202: Symbol 'test_stat_min_f_empty' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(227): Warning! W202: Symbol 'test_stat_min_f_nan_handling' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(254): Warning! W202: Symbol 'test_stat_max_f_normal' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(239): Warning! W202: Symbol 'test_stat_min_f_large' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(259): Warning! W202: Symbol 'test_stat_max_f_infinity' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(272): Warning! W202: Symbol 'test_stat_range_f_precision' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(267): Warning! W202: Symbol 'test_stat_range_f_known' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(286): Warning! W202: Symbol 'test_stat_max_scalar_f_edge' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(281): Warning! W202: Symbol 'test_stat_min_scalar_f_edge' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(294): Warning! W202: Symbol 'test_stat_mean_f_basic' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(299): Warning! W202: Symbol 'test_stat_mean_f_empty' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(320): Warning! W202: Symbol 'test_stat_median_f_odd' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(306): Warning! W202: Symbol 'test_stat_mean_f_large' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(325): Warning! W202: Symbol 'test_stat_median_f_even' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(343): Warning! W202: Symbol 'test_stat_mode_f_bimodal' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(333): Warning! W202: Symbol 'test_stat_mode_f_unimodal' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(357): Warning! W202: Symbol 'test_stat_mean_i_basic' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(362): Warning! W202: Symbol 'test_stat_mode_i_no_modes' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(385): Warning! W202: Symbol 'test_stat_clamp_f_empty' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(374): Warning! W202: Symbol 'test_stat_clamp_f_basic' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(392): Warning! W202: Symbol 'test_stat_clamp_f_invalid_range' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(417): Warning! W202: Symbol 'test_stat_clamp_scalar_f_edge' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(404): Warning! W202: Symbol 'test_stat_clamp_i32_basic' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(424): Warning! W202: Symbol 'test_stat_clamp_scalar_i32_edge' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h(434): Warning! W202: Symbol 'test_stat_clamp_f_large' has been defined, but not referenced

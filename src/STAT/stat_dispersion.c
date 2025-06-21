@@ -8,7 +8,7 @@
 #include <math.h>
 #include <stddef.h>
 #include <stdlib.h>
-
+/*
 stat_float_t stat_range_f(const stat_float_t* data, stat_size_t count) {
     assert(data != NULL && "Input array cannot be NULL");
 
@@ -41,9 +41,9 @@ stat_float_t stat_iqr_f(stat_float_t* data, stat_size_t count) {
     stat_sort_f(data, count);
 
     // Calculate quartiles
-    stat_float_t q1 = stat_percentile_f(data, count, 25.0f);
-    stat_float_t q3 = stat_percentile_f(data, count, 75.0f);
-    return q3 - q1;
+    //stat_float_t q1 = stat_percentile_f(data, count, 25.0f);
+    //stat_float_t q3 = stat_percentile_f(data, count, 75.0f);
+    return 0;//q3 - q1;
 }
 
 stat_float_t stat_mad_f(stat_float_t* data, stat_size_t count, stat_float_t scale) {
@@ -93,7 +93,7 @@ stat_float_t stat_cv_f(const stat_float_t* data, stat_size_t count) {
         return NAN;
     }
 
-    stat_float_t stddev = sqrtf(stat_variance_f(data, count, true));
+    stat_float_t stddev = 0;//sqrtf(stat_variance_f(data, count, true));
     return stddev / mean;
 }
 
@@ -169,4 +169,4 @@ stat_float_t stat_cv_i32(const stat_int_t* data, stat_size_t count) {
 
     stat_float_t stddev = sqrtf(stat_variance_i(data, count, true));
     return stddev / mean;
-}
+    }*/

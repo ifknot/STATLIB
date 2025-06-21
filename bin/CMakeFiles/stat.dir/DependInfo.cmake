@@ -17,6 +17,7 @@ set(CMAKE_DEPENDS_CHECK_C
   "/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_dispersion.c" "/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles/stat.dir/STAT/stat_dispersion.c.obj"
   "/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_distributions.c" "/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles/stat.dir/STAT/stat_distributions.c.obj"
   "/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_division.c" "/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles/stat.dir/STAT/stat_division.c.obj"
+  "/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_graphs.c" "/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles/stat.dir/STAT/stat_graphs.c.obj"
   "/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_outliers.c" "/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles/stat.dir/STAT/stat_outliers.c.obj"
   "/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_percentiles.c" "/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles/stat.dir/STAT/stat_percentiles.c.obj"
   "/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_prng.c" "/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles/stat.dir/STAT/stat_prng.c.obj"

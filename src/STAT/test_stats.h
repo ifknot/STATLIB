@@ -1,279 +1,523 @@
-#ifndef TEST_STATS_H
-#define TEST_STATS_H
+#include "../TDD/tdd_macros.h"
+
+#include "stat_abs.h"
+#include "stat_basic.h"
+#include "stat_central.h"
+#include "stat_clamp.h"
+#include "stat_compare.h"
+#include "stat_constants.h"
 
 #include <math.h>
+#include <limits.h>
+#include <stdlib.h> // for abs()
 #include <errno.h>
+#include <float.h>
 
-#include "../TDD/tdd_macros.h"
-#include "../STAT/stat.h"
-#include "stat_compare.h"
-#include "stat_types.h"
+#define NAN (0.0 / 0.0)
+#define INFINITY (1.0 / 0.0)
+#define NEG_INFINITY (-1.0 / 0.0)
 
-#define STATS_TEST_SUITE &test_basic_stats,          \
-                        &test_central_tendency,      \
-                        &test_dispersion,            \
-                        &test_percentiles,           \
-                        &test_outliers,              \
-                        &test_distributions,         \
-                        &test_descriptive_stats,     \
-                        &test_clamping,              \
-                        &test_comparisons,           \
-                        &test_division,              \
-                        &test_rounding,              \
-                        &test_sign_ops,              \
-                        &test_abs_ops,               \
-                        &test_prng,                  \
-                        &test_utility,               \
-                        &test_type_safety,           \
-                        &test_edge_cases
+#define STATS_TEST_ABS &test_stat_abs_f_basic, \
+    &test_stat_abs_f_inplace, \
+    &test_stat_abs_f_nan, \
+    &test_stat_abs_f_infinity, \
+    &test_stat_abs_f_empty, \
+    &test_stat_abs_f_large, \
+    &test_stat_abs_i_basic, \
+    &test_stat_abs_i_int32_min, \
+    &test_stat_abs_i_empty, \
+    &test_stat_abs_i_large, \
+    &test_stat_abs_scalar_f, \
+    &test_stat_abs_scalar_f_nan, \
+    &test_stat_abs_scalar_f_bulk, \
+    &test_stat_abs_scalar_i32, \
+    &test_stat_abs_scalar_i32_range, \
+    &test_stat_abs_scalar_i32_bulk
 
-// =============================================
-// Test Groups
-// =============================================
 
-TEST(test_basic_stats) {
-    stat_float_t data[] = {1.5, 2.5, 3.5};
-    stat_size_t size = 3;
+#define STATS_TEST_BASIC &test_stat_min_f_normal, \
+    &test_stat_min_f_nan_handling, \
+    &test_stat_min_f_empty, \
+    &test_stat_min_f_large, \
+    &test_stat_max_f_normal, \
+    &test_stat_max_f_infinity, \
+    &test_stat_range_f_known, \
+    &test_stat_range_f_precision, \
+    &test_stat_min_scalar_f_edge, \
+    &test_stat_max_scalar_f_edge
 
-    EXPECT_EQ(stat_min_f(data, size), 1.5);
-    EXPECT_EQ(stat_max_f(data, size), 3.5);
-    EXPECT_EQ(stat_range_f(data, size), 2.0);
+#define STATS_TEST_CENTRAL &test_stat_mean_f_basic, \
+    &test_stat_mean_f_empty, \
+    &test_stat_mean_f_large, \
+    &test_stat_median_f_odd, \
+    &test_stat_median_f_even, \
+    &test_stat_mode_f_unimodal, \
+    &test_stat_mode_f_bimodal, \
+    &test_stat_mean_i_basic, \
+    &test_stat_mode_i_no_modes
+
+#define STATS_TEST_CLAMP &test_stat_clamp_f_basic, \
+    &test_stat_clamp_f_empty, \
+    &test_stat_clamp_f_invalid_range, \
+    &test_stat_clamp_i32_basic, \
+    &test_stat_clamp_scalar_f_edge, \
+    &test_stat_clamp_scalar_i32_edge, \
+    &test_stat_clamp_f_large
+
+#define STATS_TEST_COMPARE &test_stat_compare_floats_basic, \
+    &test_stat_almost_equal, \
+    &test_stat_is_near_zero, \
+    &test_stat_compare_floats_qsort, \
+    &test_stat_compare_ints_qsort, \
+    &test_stat_compare_infinity, \
+    &test_stat_almost_equal_extreme
+
+// ============================================================================
+// TEST: stat_abs_f (stat_float_t* src, stat_float_t* dst, stat_size_t size)
+// ============================================================================
+TEST(test_stat_abs_f_basic) {
+    stat_float_t src[] = {-1.5, 2.0, -3.14, 0.0};
+    stat_float_t dst[4];
+
+    stat_abs_f(src, dst, 4);
+    EXPECT_EQ(dst[0], 1.5);
+    EXPECT_EQ(dst[1], 2.0);
+    EXPECT_EQ(dst[2], 3.14);
+    EXPECT_EQ(dst[3], 0.0);
 }
 
-TEST(test_central_tendency) {
-    stat_float_t data[] = {1, 2, 3, 4};
-    EXPECT_EQ(stat_mean(data, 4), 2.5);
-    EXPECT_EQ(stat_median(data, 4), 2.5);
-    EXPECT_EQ(stat_mode(data, 4), 1); // All values are modes
-}
-
-TEST(test_dispersion) {
-    stat_float_t data[] = {1, 2, 3, 4, 5};
-    EXPECT_EQ(stat_variance(data, 5), 2.5);
-    EXPECT_EQ(stat_std_dev(data, 5), sqrt(2.5));
-    EXPECT_EQ(stat_mad(data, 5), 1.0); // NB *median* absolute deviations
-    // Single element
-    stat_float_t single[] = {42};
-    EXPECT_EQ(stat_mad(single, 1), 0.0);
-    // Even-sized array
-    stat_float_t even[] = {1, 2, 3, 4};
-    EXPECT_EQ(stat_mad(even, 4), 1.0);  // Deviations: {1, 0, 0, 1}
-    // All identical values
-    stat_float_t identical[] = {5, 5, 5};
-    EXPECT_EQ(stat_mad(identical, 3), 0.0);
-    //floats
-    stat_float_t frac[] =  {1.1, 2.2, 3.3, 4.02, 5.1};
-    EXPECT_EQ(stat_compare_floats(stat_mad(frac, 5), 1.1, STAT_SAFE_EPSILON), 0);
-}
-
-TEST(test_percentiles) {
-    stat_float_t data[] = {1,2,3,4,5,6,7,8,9,10};
-    stat_five_num_summary_t fns = stat_five_num_summary(data, 10);
-    EXPECT_EQ(fns.min, 1);
-    EXPECT_EQ(fns.median, 5.5);
-    EXPECT_EQ(fns.max, 10);
-}
-
-TEST(test_outliers) {
-    stat_float_t data[] = {1,2,3,4,5,100}; // 100 is an outlier
-    stat_five_num_summary_t fns = stat_five_num_summary(data, 6);
-    EXPECT(stat_is_outlier(100, &fns));
-    EXPECT(!stat_is_outlier(3, &fns));
-}
-
-TEST(test_distributions) {
-    stat_prng_state_t prng;
-    stat_prng_init(&prng);
-
-    stat_float_t normal[100];
-    stat_generate_normal_dist(normal, 100, 0.0, 1.0, &prng);
-
-    // Check mean is near 0
-    EXPECT_IN_RANGE(stat_mean(normal, 100), -0.1, 0.1);
-}
-
-TEST(test_descriptive_stats) {
-    stat_float_t data[] = {1,2,3,4,5};
-    stat_descriptive_stats_t stats = stat_describe(data, 5);
-    EXPECT_EQ(stats.mean, 3);
-    EXPECT_EQ(stats.median, 3);
-    EXPECT_EQ(stats.std_dev, sqrt(2.5));
-}
-
-TEST(test_clamping) {
-    // Float clamping
-    EXPECT_EQ(stat_clamp_f(3.14, 0.0, 5.0), 3.14);
-    EXPECT_EQ(stat_clamp_f(-1.0, 0.0, 5.0), 0.0);
-    EXPECT_EQ(stat_clamp_f(10.0, 0.0, 5.0), 5.0);
-
-    // Integer clamping
-    EXPECT_EQ(stat_clamp_i32(50, 0, 100), 50);
-    EXPECT_EQ(stat_clamp_i32(-10, 0, 100), 0);
-    EXPECT_EQ(stat_clamp_i32(150, 0, 100), 100);
-
-    // Array clamping
-    stat_float_t arr[] = {-1.0, 2.5, 10.0};
-    stat_clamp_array(arr, 3, 0.0, 5.0);
-    EXPECT_EQ(arr[0], 0.0);
-    EXPECT_EQ(arr[1], 2.5);
-    EXPECT_EQ(arr[2], 5.0);
-}
-
-TEST(test_comparisons) {
-    // Float comparisons with epsilon
-    EXPECT(stat_almost_equal(1.0, 1.0000001, 1e-6, 1e-9));
-    EXPECT(!stat_almost_equal(1.0, 1.1, 1e-6, 1e-9));
-
-    // Near-zero checks
-    EXPECT(stat_is_near_zero(0.0000001, 1e-6));
-    EXPECT(!stat_is_near_zero(0.1, 1e-6));
-}
-
-TEST(test_division) {
-    int32_t result;
-
-    // Safe division
-    EXPECT(stat_safe_div_i32(10, 2, &result) && result == 5);
-    EXPECT(!stat_safe_div_i32(10, 0, &result)); // division by zero
-    EXPECT(!stat_safe_div_i32(INT32_MIN, -1, &result)); // overflow
-
-    // Rounding division
-    EXPECT_EQ(stat_div_round_up(10, 3), 4);
-    EXPECT_EQ(stat_div_round_nearest(10, 4), 3);
-}
-
-TEST(test_rounding) {
-    // Basic rounding
-    EXPECT_EQ(stat_round_to_i32(3.4), 3);
-    EXPECT_EQ(stat_round_to_i32(3.6), 4);
-    EXPECT_EQ(stat_floor_to_i32(3.9), 3);
-    EXPECT_EQ(stat_ceil_to_i32(3.1), 4);
-
-    // Precision rounding
-    EXPECT_EQ(stat_round_decimal(3.14159, 2), 3.14);
-    EXPECT_EQ(stat_round_to_multiple(17, 5), 15);
-}
-
-/**
- * @brief Test absolute value operations
- * @details Covers all absolute value functions:
- *          - stat_abs_f()
- *          - stat_abs_i32()
- *          - stat_abs_u32()
- *          - stat_safe_abs_i32()
- */
-TEST(test_abs_ops) {
-    // ======================
-    // Float absolute values
-    // ======================
-    EXPECT_EQ(stat_abs_f(3.14), 3.14);
-    EXPECT_EQ(stat_abs_f(-2.718), 2.718);
-    EXPECT_EQ(stat_abs_f(0.0), 0.0);
-    EXPECT(isnan(stat_abs_f(NAN)));
-
-    // ======================
-    // int32_t absolute values
-    // ======================
-    EXPECT_EQ(stat_abs_i32(42), 42);
-    EXPECT_EQ(stat_abs_i32(-42), 42);
-    EXPECT_EQ(stat_abs_i32(0), 0);
-
-    // Test INT32_MIN edge case (can't be represented positively)
-    EXPECT_EQ(stat_abs_i32(INT32_MIN), INT32_MIN); // Known limitation
-
-    // ======================
-    // uint32_t absolute values
-    // ======================
-    EXPECT_EQ(stat_abs_u32(42), 42);
-    EXPECT_EQ(stat_abs_u32(0), 0);
-
-    // ======================
-    // Safe absolute values
-    // ======================
-    int32_t result;
-    EXPECT(stat_safe_abs_i32(42, &result) && result == 42);
-    EXPECT(stat_safe_abs_i32(-42, &result) && result == 42);
-    EXPECT(stat_safe_abs_i32(0, &result) && result == 0);
-
-    // Test INT32_MIN failure case
-    bool success = stat_safe_abs_i32(INT32_MIN, &result);
-    EXPECT(!success && errno == ERANGE);
-
-    // ======================
-    // Array operations
-    // ======================
-    stat_float_t f_arr[] = {1.5, -2.5, 3.0};
-    int32_t i_arr[] = {1, -2, 3};
-    uint32_t u_arr[] = {1, 2, 3};
-
-    EXPECT_EQ(stat_min_f(f_arr, 3), -2.5);
-    EXPECT_EQ(stat_min_i32(i_arr, 3), -2);
-    EXPECT_EQ(stat_min_u32(u_arr, 3), 1);
-}
-
-TEST(test_sign_ops) {
-    // Sign detection
-    EXPECT_EQ(stat_sign_f(3.14), 1);
-    EXPECT_EQ(stat_sign_f(-2.71), -1);
-    EXPECT_EQ(stat_sign_f(0.0), 0);
-
-    // Integer signs
-    EXPECT_EQ(stat_sign_i32(42), 1);
-    EXPECT_EQ(stat_sign_i32(-42), -1);
-
-    // Sign copying
-    EXPECT_EQ(stat_copysign_f(5.0, -1.0), -5.0);
-}
-
-TEST(test_prng) {
-    stat_prng_state_t prng;
-    stat_prng_init(&prng);
-
-    // Basic PRNG properties
-    stat_float_t r1 = stat_prng_next(&prng);
-    stat_float_t r2 = stat_prng_next(&prng);
-    EXPECT_NEQ(r1, r2);
-    EXPECT_IN_RANGE(r1, 0.0, 1.0);
-
-    // Integer generation
-    int32_t ir = stat_prng_next_int(&prng, 1, 6);
-    EXPECT_IN_RANGE(ir, 1, 6);
-}
-
-TEST(test_utility) {
-    stat_float_t data[] = {3.0, 1.0, 2.0};
-
-    // Sorting
-    stat_sort(data, 3);
+TEST(test_stat_abs_f_inplace) {
+    stat_float_t data[] = {-1.0, -2.0, -3.0};
+    stat_abs_f(data, data, 3);
     EXPECT_EQ(data[0], 1.0);
     EXPECT_EQ(data[1], 2.0);
-
-    // FP classification
-    EXPECT(stat_is_finite(1.0));
-    EXPECT(!stat_is_normal(NAN));
+    EXPECT_EQ(data[2], 3.0);
 }
 
-TEST(test_type_safety) {
-    // Cross-type comparisons
-    EXPECT_EQ(stat_abs_i32(-5), stat_abs_u32(5));
+TEST(test_stat_abs_f_nan) {
+    stat_float_t src[] = {0.0/0.0};
+    stat_float_t dst[1];
 
-    // Mixed-type operations
-    stat_float_t f = 3.0;
-    int32_t i = 3;
-    EXPECT_EQ(stat_round_to_i32(f), i);
+    errno = 0;
+    stat_abs_f(src, dst, 1);
+    EXPECT_NEQ(dst[0], dst[0]); // NaN check
+    EXPECT_EQ(errno, EDOM);
 }
 
-TEST(test_edge_cases) {
-    // Empty arrays
-    EXPECT(isnan(stat_mean(NULL, 0)));
+TEST(test_stat_abs_f_infinity) {
+    stat_float_t src[] = {0};
+    stat_float_t dst[1];
 
-    // Single element
-    stat_float_t single[] = {42.0};
-    EXPECT_EQ(stat_median(single, 1), 42.0);
-
-    // Extreme values
-    int32_t extreme[] = {INT32_MIN, INT32_MAX};
-    EXPECT_EQ(stat_range_i32(extreme, 2), UINT32_MAX);
+    stat_abs_f(src, dst, 1);
+    EXPECT_EQ(dst[0], INFINITY);
 }
 
-#endif // TEST_STATS_H
+TEST(test_stat_abs_f_empty) {
+    errno = 0;
+    stat_float_t dummy;
+    stat_abs_f(&dummy, &dummy, 0);
+    EXPECT_EQ(errno, EINVAL);
+}
+
+TEST(test_stat_abs_f_large) {
+    stat_float_t big[100];
+    stat_float_t out[100];
+    for (int i = 0; i < 100; i++) {
+        big[i] = (i % 2) ? -i*0.1 : i*0.1;
+    }
+
+    stat_abs_f(big, out, 100);
+    EXPECT_EQ(out[99], 9.9);
+}
+
+// ============================================================================
+// TEST: stat_abs_i (int32_t* src, int32_t* dst, stat_size_t size)
+// ============================================================================
+TEST(test_stat_abs_i_basic) {
+    int32_t src[] = {-1, 2, -3, 0};
+    int32_t dst[4];
+
+    stat_abs_i(src, dst, 4);
+    EXPECT_EQ(dst[0], 1);
+    EXPECT_EQ(dst[1], 2);
+    EXPECT_EQ(dst[2], 3);
+    EXPECT_EQ(dst[3], 0);
+}
+
+TEST(test_stat_abs_i_int32_min) {
+    int32_t src[] = {INT32_MIN};
+    int32_t dst[1];
+
+    errno = 0;
+    stat_abs_i(src, dst, 1);
+    EXPECT_EQ(errno, ERANGE);
+}
+
+TEST(test_stat_abs_i_empty) {
+    errno = 0;
+    int32_t dummy;
+    stat_abs_i(&dummy, &dummy, 0);
+    EXPECT_EQ(errno, EINVAL);
+}
+
+TEST(test_stat_abs_i_large) {
+    int32_t big[100];
+    int32_t out[100];
+    for (int i = 0; i < 100; i++) {
+        big[i] = (i % 2) ? -i : i;
+    }
+
+    stat_abs_i(big, out, 100);
+    EXPECT_EQ(out[99], 99);
+}
+
+// ============================================================================
+// TEST: stat_abs_scalar_f (stat_float_t x)
+// ============================================================================
+TEST(test_stat_abs_scalar_f) {
+    EXPECT_EQ(stat_abs_scalar_f(-2.5), 2.5);
+    EXPECT_EQ(stat_abs_scalar_f(0.0), 0.0);
+    EXPECT_EQ(stat_abs_scalar_f(-0.0), 0.0);
+}
+
+TEST(test_stat_abs_scalar_f_nan) {
+    errno = 0;
+    stat_float_t result = stat_abs_scalar_f(NAN);
+    EXPECT_NEQ(result, result);
+    EXPECT_EQ(errno, EDOM);
+}
+
+TEST(test_stat_abs_scalar_f_bulk) {
+    for (int i = 0; i < 100; i++) {
+        stat_float_t x = (i % 2) ? -i * 0.1 : i * 0.1;
+        EXPECT_EQ(stat_abs_scalar_f(x), fabs(x));
+    }
+}
+
+// ============================================================================
+// TEST: stat_abs_scalar_i32 (int32_t x)
+// ============================================================================
+TEST(test_stat_abs_scalar_i32) {
+    EXPECT_EQ(stat_abs_scalar_i32(-42), 42);
+    EXPECT_EQ(stat_abs_scalar_i32(42), 42);
+}
+
+TEST(test_stat_abs_scalar_i32_range) {
+    errno = 0;
+    stat_abs_scalar_i32(INT32_MIN);
+    EXPECT_EQ(errno, ERANGE);
+}
+
+TEST(test_stat_abs_scalar_i32_bulk) {
+    for (int32_t i = -50; i < 50; i++) {
+        if (i != INT32_MIN) { // Skip undefined case
+            EXPECT_EQ(stat_abs_scalar_i32(i), abs(i));
+        }
+    }
+}
+
+// ============================================================================
+// TEST: stat_min_f (const stat_float_t* data, stat_size_t count)
+// ============================================================================
+TEST(test_stat_min_f_normal) {
+    stat_float_t data[] = {5.0, -2.0, 3.14, 0.001, -DBL_MAX};
+    EXPECT_EQ(stat_min_f(data, 5), -DBL_MAX);  // Dogma 1: Extreme value
+}
+
+TEST(test_stat_min_f_nan_handling) {
+    stat_float_t data[] = {1.0, 0.0/0.0, 3.0};
+    EXPECT_NEQ(stat_min_f(data, 3), stat_min_f(data, 3));  // NaN check
+}
+
+TEST(test_stat_min_f_empty) {
+    errno = 0;
+    stat_float_t dummy;
+    EXPECT_TRUE(isnan(stat_min_f(&dummy, 0)));  // @throws EINVAL
+    EXPECT_EQ(errno, EINVAL);                   // Dogma 4: Docs proven
+}
+
+TEST(test_stat_min_f_large) {
+    stat_float_t* big = (stat_float_t*)malloc(1000 * sizeof(stat_float_t));
+    EXPECT_MALLOC(big);  /* Your cleaner version */
+
+    for (int i = 0; i < 1000; i++) {
+        big[i] = 1000.0 - i;
+    }
+
+    EXPECT_EQ(stat_min_f(big, 1000), 1.0);
+    free(big);
+}
+
+// ============================================================================
+// TEST: stat_max_f (const stat_float_t* data, stat_size_t count)
+// ============================================================================
+TEST(test_stat_max_f_normal) {
+    stat_float_t data[] = {-5.0, 2.0, DBL_MAX, 0.0};
+    EXPECT_EQ(stat_max_f(data, 4), DBL_MAX);  // Dogma 1: Max float
+}
+
+TEST(test_stat_max_f_infinity) {
+    stat_float_t data[] = {1.0, INFINITY, 3.0};
+    EXPECT_EQ(stat_max_f(data, 3), INFINITY);  // Dogma 1: INF handling
+}
+
+// ============================================================================
+// TEST: stat_range_f (const stat_float_t* data, stat_size_t count)
+// ============================================================================
+TEST(test_stat_range_f_known) {
+    stat_float_t data[] = {10.0, -5.0, 0.0, DBL_MIN};
+    EXPECT_EQ(stat_range_f(data, 4), 15.0);  // 10.0 - (-5.0)
+}
+
+TEST(test_stat_range_f_precision) {
+    // Dogma 3: Math correctness
+    stat_float_t data[] = {1.0000001, 1.0000000};
+    EXPECT_EQ(stat_range_f(data, 2), 0.0000001);
+}
+
+// ============================================================================
+// TEST: Scalar Functions (Dogma 11: Full coverage)
+// ============================================================================
+TEST(test_stat_min_scalar_f_edge) {
+    EXPECT_EQ(stat_min_scalar_f(NAN, 2.0), 2.0);  // NaN handling
+    EXPECT_EQ(stat_min_scalar_f(-0.0, +0.0), -0.0);  // IEEE 754
+}
+
+TEST(test_stat_max_scalar_f_edge) {
+    EXPECT_EQ(stat_max_scalar_f(INFINITY, DBL_MAX), INFINITY);
+    EXPECT_EQ(stat_max_scalar_f(NAN, 1.0), 1.0);
+}
+
+// ============================================================================
+// TEST: stat_mean_f (const stat_float_t* data, stat_size_t count)
+// ============================================================================
+TEST(test_stat_mean_f_basic) {
+    stat_float_t data[] = {1.0, 2.0, 3.0, 4.0};
+    EXPECT_EQ(stat_mean_f(data, 4), 2.5);
+}
+
+TEST(test_stat_mean_f_empty) {
+    errno = 0;
+    stat_float_t dummy;
+    EXPECT_TRUE(isnan(stat_mean_f(&dummy, 0)));  // @throws EINVAL
+    EXPECT_EQ(errno, EINVAL);
+}
+
+TEST(test_stat_mean_f_large) {
+    // Dogma 10: Heap-allocated large array
+    stat_float_t* big = (stat_float_t*)malloc(1000 * sizeof(stat_float_t));
+    EXPECT_MALLOC(big);
+
+    for (int i = 0; i < 1000; i++) big[i] = i + 1.0;
+    EXPECT_EQ(stat_mean_f(big, 1000), 500.5);  // (1+1000)/2
+
+    free(big);
+}
+
+// ============================================================================
+// TEST: stat_median_f (const stat_float_t* data, stat_size_t count)
+// ============================================================================
+TEST(test_stat_median_f_odd) {
+    stat_float_t data[] = {5.0, 2.0, 3.0};
+    EXPECT_EQ(stat_median_f(data, 3), 3.0);
+}
+
+TEST(test_stat_median_f_even) {
+    stat_float_t data[] = {1.0, 5.0, 2.0, 4.0};
+    EXPECT_EQ(stat_median_f(data, 4), 3.0);  // (2+4)/2
+}
+
+// ============================================================================
+// TEST: stat_mode_f (const stat_float_t* data, stat_size_t count, ...)
+// ============================================================================
+TEST(test_stat_mode_f_unimodal) {
+    stat_float_t data[] = {1.0, 2.0, 2.0, 3.0};
+    stat_float_t modes[4];
+    stat_size_t mode_count;
+
+    EXPECT_TRUE(stat_mode_f(data, 4, modes, &mode_count));
+    EXPECT_EQ(mode_count, 1);
+    EXPECT_EQ(modes[0], 2.0);
+}
+
+TEST(test_stat_mode_f_bimodal) {
+    stat_float_t data[] = {1.0, 2.0, 2.0, 3.0, 3.0};
+    stat_float_t modes[5];
+    stat_size_t mode_count;
+
+    EXPECT_TRUE(stat_mode_f(data, 5, modes, &mode_count));
+    EXPECT_EQ(mode_count, 2);
+    EXPECT_EQ(modes[0], 2.0);  // Modes may be unordered
+    EXPECT_EQ(modes[1], 3.0);
+}
+
+// ============================================================================
+// Integer Version Tests (Same patterns as float)
+// ============================================================================
+TEST(test_stat_mean_i_basic) {
+    stat_int_t data[] = {1, 2, 3, 4};
+    EXPECT_EQ(stat_mean_i(data, 4), 2.5);
+}
+
+TEST(test_stat_mode_i_no_modes) {
+    stat_int_t data[] = {1, 2, 3};
+    stat_int_t modes[3];
+    stat_size_t mode_count;
+
+    EXPECT_TRUE(stat_mode_i(data, 3, modes, &mode_count));
+    EXPECT_EQ(mode_count, 3);  // All values are modes when none repeat
+}
+
+// ============================================================================
+// TEST: stat_clamp_f (float array clamp)
+// ============================================================================
+TEST(test_stat_clamp_f_basic) {
+    stat_float_t src[] = {-1.5, 2.0, 3.5, NAN};
+    stat_float_t dst[4];
+
+    stat_clamp_f(src, dst, 4, 0.0, 2.0);
+    EXPECT_EQ(dst[0], 0.0);   // Clamped from -1.5
+    EXPECT_EQ(dst[1], 2.0);   // Unchanged
+    EXPECT_EQ(dst[2], 2.0);   // Clamped from 3.5
+    EXPECT_NEQ(dst[3], dst[3]); // NaN propagated
+}
+
+TEST(test_stat_clamp_f_empty) {
+    errno = 0;
+    stat_float_t dummy_src, dummy_dst;
+    stat_clamp_f(&dummy_src, &dummy_dst, 0, 0.0, 1.0);
+    EXPECT_EQ(errno, EINVAL);  // @throws EINVAL
+}
+
+TEST(test_stat_clamp_f_invalid_range) {
+    stat_float_t src[] = {1.0};
+    stat_float_t dst[1];
+
+    errno = 0;
+    stat_clamp_f(src, dst, 1, 2.0, 1.0);  // min > max
+    EXPECT_EQ(errno, EINVAL);
+}
+
+// ============================================================================
+// TEST: stat_clamp_i32 (int32 array clamp)
+// ============================================================================
+TEST(test_stat_clamp_i32_basic) {
+    stat_int_t src[] = {INT32_MIN, 0, INT32_MAX};
+    stat_int_t dst[3];
+
+    stat_clamp_i32(src, dst, 3, -100, 100);
+    EXPECT_EQ(dst[0], -100);  // Clamped from INT32_MIN
+    EXPECT_EQ(dst[1], 0);     // Unchanged
+    EXPECT_EQ(dst[2], 100);   // Clamped from INT32_MAX
+}
+
+// ============================================================================
+// TEST: Scalar Clamps
+// ============================================================================
+TEST(test_stat_clamp_scalar_f_edge) {
+    errno = 0;
+    EXPECT_EQ(stat_clamp_scalar_f(-INFINITY, 0.0, 1.0), 0.0);
+    EXPECT_EQ(stat_clamp_scalar_f(NAN, 0.0, 1.0), NAN);
+    EXPECT_EQ(errno, EDOM);
+}
+
+TEST(test_stat_clamp_scalar_i32_edge) {
+    errno = 0;
+    EXPECT_EQ(stat_clamp_scalar_i32(42, 0, INT32_MAX), 42);
+    EXPECT_EQ(stat_clamp_scalar_i32(42, 50, 10), 42);  // Invalid range
+    EXPECT_EQ(errno, EINVAL);
+}
+
+// ============================================================================
+// Large Array Tests (Heap-Allocated for DOS)
+// ============================================================================
+TEST(test_stat_clamp_f_large) {
+    stat_float_t* big_src = (stat_float_t*)malloc(1000 * sizeof(stat_float_t));
+    stat_float_t* big_dst = (stat_float_t*)malloc(1000 * sizeof(stat_float_t));
+    EXPECT_MALLOC(big_src);
+    EXPECT_MALLOC(big_dst);
+
+    for (int i = 0; i < 1000; i++) {
+        big_src[i] = i - 500.0;  // Values from -500 to 499
+    }
+
+    stat_clamp_f(big_src, big_dst, 1000, -100.0, 100.0);
+    EXPECT_EQ(big_dst[0], -100.0);   // Clamped from -500
+    EXPECT_EQ(big_dst[600], 100.0);  // Clamped from 100 (now 600-500=100)
+
+    free(big_src);
+    free(big_dst);
+}
+
+// ============================================================================
+// TEST: stat_compare_floats
+// ============================================================================
+TEST(test_stat_compare_floats_basic) {
+    // Exact equality
+    EXPECT_EQ(stat_compare_floats(1.0, 1.0, STAT_SAFE_EPSILON), 0);
+
+    // Within epsilon
+    EXPECT_EQ(stat_compare_floats(1.0, 1.0 + 0.5*STAT_SAFE_EPSILON, STAT_SAFE_EPSILON), 0);
+
+    // Outside epsilon (a > b)
+    EXPECT_GT(stat_compare_floats(1.0 + 2*STAT_SAFE_EPSILON, 1.0, STAT_SAFE_EPSILON), 0);
+
+    // NaN handling
+    EXPECT_LT(stat_compare_floats(NAN, 1.0, STAT_SAFE_EPSILON), 0);
+}
+
+// ============================================================================
+// TEST: stat_almost_equal
+// ============================================================================
+TEST(test_stat_almost_equal) {
+    // Relative tolerance test
+    EXPECT_TRUE(stat_almost_equal(1.0, 1.0 + STAT_REL_TOL*0.5, STAT_REL_TOL, STAT_ABS_TOL));
+
+    // Absolute tolerance test for near-zero
+    EXPECT_TRUE(stat_almost_equal(0.0, STAT_ABS_TOL*0.5, STAT_REL_TOL, STAT_ABS_TOL));
+
+    // Failure case
+    EXPECT_FALSE(stat_almost_equal(1.0, 1.0 + 2*STAT_REL_TOL, STAT_REL_TOL, STAT_ABS_TOL));
+}
+
+// ============================================================================
+// TEST: stat_is_near_zero
+// ============================================================================
+TEST(test_stat_is_near_zero) {
+    EXPECT_TRUE(stat_is_near_zero(0.5*STAT_SMALL_TOL, STAT_SMALL_TOL));
+    EXPECT_FALSE(stat_is_near_zero(2*STAT_SMALL_TOL, STAT_SMALL_TOL));
+
+    // Verify it uses absolute comparison only
+    EXPECT_TRUE(stat_is_near_zero(1e-20, STAT_SMALL_TOL));  // Even though 1e-20 << SMALL_TOL
+}
+
+// ============================================================================
+// TEST: Qsort Comparators
+// ============================================================================
+TEST(test_stat_compare_floats_qsort) {
+    stat_float_t a = 1.0;
+    stat_float_t b = 2.0;
+    EXPECT_LT(stat_compare_floats_qsort(&a, &b), 0);
+    EXPECT_GT(stat_compare_floats_qsort(&b, &a), 0);
+}
+
+TEST(test_stat_compare_ints_qsort) {
+    stat_int_t a = 10;
+    stat_int_t b = 20;
+    EXPECT_LT(stat_compare_ints_qsort(&a, &b), 0);
+    EXPECT_EQ(stat_compare_ints_qsort(&a, &a), 0);
+}
+
+// ============================================================================
+// Edge Case Tests
+// ============================================================================
+TEST(test_stat_compare_infinity) {
+    EXPECT_LT(stat_compare_floats(INFINITY, 1.0, STAT_SAFE_EPSILON), 0);
+    EXPECT_GT(stat_compare_floats(1.0, -INFINITY, STAT_SAFE_EPSILON), 0);
+}
+
+TEST(test_stat_almost_equal_extreme) {
+    // Large numbers with relative tolerance
+    stat_float_t big = 1e20;
+    EXPECT_TRUE(stat_almost_equal(big, big*(1.0 + 0.5*STAT_REL_TOL), STAT_REL_TOL, STAT_ABS_TOL));
+}

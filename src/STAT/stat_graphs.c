@@ -4,6 +4,7 @@
 
 #include "stat_basic.h"
 
+/*
 void stat_graph_smooth_histogram_i(
     const stat_int_t* values,
     stat_size_t count,
@@ -96,3 +97,4 @@ void stat_graph_smooth_histogram_f(
         printf(" %.2f\n", values[i]); // Show float value
     }
 }
+*/

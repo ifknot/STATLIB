@@ -334,6 +334,30 @@ STAT/stat_division.c.s: .SYMBOLIC
 STAT/stat_division.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/stat.dir/build.make -h CMakeFiles/stat.dir/STAT/stat_division.c.s
 
+STAT/stat_graphs.obj: .SYMBOLIC
+STAT/stat_graphs.obj: STAT/stat_graphs.c.obj
+
+# target to build an object file
+STAT/stat_graphs.c.obj: .SYMBOLIC
+STAT/stat_graphs.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stat.dir/build.make -h CMakeFiles/stat.dir/STAT/stat_graphs.c.obj
+
+STAT/stat_graphs.i: .SYMBOLIC
+STAT/stat_graphs.i: STAT/stat_graphs.c.i
+
+# target to preprocess a source file
+STAT/stat_graphs.c.i: .SYMBOLIC
+STAT/stat_graphs.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stat.dir/build.make -h CMakeFiles/stat.dir/STAT/stat_graphs.c.i
+
+STAT/stat_graphs.s: .SYMBOLIC
+STAT/stat_graphs.s: STAT/stat_graphs.c.s
+
+# target to generate assembly for a file
+STAT/stat_graphs.c.s: .SYMBOLIC
+STAT/stat_graphs.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stat.dir/build.make -h CMakeFiles/stat.dir/STAT/stat_graphs.c.s
+
 STAT/stat_outliers.obj: .SYMBOLIC
 STAT/stat_outliers.obj: STAT/stat_outliers.c.obj
 
@@ -611,6 +635,9 @@ help:
 	@echo "... STAT/stat_division.obj"
 	@echo "... STAT/stat_division.i"
 	@echo "... STAT/stat_division.s"
+	@echo "... STAT/stat_graphs.obj"
+	@echo "... STAT/stat_graphs.i"
+	@echo "... STAT/stat_graphs.s"
 	@echo "... STAT/stat_outliers.obj"
 	@echo "... STAT/stat_outliers.i"
 	@echo "... STAT/stat_outliers.s"

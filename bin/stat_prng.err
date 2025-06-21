@@ -1,1 +1,2 @@
-/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_prng.c(12): Warning! W202: Symbol 'seed' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_prng.c(49): Warning! W135: Shift amount too large
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_prng.c(49): Warning! W139: Divisor for modulo or division operation is zero

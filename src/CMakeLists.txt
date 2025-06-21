@@ -14,6 +14,7 @@ project(
 add_compile_options(
     -za99               # undocumented switch enable partial C99 compatibility
     -ml                 # memory model options - large model
+    -lm
     #-dNDEBUG
 )
 

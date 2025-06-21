@@ -21,6 +21,14 @@
 #include "tdd_report.h"
 #include "tdd_progress.h"
 
+// ========================
+// DEATH TEST INFRASTRUCTURE
+// ========================
+#include <setjmp.h>
+#include <signal.h>
+
+static jmp_buf tdd_death_jmp_buf;
+
 /**
  * @brief Conditional verbose output macro
  * @param expr Expression to execute only in debug mode
@@ -120,6 +128,12 @@
 // =============================================
 // Numeric Comparisons
 // =============================================
+
+#define EXPECT_MALLOC(ptr) _ASSERT(ptr != NULL, false);
+
+#define EXPECT_TRUE(expr) _ASSERT(expr, false);
+
+#define EXPECT_FALSE(expr) _ASSERT(!(expr), false);
 
 /**
  * @brief Expects two values to be equal (non-fatal)

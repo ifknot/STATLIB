@@ -6,5 +6,5 @@ C_DEFINES =
 
 C_INCLUDES = -I"/opt/watcom/h"
 
-C_FLAGS = -w3 -bt=dos -d2 -za99 -ml
+C_FLAGS = -w3 -bt=dos -d2 -za99 -ml -lm
 

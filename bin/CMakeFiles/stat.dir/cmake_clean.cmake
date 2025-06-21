@@ -8,6 +8,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/stat.dir/STAT/stat_dispersion.c.obj"
   "CMakeFiles/stat.dir/STAT/stat_distributions.c.obj"
   "CMakeFiles/stat.dir/STAT/stat_division.c.obj"
+  "CMakeFiles/stat.dir/STAT/stat_graphs.c.obj"
   "CMakeFiles/stat.dir/STAT/stat_outliers.c.obj"
   "CMakeFiles/stat.dir/STAT/stat_percentiles.c.obj"
   "CMakeFiles/stat.dir/STAT/stat_prng.c.obj"
