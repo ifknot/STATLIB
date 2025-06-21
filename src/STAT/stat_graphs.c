@@ -28,7 +28,7 @@ void stat_graph_smooth_histogram_i(
     if (show_stats) {
         stat_float_t percentiles[3];
         stat_size_t cut_offs[] = {25, 50, 75};
-        stat_percentile_arr(values, count, &cut_offs, &percentiles, 3);
+        stat_percentiles_array(values, count, &cut_offs, &percentiles, 3);
         printf("\nMax:%u  P25:%.1f  Med:%.1f  P75:%.1f\n\n", max_val, percentiles[0], percentiles[1], percentiles[2]);
     }
 
@@ -67,6 +67,10 @@ void stat_graph_smooth_histogram_f(
 
     stat_float_t percentiles[3];
     stat_percentiles_float(values, count, (stat_float_t[]){25, 50, 75}, percentiles, 3);
+
+    stat_float_t percentiles[3];
+    stat_size_t cut_offs[] = {25, 50, 75};
+    stat_percentiles_array(values, count, &cut_offs, &percentiles, 3);
 
     // Header
     printf("\n");
