@@ -45,9 +45,9 @@ void stat_generate_normal_dist(
         const stat_float_t u1 = prng_next_float(state);
         const stat_float_t u2 = prng_next_float(state);
 
-        const stat_float_t mag = std_dev * sqrtf(-2.0f * logf(u1));
-        const stat_float_t z0 = mag * cosf(TWO_PI * u2) + mean;
-        const stat_float_t z1 = mag * sinf(TWO_PI * u2) + mean;
+        const stat_float_t mag = std_dev * sqrt(-2.0f * log(u1));
+        const stat_float_t z0 = mag * cos(TWO_PI * u2) + mean;
+        const stat_float_t z1 = mag * sin(TWO_PI * u2) + mean;
 
         output[i] = z0;
         if (i + 1 < size) output[i+1] = z1;
@@ -70,7 +70,7 @@ void stat_generate_exponential_dist(
 
     for (stat_size_t i = 0; i < size; i++) {
         const stat_float_t u = prng_next_float(state);
-        output[i] = -logf(1.0f - u) / lambda;
+        output[i] = -log(1.0f - u) / lambda;
     }
 }
 
@@ -88,7 +88,7 @@ void stat_generate_poisson_dist(
         return;
     }
 
-    const stat_float_t exp_lambda = expf(-lambda);
+    const stat_float_t exp_lambda = exp(-lambda);
 
     for (stat_size_t i = 0; i < size; i++) {
         stat_size_t k = 0;

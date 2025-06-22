@@ -85,7 +85,7 @@ stat_float_t stat_median_absolute_deviation_f(stat_float_t* data, stat_size_t co
 
 stat_float_t stat_std_dev_f(stat_float_t* data, stat_size_t count) {
     stat_float_t var = stat_variance_f(data, count);
-    return isnan(var) ? NAN : sqrtf(var);
+    return isnan(var) ? NAN : sqrt(var);
 }
 
 stat_float_t stat_variance_f(stat_float_t* data, stat_size_t count) {
@@ -179,7 +179,7 @@ stat_float_t stat_variance_i(stat_int_t* data, stat_size_t count) {
 
 stat_float_t stat_std_dev_i(stat_int_t* data, stat_size_t count) {
     stat_float_t var = stat_variance_i(data, count);
-    return isnan(var) ? NAN : sqrtf(var);
+    return isnan(var) ? NAN : sqrt(var);
 }
 
 stat_float_t stat_mean_absolute_deviation_i(stat_int_t* data, stat_size_t count) {
