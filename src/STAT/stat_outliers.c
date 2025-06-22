@@ -1,8 +1,6 @@
 #include "stat_outliers.h"
 
 #include <assert.h>
-#include <errno.h>
-#include <math.h>
 #include <stddef.h>
 
 bool stat_is_outlier(stat_float_t value, const stat_five_num_summary_t* summary) {

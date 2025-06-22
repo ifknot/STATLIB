@@ -37,7 +37,7 @@ stat_float_t stat_percentile_f(
  * @details Creates an internal sorted copy of the data (original remains unchanged).
  */
 stat_float_t* stat_percentiles_array_f(
-    stat_float_t* data,
+    const stat_float_t* data,
     stat_size_t data_size,
     stat_float_t* percentiles,
     stat_float_t* results,

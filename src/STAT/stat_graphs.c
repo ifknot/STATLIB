@@ -1,10 +1,21 @@
 #include "stat_graphs.h"
 
 #include <assert.h>
+#include <stdio.h>
 
 #include "stat_basic.h"
+#include "stat_percentiles.h"
+#include "cp437_constants.h"
 
-/*
+void private_draw_bar(stat_size_t nblocks, bool is_half) {
+    for (stat_size_t j = 0; j < nblocks; ++j)  {
+        printf("%c", CP437_FULL_BLOCK);
+    }
+    if (is_half) {
+        printf("%c", CP437_LEFT_HALF_BLOCK);
+    }
+}
+
 void stat_graph_smooth_histogram_i(
     const stat_int_t* values,
     stat_size_t count,
@@ -27,10 +38,14 @@ void stat_graph_smooth_histogram_i(
 
     if (show_stats) {
         stat_float_t percentiles[3];
-        stat_size_t cut_offs[] = {25, 50, 75};
-        stat_percentiles_array(values, count, &cut_offs, &percentiles, 3);
+        const stat_float_t cut_offs[] = {25, 50, 75};
+        stat_percentiles_array_i(values, count, (stat_float_t*)&cut_offs, (stat_float_t*)&percentiles, 3);
         printf("\nMax:%u  P25:%.1f  Med:%.1f  P75:%.1f\n\n", max_val, percentiles[0], percentiles[1], percentiles[2]);
     }
+
+    stat_float_t scale = log_scale ?
+        (2 * max_cols / log10(max_val + 1)) :
+        (2 * max_cols / max_val);
 
     for (stat_size_t i = 0; i < count; ++i) {
         printf("%3zu ", i);
@@ -40,12 +55,7 @@ void stat_graph_smooth_histogram_i(
         stat_size_t full_units = (stat_size_t)(scaled / 2);
         bool has_half_unit = (scaled - full_units * 2) >= 1.0;
 
-        for (stat_size_t j = 0; j < full_units; ++j)  {
-            printf(CP437_FULL_BLOCK);
-        }
-        if (has_half_unit) {
-            printf(CP437_LEFT_HALF);
-        }
+        private_draw_bar(full_units, has_half_unit);
         printf(" %u\n", values[i]);
     }
 }
@@ -57,7 +67,9 @@ void stat_graph_smooth_histogram_f(
     bool show_stats,
     bool log_scale
 ) {
-    assert(values && count && max_cols);
+    assert(values && "NULL values!");
+    assert(count && "ZERO values!");
+    assert(max_cols && "ZERO columns!");
 
     // Calculate max value and percentiles
     stat_float_t max_val = values[0];
@@ -66,11 +78,8 @@ void stat_graph_smooth_histogram_f(
     }
 
     stat_float_t percentiles[3];
-    stat_percentiles_float(values, count, (stat_float_t[]){25, 50, 75}, percentiles, 3);
-
-    stat_float_t percentiles[3];
     stat_size_t cut_offs[] = {25, 50, 75};
-    stat_percentiles_array(values, count, &cut_offs, &percentiles, 3);
+    stat_percentiles_array_f(values, count, (stat_float_t*)&cut_offs, (stat_float_t*)&percentiles, 3);
 
     // Header
     printf("\n");
@@ -95,10 +104,7 @@ void stat_graph_smooth_histogram_f(
         stat_size_t full_units = (stat_size_t)(scaled / 2);
         bool has_half_unit = (scaled - full_units * 2) >= 1.0;
 
-        // Draw bar
-        for (stat_size_t j = 0; j < full_units; j++) printf(CP437_FULL_BLOCK);
-        if (has_half_unit) printf(CP437_LEFT_HALF);
+        private_draw_bar(full_units, has_half_unit);
         printf(" %.2f\n", values[i]); // Show float value
     }
 }
-*/

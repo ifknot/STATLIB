@@ -47,7 +47,7 @@ stat_float_t stat_percentile_f(stat_float_t* data, stat_size_t size, stat_float_
 }
 
 stat_float_t* stat_percentiles_array_f(
-    stat_float_t* data,
+    const stat_float_t* data,
     stat_size_t data_size,
     stat_float_t* percentiles,
     stat_float_t* results,
@@ -134,15 +134,6 @@ stat_five_num_summary_t stat_five_num_summary_f(stat_float_t* data, stat_size_t 
     free(sorted);
     return summary;
 }
-
-#include "stat_percentiles.h"
-#include "stat_types.h"
-#include "stat_util.h"
-#include <assert.h>
-#include <math.h>
-#include <stdlib.h>
-#include <string.h>
-#include <errno.h>
 
 static stat_float_t private_compute_percentile_i(const stat_int_t* sorted, stat_size_t size, stat_float_t percentile) {
     assert(sorted != NULL);
@@ -266,7 +257,7 @@ stat_five_num_summary_t stat_five_num_summary_i(const stat_int_t* data, stat_siz
     summary.q1 = private_compute_percentile_i(sorted, size, 25.0f);
 
     if (size % 2 == 1) {
-        summary.median = (stat_float_t)sorted[size/2];
+        summary.median = (stat_float_t)sorted[size >> 1];
     } else {
         summary.median = private_compute_percentile_i(sorted, size, 50.0f);
     }

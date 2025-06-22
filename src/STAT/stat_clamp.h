@@ -37,7 +37,7 @@ stat_float_t* stat_clamp_f(
  * @throws EINVAL if count=0 or min > max
  * @assert Fails if src or dst is NULL
  */
-stat_int_t* stat_clamp_i32(
+stat_int_t* stat_clamp_i(
     const stat_int_t* src,
     stat_int_t* dst,
     stat_size_t count,

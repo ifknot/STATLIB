@@ -30,7 +30,7 @@ stat_float_t* stat_clamp_f(
     return dst;
 }
 
-stat_int_t* stat_clamp_i32(
+stat_int_t* stat_clamp_i(
     const stat_int_t* src,
     stat_int_t* dst,
     stat_size_t count,
