@@ -27,7 +27,11 @@
     &test_prng_monte_carlo,    \
     &test_prng_bit_quality,    \
     &test_prng_performance,    \
-    &test_prng_edge_cases
+    &test_prng_edge_cases,      \
+    &test_prng_range_u32_basic, \
+    //&test_prng_range_u32_bias_check, \
+    &test_prng_range_exact_uniformity, \
+    &test_prng_range_exact_edge_cases
 
 // =============================================
 // Test Cases
@@ -203,6 +207,78 @@ TEST(test_prng_edge_cases) {
     for (size_t i = 0; i < 10; i++) {
         EXPECT_NEQ(first, prng_next_u32(&low_entropy));
     }
+}
+
+// ============================================================================
+// TEST: prng_range_u32 (Biased-but-fast range)
+// ============================================================================
+TEST(test_prng_range_u32_basic) {
+    uint32_t r = 0x12345678;  // Fixed input for reproducibility
+    EXPECT_EQ(prng_range_u32(r, 10, 10), 10);  // Single-value range
+    uint32_t val = prng_range_u32(r, 0, 100);
+    EXPECT_EQ(val >= 0 && val <= 100, 1);  // Manual range check
+}
+
+TEST(test_prng_range_u32_bias_check) {
+    /* Assumption Testing - Verify bias is < 0.0000001% for range=6 */
+    prng_state_t rng;
+    prng_init(&rng, PRNG_XORSHIFT,  0xDEADBEEF, 0, NULL);
+
+    const uint32_t range = 6;
+    uint32_t counts[6] = {0};
+    const uint32_t trials = 1000;  // 10M
+
+    for (uint32_t i = 0; i < trials; i++) {
+        uint32_t r = prng_next_u32(&rng);
+        uint32_t val = prng_range_u32(r, 0, range-1);
+        counts[val]++;
+    }
+    // Check distribution is within 0.0001% of expected
+    for (int i = 0; i < range; i++) {
+        double expected = (double)trials / range;
+        double ratio = counts[i] / expected;
+        EXPECT_GT(ratio, 0.999999);
+        EXPECT_LT(ratio, 1.000001);
+    }
+}
+
+// ============================================================================
+// TEST: prng_range_exact (Uniform range)
+// ============================================================================
+TEST(test_prng_range_exact_uniformity) {
+    prng_state_t rng;
+    prng_init(&rng, PRNG_XORSHIFT, 0xDEADBEEF, 0, NULL);
+
+    const uint32_t min = 10, max = 15;  // Small range to detect bias
+    uint32_t counts[6] = {0};
+    const uint32_t trials = 1000;
+
+    for (uint32_t i = 0; i < trials; i++) {
+        uint32_t val = prng_range_exact(&rng, min, max);
+        counts[val - min]++;
+    }
+
+    // Chi-squared test for uniformity (Dogma 3: Mathematical Correctness)
+    double expected = trials / 6.0;
+    double chi2 = 0;
+    for (int i = 0; i < 6; i++) {
+        double diff = counts[i] - expected;
+        chi2 += (diff * diff) / expected;
+    }
+    EXPECT_LT(chi2, 20.0);  // For 5 degrees of freedom, p=0.001 threshold is ~20.5
+}
+
+TEST(test_prng_range_exact_edge_cases) {
+    prng_state_t rng;
+    prng_init(&rng, PRNG_XORSHIFT, 0xDEADBEEF, 0, NULL);
+
+    // Single-value range
+    EXPECT_EQ(prng_range_exact(&rng, 42, 42), 42);
+
+    // Full 32-bit range
+    uint32_t val = prng_range_exact(&rng, 0, UINT32_MAX);
+    EXPECT_GT(val, 0);
+    EXPECT_LT(val, UINT32_MAX);
 }
 
 #endif

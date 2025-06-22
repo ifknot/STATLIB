@@ -47,22 +47,6 @@ static uint32_t splitmix_next(prng_state_t* s) {
     return z >> 32;
 }
 
-/* ===================== *
- * Metadata and Core Functions
- * ===================== */
-
-static const struct {
-    const char* name;
-    uint32_t period_log2;
-    float speed_factor;
-} engine_metadata[] = {
-    [PRNG_MARSAGLIA] = {"Marsaglia MWC", 60, 1.0f},
-    [PRNG_XORSHIFT]  = {"XORShift128**", 128, 1.3f},
-    [PRNG_C99]       = {"C99 rand()", 31, 0.8f},
-    [PRNG_PCG32]     = {"PCG32", 64, 1.1f},
-    [PRNG_SPLITMIX]  = {"SplitMix64", 64, 1.2f}
-};
-
 /**
  * Generates a default seed using system time and process ID.
  * - Clock bits add per-process variability.
@@ -116,8 +100,6 @@ void prng_init(prng_state_t* state, prng_engine_t engine, uint64_t seed, int war
     assert(seed != 0); // Enforce explicit seeding
 
     state->engine = engine;
-    state->engine_name = engine_metadata[engine].name;
-    state->period_log2 = engine_metadata[engine].period_log2;
 
     switch(engine) {
         case PRNG_MARSAGLIA:
@@ -166,10 +148,15 @@ double prng_next_float(prng_state_t* state) {
     return ((uint64_t)state >> FLOAT_SHIFT_BITS) * (1.0f / (1U << FLOAT_PRECISION_BITS));
 }
 
-const char* prng_get_metadata(const prng_state_t* state) {
-    static char buf[64];
-    snprintf(buf, sizeof(buf), "%s (Period=2^%u, Speed=%.1fx)",
-             state->engine_name, state->period_log2,
-             engine_metadata[state->engine].speed_factor);
-    return buf;
+// Rejection sampling for strict uniformity
+uint32_t prng_range_exact(prng_state_t* state, uint32_t min, uint32_t max) {
+    const uint32_t range = max - min + 1;
+    const uint32_t threshold = -range % range;  // Equiv to (2^32 - range) % range
+
+    uint32_t r;
+    do {
+        r = prng_next_u32(state);
+    } while (r < threshold);
+
+    return min + r % range;
 }

@@ -77,8 +77,6 @@ typedef struct {
         uint64_t splitmix;
     } state;
     prng_engine_t engine;
-    const char* engine_name;
-    uint32_t period_log2;  // log2 of period
 } prng_state_t;
 
 
@@ -141,10 +139,30 @@ double prng_next_float(prng_state_t* state);
 uint32_t prng_next_u32(prng_state_t* state);
 
 /**
- * @brief Gets engine metadata string
- * @return Format: "Name (Period=2^N, Speed=X.Yx)"
+ * @brief Generates a biased-but-fast random number within [min, max] using multiply-shift.
+ * @param[in] r    32-bit random input (e.g., from `prng_next_u32()`).
+ * @param[in] min  Lower bound (inclusive).
+ * @param[in] max  Upper bound (inclusive).
+ * @return uint32_t A random value in [min, max].
+ * @note For range=6, bias per value is ~0.0000001%.
+ * @warning Not suitable when exact uniformity is required (e.g., shuffling a 52-card deck).
  */
-const char* prng_get_metadata(const prng_state_t* state);
+static inline uint32_t prng_range_u32(uint32_t r, uint32_t min, uint32_t max) {
+    uint32_t range = max - min + 1;
+    return min + ((uint64_t)r * range >> 32);
+}
 
+/**
+ * @brief Generates a uniformly distributed random number within [min, max] using rejection sampling.
+ * @note Provides perfect uniformity by discarding values that would cause bias.
+ * @param[in,out] state Pointer to the PRNG state (must not be NULL).
+ * @param[in]     min   Lower bound (inclusive).
+ * @param[in]     max   Upper bound (inclusive).
+ * @return uint32_t A random value in [min, max].
+ * @note
+ * - Time complexity: Average O(1), worst-case O(∞) (theoretical, practically ~1-2 iterations).
+ * @warning If `min > max`, behavior is undefined.
+ */
+uint32_t prng_range_exact(prng_state_t* state, uint32_t min, uint32_t max);
 
 #endif

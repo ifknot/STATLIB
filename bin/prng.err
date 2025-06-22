@@ -1,4 +1,4 @@
-/Users/jeremythornton/dosbox/STATLIB/src/PRNG/prng.c(114): Warning! W303: Parameter 'warmup_rounds' has been defined, but not referenced
-/Users/jeremythornton/dosbox/STATLIB/src/PRNG/prng.c(114): Warning! W303: Parameter 'seed_log' has been defined, but not referenced
-/Users/jeremythornton/dosbox/STATLIB/src/PRNG/prng.c(166): Warning! W135: Shift amount too large
-/Users/jeremythornton/dosbox/STATLIB/src/PRNG/prng.c(166): Warning! W139: Divisor for modulo or division operation is zero
+/Users/jeremythornton/dosbox/STATLIB/src/PRNG/prng.c(98): Warning! W303: Parameter 'warmup_rounds' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/PRNG/prng.c(98): Warning! W303: Parameter 'seed_log' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/PRNG/prng.c(148): Warning! W135: Shift amount too large
+/Users/jeremythornton/dosbox/STATLIB/src/PRNG/prng.c(148): Warning! W139: Divisor for modulo or division operation is zero
