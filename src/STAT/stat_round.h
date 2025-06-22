@@ -22,7 +22,7 @@ bool stat_safe_round_to_i32(stat_float_t value, int32_t* result);
 
 stat_float_t* stat_cast_int_to_float_array(stat_float_t* destination, stat_int_t* source);
 
-// Array versions
+// put the rest og the array versions here
 
 
 #endif // STAT_ROUND_H

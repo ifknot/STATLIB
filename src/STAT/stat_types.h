@@ -10,6 +10,12 @@ typedef uint32_t stat_size_t;
 typedef int32_t stat_int_t;
 typedef double stat_float_t;
 
+typedef enum {
+    STAT_Q1 = 0,     // 25th percentile
+    STAT_MEDIAN = 1,  // 50th percentile
+    STAT_Q3 = 2       // 75th percentile
+} stat_quartile_t;
+
 // Five-number summary
 typedef struct {
     stat_float_t min;
