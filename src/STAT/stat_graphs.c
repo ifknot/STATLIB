@@ -44,8 +44,8 @@ void stat_graph_smooth_histogram_i(
     }
 
     stat_float_t scale = log_scale ?
-        (2 * max_cols / log10(max_val + 1)) :
-        (2 * max_cols / max_val);
+        (2.0 * max_cols / log10(max_val + 1)) :
+        (2.0 * max_cols / max_val);
 
     for (stat_size_t i = 0; i < count; ++i) {
         printf("%3zu ", i);
