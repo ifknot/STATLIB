@@ -10,7 +10,8 @@ RUN_TESTS(
     //STATS_TEST_CENTRAL,
     //STATS_TEST_CLAMP
     //STATS_TEST_COMPARE
-    PRNG_TEST_SUITE
+    //PRNG_TEST_SUITE
+    PRNG_TEST_RANGE
 )
 
 int main(int argc, char** argv) {

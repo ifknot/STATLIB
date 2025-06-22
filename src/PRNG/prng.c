@@ -150,9 +150,11 @@ double prng_next_float(prng_state_t* state) {
 
 // Rejection sampling for strict uniformity
 uint32_t prng_range_exact(prng_state_t* state, uint32_t min, uint32_t max) {
+    if (min == 0 && max == UINT32_MAX) { // Special case: no need for range reduction
+        return prng_next_u32(state);
+    }
     const uint32_t range = max - min + 1;
-    const uint32_t threshold = -range % range;  // Equiv to (2^32 - range) % range
-
+    const uint32_t threshold = -range % range; // Equiv to (2^32 - range) % range
     uint32_t r;
     do {
         r = prng_next_u32(state);
