@@ -22,7 +22,6 @@
 #include "stat_division.h"    ///< Integer division: stat_safe_div_int32(), stat_div_round_up(), stat_div_round_nearest()
 #include "stat_outliers.h"    ///< Outlier detection: stat_is_outlier(), stat_count_outliers()
 #include "stat_percentiles.h" ///< Percentile functions: stat_percentile(), stat_quartile(), stat_five_num_summary()
-#include "stat_prng.h"        ///< PRNG functions: stat_prng_init(), stat_prng_init_time(), stat_prng_next(), stat_prng_next_int()
 #include "stat_round.h"       ///< Rounding functions: stat_round_to_int32(), stat_floor_to_int32(), stat_ceil_to_int32(), stat_round_decimal()
 #include "stat_sign.h"        ///< Sign functions: stat_sign_float(), stat_sign_int32(), stat_copysign_float()
 #include "stat_util.h"        ///< Utilities: stat_sort(), stat_is_finite(), stat_is_normal()

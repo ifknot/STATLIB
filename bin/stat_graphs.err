@@ -1,2 +1,1 @@
-/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_graphs.c(34): Warning! W202: Symbol 'scale' has been defined, but not referenced
-/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_graphs.c(36): Warning! W202: Symbol 'scale' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_graphs.c(126): Warning! W303: Parameter 'log_scale' has been defined, but not referenced

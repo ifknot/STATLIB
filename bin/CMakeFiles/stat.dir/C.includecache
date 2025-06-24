@@ -6,35 +6,41 @@
 
 #IncludeRegexTransform: 
 
-/Users/jeremythornton/dosbox/STATLIB/src/STAT/cp437_constants.h
-
-/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_basic.h
-stat_types.h
-/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_types.h
-
-/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_graphs.h
-math.h
--
-cp437_constants.h
-/Users/jeremythornton/dosbox/STATLIB/src/STAT/cp437_constants.h
-stat_types.h
-/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_types.h
-stat_basic.h
-/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_basic.h
-
-/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_types.h
+/Users/jeremythornton/dosbox/STATLIB/src/PRNG/prng.h
 stdint.h
+-
+stdio.h
 -
 stdbool.h
 -
-float.h
+prng_constants.h
+/Users/jeremythornton/dosbox/STATLIB/src/PRNG/prng_constants.h
+
+/Users/jeremythornton/dosbox/STATLIB/src/PRNG/prng_constants.h
+
+/Users/jeremythornton/dosbox/STATLIB/src/PRNG/prng_popcount.h
+stdint.h
 -
 
-/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_graphs.h
+/Users/jeremythornton/dosbox/STATLIB/src/PRNG/test_prng.h
+stdbool.h
+-
+math.h
+-
+stdint.h
+-
+../PRNG/prng.h
+/Users/jeremythornton/dosbox/STATLIB/src/PRNG/prng.h
+../PRNG/prng_popcount.h
+/Users/jeremythornton/dosbox/STATLIB/src/PRNG/prng_popcount.h
+../PRNG/prng_constants.h
+/Users/jeremythornton/dosbox/STATLIB/src/PRNG/prng_constants.h
 ../TDD/tdd_macros.h
 /Users/jeremythornton/dosbox/STATLIB/src/TDD/tdd_macros.h
-../STAT/stat_graphs.h
-/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_graphs.h
+../TDD/tdd_progress.h
+/Users/jeremythornton/dosbox/STATLIB/src/TDD/tdd_progress.h
+../TDD/tdd_on_escape.h
+/Users/jeremythornton/dosbox/STATLIB/src/TDD/tdd_on_escape.h
 
 /Users/jeremythornton/dosbox/STATLIB/src/TDD/tdd_macros.h
 stddef.h
@@ -83,10 +89,8 @@ stdint.h
 /Users/jeremythornton/dosbox/STATLIB/src/main.c
 stdlib.h
 -
-STAT/test_graphs.h
-/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_graphs.h
-STAT/cp437_constants.h
-/Users/jeremythornton/dosbox/STATLIB/src/STAT/cp437_constants.h
+PRNG/test_prng.h
+/Users/jeremythornton/dosbox/STATLIB/src/PRNG/test_prng.h
 
 /opt/watcom/h/_comdef.h
 
@@ -133,10 +137,6 @@ _comdef.h
 -
 
 /opt/watcom/h/ctime
-_comdef.h
--
-
-/opt/watcom/h/float.h
 _comdef.h
 -
 

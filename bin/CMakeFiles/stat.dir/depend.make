@@ -205,11 +205,13 @@ CMakeFiles/stat.dir/STAT/stat_graphs.c.obj: &
  /opt/watcom/h/cstdbool &
  /opt/watcom/h/cstdint &
  /opt/watcom/h/cstdio &
+ /opt/watcom/h/cstdlib &
  /opt/watcom/h/float.h &
  /opt/watcom/h/math.h &
  /opt/watcom/h/stdbool.h &
  /opt/watcom/h/stdint.h &
  /opt/watcom/h/stdio.h &
+ /opt/watcom/h/stdlib.h &
  /opt/watcom/h/sys/_lfndos.h
 CMakeFiles/stat.dir/STAT/stat_outliers.c.obj: &
  /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_outliers.c &
@@ -322,11 +324,10 @@ CMakeFiles/stat.dir/TDD/tdd_spinner.c.obj: &
  /opt/watcom/h/string.h &
  /opt/watcom/h/sys/_lfndos.h
 CMakeFiles/stat.dir/main.c.obj: &
- /Users/jeremythornton/dosbox/STATLIB/src/STAT/cp437_constants.h &
- /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_basic.h &
- /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_graphs.h &
- /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_types.h &
- /Users/jeremythornton/dosbox/STATLIB/src/STAT/test_graphs.h &
+ /Users/jeremythornton/dosbox/STATLIB/src/PRNG/prng.h &
+ /Users/jeremythornton/dosbox/STATLIB/src/PRNG/prng_constants.h &
+ /Users/jeremythornton/dosbox/STATLIB/src/PRNG/prng_popcount.h &
+ /Users/jeremythornton/dosbox/STATLIB/src/PRNG/test_prng.h &
  /Users/jeremythornton/dosbox/STATLIB/src/TDD/tdd_macros.h &
  /Users/jeremythornton/dosbox/STATLIB/src/TDD/tdd_on_escape.h &
  /Users/jeremythornton/dosbox/STATLIB/src/TDD/tdd_progress.h &
@@ -345,7 +346,6 @@ CMakeFiles/stat.dir/main.c.obj: &
  /opt/watcom/h/cstdlib &
  /opt/watcom/h/cstring &
  /opt/watcom/h/ctime &
- /opt/watcom/h/float.h &
  /opt/watcom/h/math.h &
  /opt/watcom/h/setjmp.h &
  /opt/watcom/h/signal.h &

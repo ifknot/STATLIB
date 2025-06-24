@@ -8,8 +8,10 @@
 #include "../PRNG/prng.h"
 
 void stat_generate_uniform_dist(
-    stat_float_t* output, stat_size_t size,
-    stat_float_t min, stat_float_t max,
+    stat_float_t* output,
+    stat_size_t size,
+    stat_float_t min,
+    stat_float_t max,
     prng_state_t* state
 ) {
     assert(output != NULL && "Output array cannot be NULL");
@@ -22,6 +24,7 @@ void stat_generate_uniform_dist(
 
     const stat_float_t range = max - min;
     for (stat_size_t i = 0; i < size; i++) {
+        printf("%f ", prng_next_float(state));
         output[i] = min + prng_next_float(state) * range;
     }
 }

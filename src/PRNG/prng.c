@@ -7,9 +7,7 @@
 
 #include "prng_constants.h"
 
-/* ===================== *
- * Engine Implementations
- * ===================== */
+// Engine Implementations...
 
 static uint32_t marsaglia_next(prng_state_t* s) {
     uint32_t t = s->state.mwc.a * MWC_MULTIPLIER_A + (s->state.mwc.a >> 16);
@@ -46,6 +44,8 @@ static uint32_t splitmix_next(prng_state_t* s) {
     z = (z ^ (z >> SPLITMIX_SHIFT_2)) * SPLITMIX_MULT_2;
     return z >> 32;
 }
+
+// Interface implementation...
 
 /**
  * Generates a default seed using system time and process ID.
@@ -161,4 +161,50 @@ uint32_t prng_range_exact(prng_state_t* state, uint32_t min, uint32_t max) {
     } while (r < threshold);
 
     return min + r % range;
+}
+
+void prng_dump_compact(const prng_state_t* state, FILE* output) {
+    if (!state) return;
+    FILE *out = output ? output : stdout;
+
+    switch (state->engine) {
+        case PRNG_MARSAGLIA:
+            fprintf(out, "[PRNG] %s State:a=0x%08X b=0x%08X",
+                   prng_to_string[state->engine],
+                   state->state.mwc.a, state->state.mwc.b);
+            break;
+
+        case PRNG_XORSHIFT:
+            fprintf(out, "[PRNG] %s State:0x%08X..0x%08X",
+                   prng_to_string[state->engine],
+                   state->state.xorshift.x[0],
+                   state->state.xorshift.x[3]);
+            break;
+
+        case PRNG_C99:
+            fprintf(out, "[PRNG] %s Seed:0x%08X",
+                   prng_to_string[state->engine],
+                   state->state.c99_seed);
+            break;
+
+        case PRNG_PCG32:
+            fprintf(out, "[PRNG] %s State:0x%08X%08X Seq:0x%04X",
+                   prng_to_string[state->engine],
+                   (unsigned)(state->state.pcg.state >> 32),
+                   (unsigned)state->state.pcg.state,
+                   (unsigned)state->state.pcg.inc);
+            break;
+
+        case PRNG_SPLITMIX:
+            fprintf(out, "[PRNG] %s State:0x%016llX",
+                   prng_to_string[state->engine],
+                   (unsigned long long)state->state.splitmix);
+            break;
+    }
+
+    #ifdef PRNG_TRACK_WARMUP
+    fprintf(out, " (Warmup:%d)", state->warmup_remaining);
+    #endif
+
+    fprintf(out, "\n");
 }
