@@ -70,7 +70,7 @@ const char prng_to_string[PRNG_ENGINE_COUNT][31] = {
 #define SPLITMIX_SHIFT_2    27U
 
 // Float generation
-#define FLOAT_PRECISION_BITS 24U  // Bits for float mantissa
-#define FLOAT_SHIFT_BITS    8U    // (32 - FLOAT_PRECISION_BITS)
+#define FLOAT_2POW32        4294967296.0
+#define FLOAT_INV_2POW32    1.0 / FLOAT_2POW32
 
 #endif
