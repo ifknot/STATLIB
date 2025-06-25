@@ -31,6 +31,9 @@
     &test_prng_edge_cases
 
 #define PRNG_TEST_SUITE_FP &test_prng_float_basic, \
+    &test_prng_float_distribution, \
+    test_prng_float_monte_carlo, \
+    &test_prng_float_bit_quality
 
 #define PRNG_TEST_RANGE &test_prng_range_u32_basic, \
     &test_prng_range_u32_bias_check, \
