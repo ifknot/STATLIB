@@ -145,7 +145,7 @@ uint32_t prng_next_u32(prng_state_t* state) {
 }
 
 double prng_next_float(prng_state_t* state) {
-    return ((uint64_t)state >> FLOAT_SHIFT_BITS) * (1.0f / (1U << FLOAT_PRECISION_BITS));
+    return prng_next_u32(state) * (1.0 / 4294967296.0);//FLOAT_INV_2POW32    1.0 / FLOAT_2POW32
 }
 
 // Rejection sampling for strict uniformity
