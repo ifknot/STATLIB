@@ -3,6 +3,23 @@
 
 #include "stat_types.h"
 
+/*
+/ Example 1: Basic linear binning
+stat_float_t data[1000];
+// ... populate data ...
+
+binning_schema_t schema = stat_auto_bin_f(data, 1000, 20, BIN_LINEAR);
+stat_size_t bins[20] = {0};
+stat_bin_values_f(data, 1000, &schema, bins, STAT_SAFE_EPSILON);
+
+// Use bins for visualization
+stat_binning_free_schema(&schema);
+
+// Example 2: Percentile binning
+binning_schema_t percentile_schema = stat_auto_bin_f(data, 1000, 5, BIN_PERCENTILE);
+// Will create bins with equal numbers of values
+    */
+
 typedef enum {
     BIN_LINEAR,
     BIN_LOGARITHMIC,
