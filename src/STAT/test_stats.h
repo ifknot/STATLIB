@@ -72,6 +72,14 @@
     &test_stat_compare_infinity, \
     &test_stat_almost_equal_extreme
 
+#define STATS_TEST_BINNING &test_binning_linear_edges, \
+        &test_binning_logarithmic_edges,    \
+        &test_bin_integer_values,            \
+        &test_bin_float_values,            \
+        &test_auto_bin_percentile,            \
+        &test_bin_center_width,            \
+        &test_edge_cases
+
 // ============================================================================
 // TEST: stat_abs_f (stat_float_t* src, stat_float_t* dst, stat_size_t size)
 // ============================================================================
@@ -520,4 +528,112 @@ TEST(test_stat_almost_equal_extreme) {
     // Large numbers with relative tolerance
     stat_float_t big = 1e20;
     EXPECT_TRUE(stat_almost_equal(big, big*(1.0 + 0.5*STAT_REL_TOL), STAT_REL_TOL, STAT_ABS_TOL));
+}
+
+// Binning tests
+TEST(test_binning_linear_edges) {
+    stat_binning_config_t cfg;
+    cfg.min = 0.0;
+    cfg.max = 100.0;
+    cfg.count = 5;
+    stat_float_t edges[6];  // count+1
+    cfg.edges = edges;
+    
+    stat_binning_calculate_edges(&cfg, BIN_LINEAR);
+    
+    EXPECT_EQ(edges[0], 0.0);
+    EXPECT_EQ(edges[1], 20.0);
+    EXPECT_EQ(edges[2], 40.0);
+    EXPECT_EQ(edges[3], 60.0);
+    EXPECT_EQ(edges[4], 80.0);
+    EXPECT_EQ(edges[5], 100.0);
+}
+
+TEST(test_binning_logarithmic_edges) {
+    stat_binning_config_t cfg;
+    cfg.min = 1.0;
+    cfg.max = 1000.0;
+    cfg.count = 3;
+    stat_float_t edges[4];
+    cfg.edges = edges;
+    
+    stat_binning_calculate_edges(&cfg, BIN_LOGARITHMIC);
+    
+    EXPECT_GT(edges[1], 1.0);
+    EXPECT_LT(edges[1], edges[2]);
+    EXPECT_EQ(edges[3], 1000.0);
+}
+
+TEST(test_bin_integer_values) {
+    stat_binning_config_t cfg;
+    cfg.min = 0;
+    cfg.max = 100;
+    cfg.count = 5;
+    stat_float_t edges[6] = {0, 20, 40, 60, 80, 100};
+    cfg.edges = edges;
+    
+    stat_int_t values[] = {5, 25, 35, 99, 100, 0};
+    stat_size_t bins[5] = {0};
+    
+    stat_bin_values_i(values, 6, &cfg, bins);
+    
+    EXPECT_EQ(bins[0], 2);  // 0-20: 5, 0
+    EXPECT_EQ(bins[1], 1);  // 20-40: 25
+    EXPECT_EQ(bins[2], 1);  // 40-60: 35
+    EXPECT_EQ(bins[4], 2);  // 80-100: 99, 100
+}
+
+TEST(test_bin_float_values) {
+    stat_binning_config_t cfg;
+    cfg.min = 0.0;
+    cfg.max = 1.0;
+    cfg.count = 2;
+    stat_float_t edges[3] = {0.0, 0.5, 1.0};
+    cfg.edges = edges;
+    
+    stat_float_t values[] = {0.1, 0.6, 0.4999999, 1.0};
+    stat_size_t bins[2] = {0};
+    
+    stat_bin_values_f(values, 4, &cfg, bins, 1e-6f);
+    
+    EXPECT_EQ(bins[0], 2);  // 0.0-0.5: 0.1, 0.4999999
+    EXPECT_EQ(bins[1], 2);  // 0.5-1.0: 0.6, 1.0
+}
+
+TEST(test_auto_bin_percentile) {
+    stat_float_t values[] = {1.0, 2.0, 3.0, 4.0, 5.0};
+    stat_binning_config_t cfg;
+    cfg.count = 5;
+    stat_float_t edges[6];
+    cfg.edges = edges;
+    
+    stat_auto_bin_f(values, 5, &cfg, BIN_PERCENTILE);
+    
+    EXPECT_EQ(edges[0], 1.0);
+    EXPECT_EQ(edges[5], 5.0);
+    EXPECT_IN_RANGE(edges[1], 1.9, 2.1);
+    EXPECT_IN_RANGE(edges[2], 2.9, 3.1);
+}
+
+TEST(test_bin_center_width) {
+    stat_binning_config_t cfg;
+    cfg.count = 2;
+    stat_float_t edges[3] = {0.0, 5.0, 10.0};
+    cfg.edges = edges;
+    
+    EXPECT_EQ(stat_bin_center(&cfg, 0), 2.5);
+    EXPECT_EQ(stat_bin_center(&cfg, 1), 7.5);
+    EXPECT_EQ(stat_bin_width(&cfg, 0), 5.0);
+    EXPECT_EQ(stat_bin_width(&cfg, 1), 5.0);
+}
+
+TEST(test_edge_cases) {
+    // Empty bins check
+    stat_binning_config_t cfg;
+    cfg.count = 0;
+    stat_float_t edges[1];
+    cfg.edges = edges;
+    
+    // Should assert (count must be > 0)
+    // Note: This would be wrapped in EXPECT_ASSERT in frameworks that support it
 }
