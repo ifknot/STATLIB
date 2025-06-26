@@ -78,6 +78,9 @@
         &test_bin_float_values,            \
         &test_auto_bin_percentile,            \
         &test_bin_center_width,            \
+        &test_binning_with_rounding,        \
+        &test_percentile_binning_with_rounding,    \
+        &test_bin_center_with_rounding,        \
         &test_edge_cases
 
 // ============================================================================
@@ -636,4 +639,63 @@ TEST(test_edge_cases) {
     
     // Should assert (count must be > 0)
     // Note: This would be wrapped in EXPECT_ASSERT in frameworks that support it
+}
+
+TEST(test_binning_with_rounding) {
+    stat_binning_config_t cfg;
+    cfg.min = 0.0;
+    cfg.max = 1.0;
+    cfg.count = 4;
+    stat_float_t edges[5];
+    cfg.edges = edges;
+    
+    stat_binning_calculate_edges(&cfg, BIN_LINEAR);
+    
+    // Verify edges are properly rounded
+    EXPECT_EQ(edges[0], 0.0);
+    EXPECT_EQ(edges[1], 0.25);
+    EXPECT_EQ(edges[2], 0.5);
+    EXPECT_EQ(edges[3], 0.75);
+    EXPECT_EQ(edges[4], 1.0);
+    
+    // Test with values that need rounding
+    stat_float_t values[] = {0.2499999, 0.2500001, 0.4999999, 0.5000001};
+    stat_size_t bins[4] = {0};
+    
+    stat_bin_values_f(values, 4, &cfg, bins, 1e-7f);
+    
+    EXPECT_EQ(bins[0], 1);  // 0.2499999 -> bin 0
+    EXPECT_EQ(bins[1], 2);  // 0.2500001 and 0.4999999 -> bin 1
+    EXPECT_EQ(bins[2], 1);  // 0.5000001 -> bin 2
+}
+
+TEST(test_percentile_binning_with_rounding) {
+    stat_float_t values[] = {1.1, 2.2, 3.3, 4.4, 5.5};
+    stat_binning_config_t cfg;
+    cfg.count = 5;
+    stat_float_t edges[6];
+    cfg.edges = edges;
+    
+    stat_auto_bin_f(values, 5, &cfg, BIN_PERCENTILE);
+    
+    // Verify rounded percentiles
+    EXPECT_EQ(edges[0], 1.1);
+    EXPECT_EQ(edges[5], 5.5);
+    EXPECT_EQ(stat_round_decimal(edges[1], 1), 2.2);
+    EXPECT_EQ(stat_round_decimal(edges[2], 1), 3.3);
+    EXPECT_EQ(stat_round_decimal(edges[3], 1), 4.4);
+}
+
+TEST(test_bin_center_with_rounding) {
+    stat_binning_config_t cfg;
+    cfg.count = 2;
+    stat_float_t edges[3] = {1.234567, 3.456789, 5.678901};
+    cfg.edges = edges;
+    
+    // Test center calculation with rounding
+    stat_float_t center = stat_bin_center(&cfg, 0);
+    EXPECT_EQ(stat_round_decimal(center, 6), 2.345678);
+    
+    center = stat_bin_center(&cfg, 1);
+    EXPECT_EQ(stat_round_decimal(center, 6), 4.567845);
 }
