@@ -5,7 +5,8 @@
 
 typedef enum {
     BIN_LINEAR,
-    BIN_LOGARITHMIC
+    BIN_LOGARITHMIC,
+    BIN_PERCENTILE
 } stat_binning_strategy_t;
 
 typedef struct {
