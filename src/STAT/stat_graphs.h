@@ -23,20 +23,15 @@
  * 3 ███ 50
  * 4 ████████████ 1000
  */
-void stat_graph_smooth_histogram_i(
-    const stat_int_t* values,
-    stat_size_t count,
-    stat_size_t max_cols,
-    bool show_stats,
-    bool log_scale
+void stat_graph_smooth_histogram(
+    const stat_size_t* bin_counts,
+    const binning_plan_t* bin_plan,
+    stat_size_t max_height,
+    bool show_bin_info
 );
 
-void stat_graph_smooth_histogram_f(
-    const stat_float_t* values,
-    stat_size_t count,
-    stat_size_t max_cols,
-    bool show_stats,
-    bool log_scale
-);
+#endif // STAT_GRAPHS_H
+
+
 
 #endif
