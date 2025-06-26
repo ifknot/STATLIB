@@ -12,7 +12,8 @@ RUN_TESTS(
     //STATS_TEST_COMPARE
     //GRAPHS_TEST_SUITE
     PRNG_TEST_SUITE,
-    PRNG_TEST_RANGE
+    PRNG_TEST_RANGE,
+    PRNG_TEST_SUITE_FP
 )
 
 int main(int argc, char** argv) {

@@ -55,6 +55,8 @@ stdbool.h
 -
 time.h
 -
+math.h
+-
 tdd_report.h
 /Users/jeremythornton/dosbox/STATLIB/src/TDD/tdd_report.h
 tdd_progress.h

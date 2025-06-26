@@ -17,6 +17,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <time.h>
+#include <math.h>
 
 #include "tdd_report.h"
 #include "tdd_progress.h"
@@ -129,6 +130,9 @@ static jmp_buf tdd_death_jmp_buf;
 // Numeric Comparisons
 // =============================================
 
+#define EXPECT_ALMOST_EQ(a, b, e) _EXPECT_COMPARE(fabs(a - b), e, <=, "EQ")
+
+
 #define EXPECT_MALLOC(ptr) _ASSERT(ptr != NULL, false);
 
 #define EXPECT_TRUE(expr) _ASSERT(expr, false);
@@ -156,12 +160,16 @@ static jmp_buf tdd_death_jmp_buf;
  */
 #define EXPECT_GT(a, b) _EXPECT_COMPARE(a, b, >, "GT")
 
+#define EXPECT_GTE(a, b) _EXPECT_COMPARE(a,b,>=,"GTE")
+
 /**
  * @brief Expects a < b (non-fatal)
  * @param a Tested value
  * @param b Comparison threshold
  */
 #define EXPECT_LT(a, b) _EXPECT_COMPARE(a, b, <, "LT")
+
+#define EXPECT_LTE(a,b) _EXPECT_COMPARE(c,b,<=,"LTE")
 
 // =============================================
 // String Comparisons

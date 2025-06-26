@@ -1,10 +1,10 @@
-/Users/jeremythornton/dosbox/STATLIB/src/PRNG/test_prng.h(201): Warning! W202: Symbol 'rng' has been defined, but not referenced
-/Users/jeremythornton/dosbox/STATLIB/src/PRNG/test_prng.h(227): Warning! W124: Comparison result always 1
-/Users/jeremythornton/dosbox/STATLIB/src/PRNG/test_prng.h(227): Warning! W124: Comparison result always 1
-/Users/jeremythornton/dosbox/STATLIB/src/PRNG/test_prng.h(236): Warning! W124: Comparison result always 1
-/Users/jeremythornton/dosbox/STATLIB/src/PRNG/test_prng.h(236): Warning! W124: Comparison result always 1
-/Users/jeremythornton/dosbox/STATLIB/src/PRNG/test_prng.h(239): Warning! W303: Parameter 'pass' has been defined, but not referenced
-/Users/jeremythornton/dosbox/STATLIB/src/PRNG/test_prng.h(309): Warning! W202: Symbol 'threshold' has been defined, but not referenced
-/Users/jeremythornton/dosbox/STATLIB/src/main.c(18): Warning! W303: Parameter 'argv' has been defined, but not referenced
-/Users/jeremythornton/dosbox/STATLIB/src/main.c(18): Warning! W303: Parameter 'argc' has been defined, but not referenced
-/Users/jeremythornton/dosbox/STATLIB/src/PRNG/../TDD/tdd_macros.h(30): Warning! W202: Symbol 'tdd_death_jmp_buf' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/PRNG/test_prng.h(288): Warning! W202: Symbol 'rng' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/PRNG/test_prng.h(314): Warning! W124: Comparison result always 1
+/Users/jeremythornton/dosbox/STATLIB/src/PRNG/test_prng.h(314): Warning! W124: Comparison result always 1
+/Users/jeremythornton/dosbox/STATLIB/src/PRNG/test_prng.h(323): Warning! W124: Comparison result always 1
+/Users/jeremythornton/dosbox/STATLIB/src/PRNG/test_prng.h(323): Warning! W124: Comparison result always 1
+/Users/jeremythornton/dosbox/STATLIB/src/PRNG/test_prng.h(326): Warning! W303: Parameter 'pass' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/PRNG/test_prng.h(396): Warning! W202: Symbol 'threshold' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/main.c(19): Warning! W303: Parameter 'argv' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/main.c(19): Warning! W303: Parameter 'argc' has been defined, but not referenced
+/Users/jeremythornton/dosbox/STATLIB/src/PRNG/../TDD/tdd_macros.h(31): Warning! W202: Symbol 'tdd_death_jmp_buf' has been defined, but not referenced
