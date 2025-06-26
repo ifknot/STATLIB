@@ -9,11 +9,6 @@
 
 /**
  * @brief ASCII histograms for stat_int_t and stat_float_t  using full+half blocks to double density and smoother appearance 
- * @param values Array of bin counts - uint32_t
- * @param count Number of bins
- * @param max_cols Max display columns
- * @param show_stats Show distribution stats
- * @param log_scale Use logarithmic scaling
  * @example
  * [Log Scale Histogram]
  * Max:1000  Med:50.0  P25:10.0  P75:100.0
