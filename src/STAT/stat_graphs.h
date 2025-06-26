@@ -24,8 +24,8 @@
  * 4 ████████████ 1000
  */
 void stat_graph_smooth_histogram(
-    const stat_size_t* bin_counts,
-    const binning_plan_t* bin_plan,
+    const stat_size_t* bins,
+    const binning_schema_t* schema,
     stat_size_t max_height,
     bool show_bin_info
 );
