@@ -126,18 +126,3 @@ stat_size_t stat_array_replace_nan_f(stat_float_t* data, stat_size_t size, stat_
     }
     return count;
 }
-
-stat_size_t stat_array_clip_f(stat_float_t* data, stat_size_t size, stat_float_t min, stat_float_t max) {
-    assert(data != NULL);
-    stat_size_t count = 0;
-    for (stat_size_t i = 0; i < size; i++) {
-        if (data[i] < min) {
-            data[i] = min;
-            count++;
-        } else if (data[i] > max) {
-            data[i] = max;
-            count++;
-        }
-    }
-    return count;
-}
