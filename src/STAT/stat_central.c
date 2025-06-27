@@ -1,6 +1,5 @@
 #include "stat_central.h"
 #include "stat_util.h"
-//#include "stat_abs.h"
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>

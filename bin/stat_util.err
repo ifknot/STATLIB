@@ -1,0 +1,3 @@
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_util.c(59): Warning! W131: No prototype found for function 'qsort'
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_util.c(59): Warning! W308: The function 'qsort' without prototyped parameters called
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_util.c(59): Note! I2002: 'qsort' defined in: /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_util.c(59)

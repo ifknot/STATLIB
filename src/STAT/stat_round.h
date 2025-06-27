@@ -2,7 +2,7 @@
 /**
  * @file stat_round.h
  * @brief Rounding and conversion functions for statistical calculations
- * 
+ *
  * This module provides various rounding functions and type conversion utilities
  * for statistical operations. It includes both scalar and array-based operations.
  */
@@ -78,15 +78,6 @@ bool stat_safe_round_to_i(stat_float_t value, stat_int_t* result);
 /* Array conversion functions (non-inplace, destination-first pattern) */
 
 /**
- * @brief Converts an array of integers to an array of floats
- * @param destination Pointer to pre-allocated float array for results
- * @param source Pointer to source integer array
- * @return Pointer to the destination array
- * @note The destination array must have at least the same capacity as source
- */
-stat_float_t* stat_cast_int_to_float_array(stat_float_t* destination, const stat_int_t* source);
-
-/**
  * @brief Converts an array of floats to integers using rounding
  * @param destination Pointer to pre-allocated integer array for results
  * @param source Pointer to source float array
@@ -144,6 +135,6 @@ stat_float_t* stat_round_float_to_multiple_array(stat_float_t* destination, cons
  * @return Pointer to the destination array
  * @note Elements that would overflow are set to 0 and don't increment success_count
  */
-stat_int_t* stat_safe_float_to_int_array(stat_int_t* destination, const stat_float_t* source, size_t* success_count);
+stat_int_t* stat_safe_float_to_int_array(stat_int_t* destination, const stat_float_t* source, stat_size_t* success_count);
 
 #endif // STAT_ROUND_H

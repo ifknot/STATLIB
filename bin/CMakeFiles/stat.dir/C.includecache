@@ -6,41 +6,49 @@
 
 #IncludeRegexTransform: 
 
-/Users/jeremythornton/dosbox/STATLIB/src/PRNG/prng.h
-stdint.h
--
-stdio.h
--
-stdbool.h
--
-prng_constants.h
-/Users/jeremythornton/dosbox/STATLIB/src/PRNG/prng_constants.h
-
-/Users/jeremythornton/dosbox/STATLIB/src/PRNG/prng_constants.h
-
-/Users/jeremythornton/dosbox/STATLIB/src/PRNG/prng_popcount.h
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_IEEE754.h
 stdint.h
 -
 
-/Users/jeremythornton/dosbox/STATLIB/src/PRNG/test_prng.h
-stdbool.h
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_abs.c
+stat_abs.h
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_abs.h
+stat_IEEE754.h
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_IEEE754.h
+assert.h
+-
+stddef.h
+-
+
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_abs.h
+stat_types.h
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_types.h
+errno.h
 -
 math.h
 -
+
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_types.h
 stdint.h
 -
-../PRNG/prng.h
-/Users/jeremythornton/dosbox/STATLIB/src/PRNG/prng.h
-../PRNG/prng_popcount.h
-/Users/jeremythornton/dosbox/STATLIB/src/PRNG/prng_popcount.h
-../PRNG/prng_constants.h
-/Users/jeremythornton/dosbox/STATLIB/src/PRNG/prng_constants.h
+stdbool.h
+-
+float.h
+-
+math.h
+-
+
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h
+stat_abs.h
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_abs.h
+stat_types.h
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_types.h
 ../TDD/tdd_macros.h
 /Users/jeremythornton/dosbox/STATLIB/src/TDD/tdd_macros.h
-../TDD/tdd_progress.h
-/Users/jeremythornton/dosbox/STATLIB/src/TDD/tdd_progress.h
-../TDD/tdd_on_escape.h
-/Users/jeremythornton/dosbox/STATLIB/src/TDD/tdd_on_escape.h
+math.h
+-
+errno.h
+-
 
 /Users/jeremythornton/dosbox/STATLIB/src/TDD/tdd_macros.h
 stddef.h
@@ -91,10 +99,14 @@ stdint.h
 /Users/jeremythornton/dosbox/STATLIB/src/main.c
 stdlib.h
 -
-PRNG/test_prng.h
-/Users/jeremythornton/dosbox/STATLIB/src/PRNG/test_prng.h
+STAT/test_stats.h
+/Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h
 
 /opt/watcom/h/_comdef.h
+
+/opt/watcom/h/assert.h
+_comdef.h
+-
 
 /opt/watcom/h/bios.h
 _comdef.h
@@ -139,6 +151,14 @@ _comdef.h
 -
 
 /opt/watcom/h/ctime
+_comdef.h
+-
+
+/opt/watcom/h/errno.h
+_comdef.h
+-
+
+/opt/watcom/h/float.h
 _comdef.h
 -
 

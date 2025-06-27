@@ -113,9 +113,22 @@ CMakeFiles/stat.dir/STAT/stat_basic.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/stat.dir/STAT/stat_basic.c.s"
 	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_C_CREATE_ASSEMBLY_SOURCE
 
+CMakeFiles/stat.dir/STAT/stat_binning.c.obj: CMakeFiles/stat.dir/flags.make
+CMakeFiles/stat.dir/STAT/stat_binning.c.obj: /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_binning.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/stat.dir/STAT/stat_binning.c.obj"
+	/opt/watcom/armo64/wcl -zq -d+ $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -foCMakeFiles/stat.dir/STAT/stat_binning.c.obj -c -cc /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_binning.c
+
+CMakeFiles/stat.dir/STAT/stat_binning.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/stat.dir/STAT/stat_binning.c.i"
+	/opt/watcom/armo64/wcl -zq -d+ $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -foCMakeFiles/stat.dir/STAT/stat_binning.c.i -pl -cc /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_binning.c
+
+CMakeFiles/stat.dir/STAT/stat_binning.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/stat.dir/STAT/stat_binning.c.s"
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_C_CREATE_ASSEMBLY_SOURCE
+
 CMakeFiles/stat.dir/STAT/stat_central.c.obj: CMakeFiles/stat.dir/flags.make
 CMakeFiles/stat.dir/STAT/stat_central.c.obj: /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_central.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/stat.dir/STAT/stat_central.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/stat.dir/STAT/stat_central.c.obj"
 	/opt/watcom/armo64/wcl -zq -d+ $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -foCMakeFiles/stat.dir/STAT/stat_central.c.obj -c -cc /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_central.c
 
 CMakeFiles/stat.dir/STAT/stat_central.c.i: cmake_force
@@ -128,7 +141,7 @@ CMakeFiles/stat.dir/STAT/stat_central.c.s: cmake_force
 
 CMakeFiles/stat.dir/STAT/stat_clamp.c.obj: CMakeFiles/stat.dir/flags.make
 CMakeFiles/stat.dir/STAT/stat_clamp.c.obj: /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_clamp.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/stat.dir/STAT/stat_clamp.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/stat.dir/STAT/stat_clamp.c.obj"
 	/opt/watcom/armo64/wcl -zq -d+ $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -foCMakeFiles/stat.dir/STAT/stat_clamp.c.obj -c -cc /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_clamp.c
 
 CMakeFiles/stat.dir/STAT/stat_clamp.c.i: cmake_force
@@ -141,7 +154,7 @@ CMakeFiles/stat.dir/STAT/stat_clamp.c.s: cmake_force
 
 CMakeFiles/stat.dir/STAT/stat_compare.c.obj: CMakeFiles/stat.dir/flags.make
 CMakeFiles/stat.dir/STAT/stat_compare.c.obj: /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_compare.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/stat.dir/STAT/stat_compare.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/stat.dir/STAT/stat_compare.c.obj"
 	/opt/watcom/armo64/wcl -zq -d+ $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -foCMakeFiles/stat.dir/STAT/stat_compare.c.obj -c -cc /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_compare.c
 
 CMakeFiles/stat.dir/STAT/stat_compare.c.i: cmake_force
@@ -154,7 +167,7 @@ CMakeFiles/stat.dir/STAT/stat_compare.c.s: cmake_force
 
 CMakeFiles/stat.dir/STAT/stat_describe.c.obj: CMakeFiles/stat.dir/flags.make
 CMakeFiles/stat.dir/STAT/stat_describe.c.obj: /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_describe.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/stat.dir/STAT/stat_describe.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/stat.dir/STAT/stat_describe.c.obj"
 	/opt/watcom/armo64/wcl -zq -d+ $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -foCMakeFiles/stat.dir/STAT/stat_describe.c.obj -c -cc /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_describe.c
 
 CMakeFiles/stat.dir/STAT/stat_describe.c.i: cmake_force
@@ -167,7 +180,7 @@ CMakeFiles/stat.dir/STAT/stat_describe.c.s: cmake_force
 
 CMakeFiles/stat.dir/STAT/stat_dispersion.c.obj: CMakeFiles/stat.dir/flags.make
 CMakeFiles/stat.dir/STAT/stat_dispersion.c.obj: /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_dispersion.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/stat.dir/STAT/stat_dispersion.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object CMakeFiles/stat.dir/STAT/stat_dispersion.c.obj"
 	/opt/watcom/armo64/wcl -zq -d+ $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -foCMakeFiles/stat.dir/STAT/stat_dispersion.c.obj -c -cc /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_dispersion.c
 
 CMakeFiles/stat.dir/STAT/stat_dispersion.c.i: cmake_force
@@ -180,7 +193,7 @@ CMakeFiles/stat.dir/STAT/stat_dispersion.c.s: cmake_force
 
 CMakeFiles/stat.dir/STAT/stat_distributions.c.obj: CMakeFiles/stat.dir/flags.make
 CMakeFiles/stat.dir/STAT/stat_distributions.c.obj: /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_distributions.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object CMakeFiles/stat.dir/STAT/stat_distributions.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object CMakeFiles/stat.dir/STAT/stat_distributions.c.obj"
 	/opt/watcom/armo64/wcl -zq -d+ $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -foCMakeFiles/stat.dir/STAT/stat_distributions.c.obj -c -cc /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_distributions.c
 
 CMakeFiles/stat.dir/STAT/stat_distributions.c.i: cmake_force
@@ -193,7 +206,7 @@ CMakeFiles/stat.dir/STAT/stat_distributions.c.s: cmake_force
 
 CMakeFiles/stat.dir/STAT/stat_division.c.obj: CMakeFiles/stat.dir/flags.make
 CMakeFiles/stat.dir/STAT/stat_division.c.obj: /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_division.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object CMakeFiles/stat.dir/STAT/stat_division.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object CMakeFiles/stat.dir/STAT/stat_division.c.obj"
 	/opt/watcom/armo64/wcl -zq -d+ $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -foCMakeFiles/stat.dir/STAT/stat_division.c.obj -c -cc /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_division.c
 
 CMakeFiles/stat.dir/STAT/stat_division.c.i: cmake_force
@@ -206,7 +219,7 @@ CMakeFiles/stat.dir/STAT/stat_division.c.s: cmake_force
 
 CMakeFiles/stat.dir/STAT/stat_graphs.c.obj: CMakeFiles/stat.dir/flags.make
 CMakeFiles/stat.dir/STAT/stat_graphs.c.obj: /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_graphs.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object CMakeFiles/stat.dir/STAT/stat_graphs.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building C object CMakeFiles/stat.dir/STAT/stat_graphs.c.obj"
 	/opt/watcom/armo64/wcl -zq -d+ $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -foCMakeFiles/stat.dir/STAT/stat_graphs.c.obj -c -cc /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_graphs.c
 
 CMakeFiles/stat.dir/STAT/stat_graphs.c.i: cmake_force
@@ -219,7 +232,7 @@ CMakeFiles/stat.dir/STAT/stat_graphs.c.s: cmake_force
 
 CMakeFiles/stat.dir/STAT/stat_outliers.c.obj: CMakeFiles/stat.dir/flags.make
 CMakeFiles/stat.dir/STAT/stat_outliers.c.obj: /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_outliers.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building C object CMakeFiles/stat.dir/STAT/stat_outliers.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building C object CMakeFiles/stat.dir/STAT/stat_outliers.c.obj"
 	/opt/watcom/armo64/wcl -zq -d+ $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -foCMakeFiles/stat.dir/STAT/stat_outliers.c.obj -c -cc /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_outliers.c
 
 CMakeFiles/stat.dir/STAT/stat_outliers.c.i: cmake_force
@@ -232,7 +245,7 @@ CMakeFiles/stat.dir/STAT/stat_outliers.c.s: cmake_force
 
 CMakeFiles/stat.dir/STAT/stat_percentiles.c.obj: CMakeFiles/stat.dir/flags.make
 CMakeFiles/stat.dir/STAT/stat_percentiles.c.obj: /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_percentiles.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building C object CMakeFiles/stat.dir/STAT/stat_percentiles.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building C object CMakeFiles/stat.dir/STAT/stat_percentiles.c.obj"
 	/opt/watcom/armo64/wcl -zq -d+ $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -foCMakeFiles/stat.dir/STAT/stat_percentiles.c.obj -c -cc /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_percentiles.c
 
 CMakeFiles/stat.dir/STAT/stat_percentiles.c.i: cmake_force
@@ -245,7 +258,7 @@ CMakeFiles/stat.dir/STAT/stat_percentiles.c.s: cmake_force
 
 CMakeFiles/stat.dir/STAT/stat_round.c.obj: CMakeFiles/stat.dir/flags.make
 CMakeFiles/stat.dir/STAT/stat_round.c.obj: /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_round.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building C object CMakeFiles/stat.dir/STAT/stat_round.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building C object CMakeFiles/stat.dir/STAT/stat_round.c.obj"
 	/opt/watcom/armo64/wcl -zq -d+ $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -foCMakeFiles/stat.dir/STAT/stat_round.c.obj -c -cc /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_round.c
 
 CMakeFiles/stat.dir/STAT/stat_round.c.i: cmake_force
@@ -258,7 +271,7 @@ CMakeFiles/stat.dir/STAT/stat_round.c.s: cmake_force
 
 CMakeFiles/stat.dir/STAT/stat_sign.c.obj: CMakeFiles/stat.dir/flags.make
 CMakeFiles/stat.dir/STAT/stat_sign.c.obj: /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_sign.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building C object CMakeFiles/stat.dir/STAT/stat_sign.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building C object CMakeFiles/stat.dir/STAT/stat_sign.c.obj"
 	/opt/watcom/armo64/wcl -zq -d+ $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -foCMakeFiles/stat.dir/STAT/stat_sign.c.obj -c -cc /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_sign.c
 
 CMakeFiles/stat.dir/STAT/stat_sign.c.i: cmake_force
@@ -271,7 +284,7 @@ CMakeFiles/stat.dir/STAT/stat_sign.c.s: cmake_force
 
 CMakeFiles/stat.dir/STAT/stat_util.c.obj: CMakeFiles/stat.dir/flags.make
 CMakeFiles/stat.dir/STAT/stat_util.c.obj: /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_util.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building C object CMakeFiles/stat.dir/STAT/stat_util.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building C object CMakeFiles/stat.dir/STAT/stat_util.c.obj"
 	/opt/watcom/armo64/wcl -zq -d+ $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -foCMakeFiles/stat.dir/STAT/stat_util.c.obj -c -cc /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_util.c
 
 CMakeFiles/stat.dir/STAT/stat_util.c.i: cmake_force
@@ -284,7 +297,7 @@ CMakeFiles/stat.dir/STAT/stat_util.c.s: cmake_force
 
 CMakeFiles/stat.dir/TDD/tdd_progress.c.obj: CMakeFiles/stat.dir/flags.make
 CMakeFiles/stat.dir/TDD/tdd_progress.c.obj: /Users/jeremythornton/dosbox/STATLIB/src/TDD/tdd_progress.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building C object CMakeFiles/stat.dir/TDD/tdd_progress.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building C object CMakeFiles/stat.dir/TDD/tdd_progress.c.obj"
 	/opt/watcom/armo64/wcl -zq -d+ $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -foCMakeFiles/stat.dir/TDD/tdd_progress.c.obj -c -cc /Users/jeremythornton/dosbox/STATLIB/src/TDD/tdd_progress.c
 
 CMakeFiles/stat.dir/TDD/tdd_progress.c.i: cmake_force
@@ -297,7 +310,7 @@ CMakeFiles/stat.dir/TDD/tdd_progress.c.s: cmake_force
 
 CMakeFiles/stat.dir/TDD/tdd_report.c.obj: CMakeFiles/stat.dir/flags.make
 CMakeFiles/stat.dir/TDD/tdd_report.c.obj: /Users/jeremythornton/dosbox/STATLIB/src/TDD/tdd_report.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building C object CMakeFiles/stat.dir/TDD/tdd_report.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building C object CMakeFiles/stat.dir/TDD/tdd_report.c.obj"
 	/opt/watcom/armo64/wcl -zq -d+ $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -foCMakeFiles/stat.dir/TDD/tdd_report.c.obj -c -cc /Users/jeremythornton/dosbox/STATLIB/src/TDD/tdd_report.c
 
 CMakeFiles/stat.dir/TDD/tdd_report.c.i: cmake_force
@@ -310,7 +323,7 @@ CMakeFiles/stat.dir/TDD/tdd_report.c.s: cmake_force
 
 CMakeFiles/stat.dir/TDD/tdd_spinner.c.obj: CMakeFiles/stat.dir/flags.make
 CMakeFiles/stat.dir/TDD/tdd_spinner.c.obj: /Users/jeremythornton/dosbox/STATLIB/src/TDD/tdd_spinner.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building C object CMakeFiles/stat.dir/TDD/tdd_spinner.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building C object CMakeFiles/stat.dir/TDD/tdd_spinner.c.obj"
 	/opt/watcom/armo64/wcl -zq -d+ $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -foCMakeFiles/stat.dir/TDD/tdd_spinner.c.obj -c -cc /Users/jeremythornton/dosbox/STATLIB/src/TDD/tdd_spinner.c
 
 CMakeFiles/stat.dir/TDD/tdd_spinner.c.i: cmake_force
@@ -323,7 +336,7 @@ CMakeFiles/stat.dir/TDD/tdd_spinner.c.s: cmake_force
 
 CMakeFiles/stat.dir/main.c.obj: CMakeFiles/stat.dir/flags.make
 CMakeFiles/stat.dir/main.c.obj: /Users/jeremythornton/dosbox/STATLIB/src/main.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building C object CMakeFiles/stat.dir/main.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building C object CMakeFiles/stat.dir/main.c.obj"
 	/opt/watcom/armo64/wcl -zq -d+ $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -foCMakeFiles/stat.dir/main.c.obj -c -cc /Users/jeremythornton/dosbox/STATLIB/src/main.c
 
 CMakeFiles/stat.dir/main.c.i: cmake_force
@@ -340,6 +353,7 @@ stat_OBJECTS = &
 "'CMakeFiles/stat.dir/PRNG/prng_popcount.c.obj'" &
 "'CMakeFiles/stat.dir/STAT/stat_abs.c.obj'" &
 "'CMakeFiles/stat.dir/STAT/stat_basic.c.obj'" &
+"'CMakeFiles/stat.dir/STAT/stat_binning.c.obj'" &
 "'CMakeFiles/stat.dir/STAT/stat_central.c.obj'" &
 "'CMakeFiles/stat.dir/STAT/stat_clamp.c.obj'" &
 "'CMakeFiles/stat.dir/STAT/stat_compare.c.obj'" &
@@ -365,6 +379,7 @@ stat.exe: CMakeFiles/stat.dir/PRNG/prng.c.obj
 stat.exe: CMakeFiles/stat.dir/PRNG/prng_popcount.c.obj
 stat.exe: CMakeFiles/stat.dir/STAT/stat_abs.c.obj
 stat.exe: CMakeFiles/stat.dir/STAT/stat_basic.c.obj
+stat.exe: CMakeFiles/stat.dir/STAT/stat_binning.c.obj
 stat.exe: CMakeFiles/stat.dir/STAT/stat_central.c.obj
 stat.exe: CMakeFiles/stat.dir/STAT/stat_clamp.c.obj
 stat.exe: CMakeFiles/stat.dir/STAT/stat_compare.c.obj
@@ -384,7 +399,7 @@ stat.exe: CMakeFiles/stat.dir/TDD/tdd_spinner.c.obj
 stat.exe: CMakeFiles/stat.dir/main.c.obj
 stat.exe: CMakeFiles/stat.dir/build.make
 stat.exe: CMakeFiles/stat.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Linking C executable stat.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Linking C executable stat.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/stat.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

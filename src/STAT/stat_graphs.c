@@ -18,7 +18,7 @@ void stat_graph_smooth_histogram(const stat_size_t* bins, const stat_binning_con
     assert(bins && "NULL bins!");
     assert(schema && "NULL schema!");
 
-    const stat_size_t max_count = stat_max_i((stat_int_t*)bins, schema->count);
+    const stat_size_t max_count = stat_max_int_array((stat_int_t*)bins, schema->count);
     const stat_float_t scale = max_count ? (2.0 * max_height) / max_count : 0;
 
     for (stat_size_t i = 0; i < schema->count; i++) {

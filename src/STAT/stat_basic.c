@@ -1,8 +1,9 @@
 #include "stat_basic.h"
+#include "stat_types.h"
 #include <assert.h>
 #include <errno.h>
 #include <math.h>
-#include <limits.h>
+#include <stddef.h>
 
 stat_float_t stat_min_float_array(const stat_float_t* source, stat_size_t count) {
     assert(source != NULL && "Input array cannot be NULL");
@@ -86,7 +87,7 @@ stat_int_t stat_range_int_array(const stat_int_t* source, stat_size_t count) {
 
 stat_int_t* stat_cast_float_to_int_array(stat_int_t* destination, const stat_float_t* source, stat_size_t count) {
     assert(destination != NULL && source != NULL && "Arrays cannot be NULL");
-    
+
     for (stat_size_t i = 0; i < count; i++) {
         destination[i] = (stat_int_t)source[i];
     }
@@ -95,7 +96,7 @@ stat_int_t* stat_cast_float_to_int_array(stat_int_t* destination, const stat_flo
 
 stat_float_t* stat_cast_int_to_float_array(stat_float_t* destination, const stat_int_t* source, stat_size_t count) {
     assert(destination != NULL && source != NULL && "Arrays cannot be NULL");
-    
+
     for (stat_size_t i = 0; i < count; i++) {
         destination[i] = (stat_float_t)source[i];
     }

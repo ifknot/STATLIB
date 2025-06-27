@@ -1,7 +1,9 @@
 #include "stat_util.h"
+#include "stat_compare.h"
 #include <math.h>
 #include <assert.h>
 #include <stdbool.h>
+#include <stddef.h>
 
 // ========================
 // Sorting Functions
@@ -9,10 +11,10 @@
 
 static void quicksort_f(stat_float_t* data, stat_size_t left, stat_size_t right) {
     if (left >= right) return;
-    
+
     stat_float_t pivot = data[(left + right) / 2];
     stat_size_t i = left, j = right;
-    
+
     while (i <= j) {
         while (data[i] < pivot) i++;
         while (data[j] > pivot) j--;
@@ -24,7 +26,7 @@ static void quicksort_f(stat_float_t* data, stat_size_t left, stat_size_t right)
             j--;
         }
     }
-    
+
     quicksort_f(data, left, j);
     quicksort_f(data, i, right);
 }
@@ -54,8 +56,7 @@ void stat_sort_i(stat_int_t* data, stat_size_t size) {
         insertion_sort_i(data, size);
     } else {
         // Use library qsort for larger arrays
-        qsort(data, size, sizeof(stat_int_t), 
-              (int (*)(const void*, const void*))stat_compare_ints_qsort);
+        qsort(data, size, sizeof(stat_int_t), (int (*)(const void*, const void*))stat_compare_ints_qsort);
     }
 }
 
@@ -72,7 +73,7 @@ bool stat_is_normal(stat_float_t value) {
 }
 
 bool stat_is_valid(stat_float_t value) {
-    return isfinite(value) && 
+    return isfinite(value) &&
            (fabs(value) < 1e100) &&  // Reasonable bound
            (fabs(value) > 1e-100 || value == 0.0);
 }

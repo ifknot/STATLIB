@@ -1,5 +1,6 @@
 #include "stat_clamp.h"
 #include <math.h>
+#include <stddef.h>
 
 stat_float_t* stat_clamp_float_array(
     stat_float_t* destination,

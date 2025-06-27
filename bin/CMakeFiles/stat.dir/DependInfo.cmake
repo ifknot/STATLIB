@@ -12,6 +12,7 @@ set(CMAKE_DEPENDS_CHECK_C
   "/Users/jeremythornton/dosbox/STATLIB/src/PRNG/prng_popcount.c" "/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles/stat.dir/PRNG/prng_popcount.c.obj"
   "/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_abs.c" "/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles/stat.dir/STAT/stat_abs.c.obj"
   "/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_basic.c" "/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles/stat.dir/STAT/stat_basic.c.obj"
+  "/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_binning.c" "/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles/stat.dir/STAT/stat_binning.c.obj"
   "/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_central.c" "/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles/stat.dir/STAT/stat_central.c.obj"
   "/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_clamp.c" "/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles/stat.dir/STAT/stat_clamp.c.obj"
   "/Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_compare.c" "/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles/stat.dir/STAT/stat_compare.c.obj"

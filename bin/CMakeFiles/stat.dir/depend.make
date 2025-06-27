@@ -26,6 +26,7 @@ CMakeFiles/stat.dir/PRNG/prng_popcount.c.obj: &
  /opt/watcom/h/cstdint &
  /opt/watcom/h/stdint.h
 CMakeFiles/stat.dir/STAT/stat_abs.c.obj: &
+ /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_IEEE754.h &
  /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_abs.c &
  /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_abs.h &
  /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_types.h &
@@ -57,6 +58,26 @@ CMakeFiles/stat.dir/STAT/stat_basic.c.obj: &
  /opt/watcom/h/stdbool.h &
  /opt/watcom/h/stddef.h &
  /opt/watcom/h/stdint.h
+CMakeFiles/stat.dir/STAT/stat_binning.c.obj: &
+ /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_basic.h &
+ /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_binning.c &
+ /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_binning.h &
+ /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_percentiles.h &
+ /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_round.h &
+ /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_types.h &
+ /opt/watcom/h/_comdef.h &
+ /opt/watcom/h/assert.h &
+ /opt/watcom/h/cmath &
+ /opt/watcom/h/cstdbool &
+ /opt/watcom/h/cstdint &
+ /opt/watcom/h/cstdlib &
+ /opt/watcom/h/errno.h &
+ /opt/watcom/h/float.h &
+ /opt/watcom/h/math.h &
+ /opt/watcom/h/stdbool.h &
+ /opt/watcom/h/stdint.h &
+ /opt/watcom/h/stdlib.h &
+ /opt/watcom/h/sys/_lfndos.h
 CMakeFiles/stat.dir/STAT/stat_central.c.obj: &
  /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_central.c &
  /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_central.h &
@@ -217,10 +238,12 @@ CMakeFiles/stat.dir/STAT/stat_outliers.c.obj: &
  /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_types.h &
  /opt/watcom/h/_comdef.h &
  /opt/watcom/h/assert.h &
+ /opt/watcom/h/cmath &
  /opt/watcom/h/cstdbool &
  /opt/watcom/h/cstddef &
  /opt/watcom/h/cstdint &
  /opt/watcom/h/float.h &
+ /opt/watcom/h/math.h &
  /opt/watcom/h/stdbool.h &
  /opt/watcom/h/stddef.h &
  /opt/watcom/h/stdint.h
@@ -249,13 +272,16 @@ CMakeFiles/stat.dir/STAT/stat_round.c.obj: &
  /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_round.h &
  /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_types.h &
  /opt/watcom/h/_comdef.h &
+ /opt/watcom/h/assert.h &
  /opt/watcom/h/cmath &
  /opt/watcom/h/cstdbool &
+ /opt/watcom/h/cstddef &
  /opt/watcom/h/cstdint &
  /opt/watcom/h/errno.h &
  /opt/watcom/h/float.h &
  /opt/watcom/h/math.h &
  /opt/watcom/h/stdbool.h &
+ /opt/watcom/h/stddef.h &
  /opt/watcom/h/stdint.h
 CMakeFiles/stat.dir/STAT/stat_sign.c.obj: &
  /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_sign.c &
@@ -275,16 +301,16 @@ CMakeFiles/stat.dir/STAT/stat_util.c.obj: &
  /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_util.c &
  /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_util.h &
  /opt/watcom/h/_comdef.h &
+ /opt/watcom/h/assert.h &
  /opt/watcom/h/cmath &
  /opt/watcom/h/cstdbool &
+ /opt/watcom/h/cstddef &
  /opt/watcom/h/cstdint &
- /opt/watcom/h/cstdlib &
  /opt/watcom/h/float.h &
  /opt/watcom/h/math.h &
  /opt/watcom/h/stdbool.h &
- /opt/watcom/h/stdint.h &
- /opt/watcom/h/stdlib.h &
- /opt/watcom/h/sys/_lfndos.h
+ /opt/watcom/h/stddef.h &
+ /opt/watcom/h/stdint.h
 CMakeFiles/stat.dir/TDD/tdd_progress.c.obj: &
  /Users/jeremythornton/dosbox/STATLIB/src/TDD/tdd_on_escape.h &
  /Users/jeremythornton/dosbox/STATLIB/src/TDD/tdd_progress.c &
@@ -322,10 +348,9 @@ CMakeFiles/stat.dir/TDD/tdd_spinner.c.obj: &
  /opt/watcom/h/string.h &
  /opt/watcom/h/sys/_lfndos.h
 CMakeFiles/stat.dir/main.c.obj: &
- /Users/jeremythornton/dosbox/STATLIB/src/PRNG/prng.h &
- /Users/jeremythornton/dosbox/STATLIB/src/PRNG/prng_constants.h &
- /Users/jeremythornton/dosbox/STATLIB/src/PRNG/prng_popcount.h &
- /Users/jeremythornton/dosbox/STATLIB/src/PRNG/test_prng.h &
+ /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_abs.h &
+ /Users/jeremythornton/dosbox/STATLIB/src/STAT/stat_types.h &
+ /Users/jeremythornton/dosbox/STATLIB/src/STAT/test_stats.h &
  /Users/jeremythornton/dosbox/STATLIB/src/TDD/tdd_macros.h &
  /Users/jeremythornton/dosbox/STATLIB/src/TDD/tdd_on_escape.h &
  /Users/jeremythornton/dosbox/STATLIB/src/TDD/tdd_progress.h &
@@ -344,6 +369,8 @@ CMakeFiles/stat.dir/main.c.obj: &
  /opt/watcom/h/cstdlib &
  /opt/watcom/h/cstring &
  /opt/watcom/h/ctime &
+ /opt/watcom/h/errno.h &
+ /opt/watcom/h/float.h &
  /opt/watcom/h/math.h &
  /opt/watcom/h/setjmp.h &
  /opt/watcom/h/signal.h &

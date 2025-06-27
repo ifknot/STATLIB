@@ -3,6 +3,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/stat.dir/PRNG/prng_popcount.c.obj"
   "CMakeFiles/stat.dir/STAT/stat_abs.c.obj"
   "CMakeFiles/stat.dir/STAT/stat_basic.c.obj"
+  "CMakeFiles/stat.dir/STAT/stat_binning.c.obj"
   "CMakeFiles/stat.dir/STAT/stat_central.c.obj"
   "CMakeFiles/stat.dir/STAT/stat_clamp.c.obj"
   "CMakeFiles/stat.dir/STAT/stat_compare.c.obj"

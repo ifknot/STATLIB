@@ -4,11 +4,12 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <float.h>
+#include <math.h>
 
 /**
  * @file stat_types.h
  * @brief Core type definitions for statistics library
- * 
+ *
  * Defines the fundamental types, constants, and structures used throughout
  * the statistics library, ensuring consistent numeric handling.
  */

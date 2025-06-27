@@ -1,10 +1,9 @@
 #ifndef STAT_ABS_H
 #define STAT_ABS_H
 
+#include "stat_types.h"
 #include <errno.h>
 #include <math.h>
-
-#include "stat_types.h"
 
 /**
  * @brief Computes absolute values of a stat_float_t array

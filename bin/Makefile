@@ -214,6 +214,30 @@ STAT/stat_basic.c.s: .SYMBOLIC
 STAT/stat_basic.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/stat.dir/build.make -h CMakeFiles/stat.dir/STAT/stat_basic.c.s
 
+STAT/stat_binning.obj: .SYMBOLIC
+STAT/stat_binning.obj: STAT/stat_binning.c.obj
+
+# target to build an object file
+STAT/stat_binning.c.obj: .SYMBOLIC
+STAT/stat_binning.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stat.dir/build.make -h CMakeFiles/stat.dir/STAT/stat_binning.c.obj
+
+STAT/stat_binning.i: .SYMBOLIC
+STAT/stat_binning.i: STAT/stat_binning.c.i
+
+# target to preprocess a source file
+STAT/stat_binning.c.i: .SYMBOLIC
+STAT/stat_binning.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stat.dir/build.make -h CMakeFiles/stat.dir/STAT/stat_binning.c.i
+
+STAT/stat_binning.s: .SYMBOLIC
+STAT/stat_binning.s: STAT/stat_binning.c.s
+
+# target to generate assembly for a file
+STAT/stat_binning.c.s: .SYMBOLIC
+STAT/stat_binning.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stat.dir/build.make -h CMakeFiles/stat.dir/STAT/stat_binning.c.s
+
 STAT/stat_central.obj: .SYMBOLIC
 STAT/stat_central.obj: STAT/stat_central.c.obj
 
@@ -644,6 +668,9 @@ help:
 	@echo "... STAT/stat_basic.obj"
 	@echo "... STAT/stat_basic.i"
 	@echo "... STAT/stat_basic.s"
+	@echo "... STAT/stat_binning.obj"
+	@echo "... STAT/stat_binning.i"
+	@echo "... STAT/stat_binning.s"
 	@echo "... STAT/stat_central.obj"
 	@echo "... STAT/stat_central.i"
 	@echo "... STAT/stat_central.s"

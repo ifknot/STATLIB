@@ -1,10 +1,11 @@
 #include "stat_binning.h"
 #include "stat_basic.h"
 #include "stat_percentiles.h"
-#include "stat_compare.h"
-#include "stat_round.h"  // Include your rounding module
+#include "stat_round.h"
 #include <math.h>
 #include <assert.h>
+#include <errno.h>
+#include <stdlib.h>
 
 // Updated implementation using your rounding functions
 void stat_binning_calculate_edges(stat_binning_config_t* config, stat_binning_strategy_t strategy)  {
@@ -56,63 +57,51 @@ void stat_bin_values_i(const stat_int_t* values, stat_size_t count, const stat_b
     }
 }
 
-void stat_auto_bin_f(const stat_float_t* values, stat_size_t count, stat_binning_config_t* config, stat_binning_strategy_t strategy) {
+void stat_auto_bin_f(const stat_float_t* values, stat_size_t count,
+                    stat_binning_config_t* config, stat_binning_strategy_t strategy)
+{
+    // Input validation
     assert(values && "NULL values");
     assert(count > 0 && "Empty dataset");
     assert(config && "NULL config");
     assert(config->edges && "NULL edges");
     assert(config->count > 0 && "Must have at least 1 bin");
 
-    config->min = stat_min_f(values, count);
-    config->max = stat_max_f(values, count);
+    // Get data range
+    config->min = stat_min_float_array(values, count);
+    config->max = stat_max_float_array(values, count);
 
     if (strategy == BIN_PERCENTILE) {
         config->edges[0] = config->min;
         config->edges[config->count] = config->max;
 
-        // Calculate percentile cuts
-        stat_float_t percentiles[config->count - 1];
-        stat_float_t cuts[config->count - 1];
-        for (stat_size_t i = 0; i < config->count - 1; i++) {
+        // Allocate memory for percentiles and cuts
+        stat_size_t num_cuts = config->count - 1;
+        stat_float_t* cuts = malloc(num_cuts * sizeof(stat_float_t));
+        stat_float_t* percentiles = malloc(num_cuts * sizeof(stat_float_t));
+
+        if (!cuts || !percentiles) {
+            free(cuts);
+            free(percentiles);
+            errno = ENOMEM;
+            return;
+        }
+
+        // Calculate percentile cuts (25th, 50th, 75th for quartiles etc.)
+        for (stat_size_t i = 0; i < num_cuts; i++) {
             cuts[i] = 100.0 * (i + 1) / config->count;
         }
 
-        stat_percentiles_array_f(values, count, cuts, percentiles, config->count - 1);
+        // Compute percentiles
+        stat_percentiles_array_f(values, count, cuts, percentiles, num_cuts);
 
-        for (stat_size_t i = 0; i < config->count - 1; i++) {
-            // Round percentile edges for consistency
-            config->edges[i + 1] = stat_round_decimal(percentiles[i], 6);
-        }
-    } else {
-        stat_binning_calculate_edges(config, strategy);
-    }
-}
-void stat_auto_bin_f(const stat_float_t* values, stat_size_t count, stat_binning_config_t* config, stat_binning_strategy_t strategy) {
-    assert(values && "NULL values");
-    assert(count > 0 && "Empty dataset");
-    assert(config && "NULL config");
-    assert(config->edges && "NULL edges");
-    assert(config->count > 0 && "Must have at least 1 bin");
-
-    config->min = stat_min_f(values, count);
-    config->max = stat_max_f(values, count);
-
-    if (strategy == BIN_PERCENTILE) {
-        config->edges[0] = config->min;
-        config->edges[config->count] = config->max;
-
-        // Calculate percentile cuts
-        stat_float_t percentiles[config->count - 1];
-        stat_float_t cuts[config->count - 1];
-        for (stat_size_t i = 0; i < config->count - 1; i++) {
-            cuts[i] = 100.0 * (i + 1) / config->count;
-        }
-
-        stat_percentiles_array_f(values, count, cuts, percentiles, config->count - 1);
-
-        for (stat_size_t i = 0; i < config->count - 1; i++) {
+        // Fill bin edges
+        for (stat_size_t i = 0; i < num_cuts; i++) {
             config->edges[i + 1] = percentiles[i];
         }
+
+        free(cuts);
+        free(percentiles);
     } else {
         stat_binning_calculate_edges(config, strategy);
     }

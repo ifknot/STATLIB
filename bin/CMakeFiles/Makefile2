@@ -78,12 +78,12 @@ CMakeFiles/stat.dir/all: .SYMBOLIC
 CMakeFiles/stat.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/stat.dir/build.make -h CMakeFiles/stat.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/stat.dir/build.make -h CMakeFiles/stat.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22 "Built target stat"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23 "Built target stat"
 
 # Build rule for subdir invocation for target.
 CMakeFiles/stat.dir/rule: .SYMBOLIC
 CMakeFiles/stat.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles 22
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles 23
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 -h CMakeFiles/stat.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles 0
 
@@ -95,7 +95,7 @@ stat: CMakeFiles/stat.dir/rule
 CMakeFiles/stat.dir/codegen: .SYMBOLIC
 CMakeFiles/stat.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/stat.dir/build.make -h CMakeFiles/stat.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22 "Finished codegen for target stat"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/jeremythornton/dosbox/STATLIB/bin/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23 "Finished codegen for target stat"
 
 # clean rule for target.
 CMakeFiles/stat.dir/clean: .SYMBOLIC
