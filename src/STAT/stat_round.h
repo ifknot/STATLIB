@@ -1,7 +1,3 @@
-#ifndef STAT_ROUND_H
-#define STAT_ROUND_H
-
-#include "stat_types.h"
 
 /**
  * @file stat_round.h
@@ -10,6 +6,10 @@
  * This module provides various rounding functions and type conversion utilities
  * for statistical operations. It includes both scalar and array-based operations.
  */
+#ifndef STAT_ROUND_H
+#define STAT_ROUND_H
+
+#include "stat_types.h"
 
 /**
  * @def stat_lround(x)
@@ -75,75 +75,75 @@ stat_float_t stat_round_decimal(stat_float_t value, int decimals);
  * @return true if rounding was successful, false if overflow occurred
  */
 bool stat_safe_round_to_i(stat_float_t value, stat_int_t* result);
+/* Array conversion functions (non-inplace, destination-first pattern) */
 
 /**
  * @brief Converts an array of integers to an array of floats
- * @param destination Pointer to destination float array
+ * @param destination Pointer to pre-allocated float array for results
  * @param source Pointer to source integer array
  * @return Pointer to the destination array
+ * @note The destination array must have at least the same capacity as source
  */
-stat_float_t* stat_cast_int_to_float_array(stat_float_t* destination, stat_int_t* source);
-
-/* Suggested array conversion functions */
+stat_float_t* stat_cast_int_to_float_array(stat_float_t* destination, const stat_int_t* source);
 
 /**
- * @brief Rounds all elements in a float array to integers (in-place)
- * @param array The array to round
- * @param count Number of elements in the array
+ * @brief Converts an array of floats to integers using rounding
+ * @param destination Pointer to pre-allocated integer array for results
+ * @param source Pointer to source float array
+ * @return Pointer to the destination array
  */
-void stat_round_array_to_i(stat_float_t* array, size_t count);
+stat_int_t* stat_round_float_to_int_array(stat_int_t* destination, const stat_float_t* source);
 
 /**
- * @brief Rounds all elements in a float array to integers (to a new array)
- * @param dest Destination integer array
- * @param src Source float array
- * @param count Number of elements to process
+ * @brief Converts an array of floats to integers using floor operation
+ * @param destination Pointer to pre-allocated integer array for results
+ * @param source Pointer to source float array
+ * @return Pointer to the destination array
  */
-void stat_round_array_to_i_dest(stat_int_t* dest, const stat_float_t* src, size_t count);
+stat_int_t* stat_floor_float_to_int_array(stat_int_t* destination, const stat_float_t* source);
 
 /**
- * @brief Floors all elements in a float array to integers (in-place)
- * @param array The array to process
- * @param count Number of elements in the array
+ * @brief Converts an array of floats to integers using ceiling operation
+ * @param destination Pointer to pre-allocated integer array for results
+ * @param source Pointer to source float array
+ * @return Pointer to the destination array
  */
-void stat_floor_array_to_i(stat_float_t* array, size_t count);
+stat_int_t* stat_ceil_float_to_int_array(stat_int_t* destination, const stat_float_t* source);
 
 /**
- * @brief Ceils all elements in a float array to integers (in-place)
- * @param array The array to process
- * @param count Number of elements in the array
+ * @brief Converts an array of floats to integers using truncation
+ * @param destination Pointer to pre-allocated integer array for results
+ * @param source Pointer to source float array
+ * @return Pointer to the destination array
  */
-void stat_ceil_array_to_i(stat_float_t* array, size_t count);
+stat_int_t* stat_trunc_float_to_int_array(stat_int_t* destination, const stat_float_t* source);
 
 /**
- * @brief Truncates all elements in a float array to integers (in-place)
- * @param array The array to process
- * @param count Number of elements in the array
- */
-void stat_trunc_array_to_i(stat_float_t* array, size_t count);
-
-/**
- * @brief Converts a float array to an integer array with rounding
- * @param dest Destination integer array
- * @param src Source float array
- * @param count Number of elements to process
- */
-void stat_float_array_to_int(stat_int_t* dest, const stat_float_t* src, size_t count);
-
-/**
- * @brief Rounds all elements in an array to specified decimal places (in-place)
- * @param array The array to process
- * @param count Number of elements in the array
+ * @brief Rounds float array elements to specified decimal places
+ * @param destination Pointer to pre-allocated float array for results
+ * @param source Pointer to source float array
  * @param decimals Number of decimal places to round to
+ * @return Pointer to the destination array
  */
-void stat_round_array_decimal(stat_float_t* array, size_t count, int decimals);
+stat_float_t* stat_round_float_decimal_array(stat_float_t* destination, const stat_float_t* source, int decimals);
 
 /**
- * @brief Rounds all elements in an array to specified multiples (in-place)
- * @param array The array to process
- * @param count Number of elements in the array
+ * @brief Rounds float array elements to nearest multiples
+ * @param destination Pointer to pre-allocated float array for results
+ * @param source Pointer to source float array
  * @param multiple The multiple to round to
+ * @return Pointer to the destination array
  */
-void stat_round_array_to_multiple(stat_float_t* array, size_t count, stat_float_t multiple);
+stat_float_t* stat_round_float_to_multiple_array(stat_float_t* destination, const stat_float_t* source, stat_float_t multiple);
+
+/**
+ * @brief Safely converts float array to integers with overflow checking
+ * @param destination Pointer to pre-allocated integer array for results
+ * @param source Pointer to source float array
+ * @param success_count Output parameter for number of successful conversions
+ * @return Pointer to the destination array
+ * @note Elements that would overflow are set to 0 and don't increment success_count
+ */
+stat_int_t* stat_safe_float_to_int_array(stat_int_t* destination, const stat_float_t* source, size_t* success_count);
 
 #endif // STAT_ROUND_H
