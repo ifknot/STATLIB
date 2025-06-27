@@ -7,76 +7,76 @@
 #include <stdbool.h>
 #include <math.h>
 
-/**
- * @brief Clamps float values to [min, max] range
- * @param[in]  src    Input array (must not be NULL)
- * @param[out] dst    Output array (must be pre-allocated)
- * @param[in]  count  Number of elements
- * @param[in]  min    Minimum bound (inclusive)
- * @param[in]  max    Maximum bound (inclusive)
- * @return dst pointer for chaining
- * @throws EINVAL if count=0 or min > max, EDOM if NaN encountered
- * @assert Fails if src or dst is NULL
- */
-stat_float_t* stat_clamp_f(
-    const stat_float_t* src,
-    stat_float_t* dst,
-    stat_size_t count,
-    stat_float_t min,
-    stat_float_t max
-);
+// ========================
+// Scalar Functions
+// ========================
 
 /**
- * @brief Clamps int32 values to [min, max] range
- * @param[in]  src    Input array (must not be NULL)
- * @param[out] dst    Output array (must be pre-allocated)
- * @param[in]  count  Number of elements
- * @param[in]  min    Minimum bound (inclusive)
- * @param[in]  max    Maximum bound (inclusive)
- * @return dst pointer for chaining
- * @throws EINVAL if count=0 or min > max
- * @assert Fails if src or dst is NULL
- */
-stat_int_t* stat_clamp_i(
-    const stat_int_t* src,
-    stat_int_t* dst,
-    stat_size_t count,
-    stat_int_t min,
-    stat_int_t max
-);
-
-/**
- * @brief Scalar float clamp
- * @param[in] x   Input value
- * @param[in] min Minimum bound
- * @param[in] max Maximum bound
+ * @brief Clamps a float value to [min, max] range
+ * @param value Input value
+ * @param min Minimum bound (inclusive)
+ * @param max Maximum bound (inclusive)
  * @return Clamped value
- * @note Sets errno=EDOM if x is NaN or min > max
+ * @note Sets errno=EDOM if value is NaN or min > max
  */
-static inline stat_float_t stat_clamp_scalar_f(
-    stat_float_t x,
-    stat_float_t min,
-    stat_float_t max
-) {
-    if (isnan(x) || min > max) errno = EDOM;
-    return (x < min) ? min : ((x > max) ? max : x);
+static inline stat_float_t stat_clamp_float(stat_float_t value, stat_float_t min, stat_float_t max) {
+    if (isnan(value) || min > max) errno = EDOM;
+    return (value < min) ? min : ((value > max) ? max : value);
 }
 
 /**
- * @brief Scalar int32 clamp
- * @param[in] x   Input value
- * @param[in] min Minimum bound
- * @param[in] max Maximum bound
+ * @brief Clamps an integer value to [min, max] range
+ * @param value Input value
+ * @param min Minimum bound (inclusive)
+ * @param max Maximum bound (inclusive)
  * @return Clamped value
  * @note Sets errno=EINVAL if min > max
  */
-static inline stat_int_t stat_clamp_scalar_i32(
-    stat_int_t x,
+static inline stat_int_t stat_clamp_int(stat_int_t value, stat_int_t min, stat_int_t max) {
+    if (min > max) errno = EINVAL;
+    return (value < min) ? min : ((value > max) ? max : value);
+}
+
+// ========================
+// Array Functions
+// ========================
+
+/**
+ * @brief Clamps float array values to [min, max] range
+ * @param destination Output array (must be pre-allocated)
+ * @param source Input array
+ * @param count Number of elements
+ * @param min Minimum bound (inclusive)
+ * @param max Maximum bound (inclusive)
+ * @return destination pointer for chaining
+ * @throws EINVAL if count=0 or min > max, EDOM if NaN encountered
+ * @assert Fails if source or destination is NULL
+ */
+stat_float_t* stat_clamp_float_array(
+    stat_float_t* destination,
+    const stat_float_t* source,
+    stat_size_t count,
+    stat_float_t min,
+    stat_float_t max
+);
+
+/**
+ * @brief Clamps integer array values to [min, max] range
+ * @param destination Output array (must be pre-allocated)
+ * @param source Input array
+ * @param count Number of elements
+ * @param min Minimum bound (inclusive)
+ * @param max Maximum bound (inclusive)
+ * @return destination pointer for chaining
+ * @throws EINVAL if count=0 or min > max
+ * @assert Fails if source or destination is NULL
+ */
+stat_int_t* stat_clamp_int_array(
+    stat_int_t* destination,
+    const stat_int_t* source,
+    stat_size_t count,
     stat_int_t min,
     stat_int_t max
-) {
-    if (min > max) errno = EINVAL;
-    return (x < min) ? min : ((x > max) ? max : x);
-}
+);
 
 #endif // STAT_CLAMP_H
